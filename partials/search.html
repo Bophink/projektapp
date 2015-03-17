@@ -1,6 +1,20 @@
 <div id="search">
 	<ng-include src="'partials/header.html'" ></ng-include>
 	<ng-include src="'partials/start.html'" ></ng-include>
-
+	<div class="row" margin-bottom="2cm">
+		<form>
+			<input class="center-block" type="text" placeholder="Search for a song!"/>
+			<input type"submit" hidden/> <!-- eventuellt gör den att enter funkar för att köra submit trots att knappen inte syns--></form>
+	</div>
+	<div class="row">
+		<table>
+			<tr class="center-block"> <!-- ng-repeat="song in songs" -->
+				<td class="col-md-2">imgtagg</td>
+				<td class="col-md-2">plocka ut sångnamn</td>
+				<td class="col-md-2">plocka ut artistnamn</td>
+				<td class="col-md-2">plocka ut album</td>
+			</tr>
+		</table>
+	</div>
 	<!-- http://www.w3schools.com/bootstrap/bootstrap_pagination.asp-->
 </div>
