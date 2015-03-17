@@ -15,7 +15,11 @@
 }
 .btn{
   background-color: rgb(242, 171, 71);
-  border: 3px solid;
+  /*border: 3px solid;*/
+}
+.answers {
+  margin: 20px;
+  padding: 20px;
 }
 .courseThumb{
   border: 3px solid;
