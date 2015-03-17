@@ -25,6 +25,28 @@ which module to associate the app with. In app.js we create the "dinnerPlanner" 
     <script src="js/app.js"></script>
     <script src="js/quizModel.js"></script>
     <script src="js/testCtrl.js"></script>
+    <script type="text/javascript">
+       $('#OverViewSlider').carousel({
+          interval: 4000
+        })
+
+        $('.carousel .item').each(function(){
+          var next = $(this).next();
+          if (!next.length) {
+            next = $(this).siblings(':first');
+          }
+          next.children(':first-child').clone().appendTo($(this));
+          
+          for (var i=0;i<2;i++) {
+            next=next.next();
+            if (!next.length) {
+                next = $(this).siblings(':first');
+            }
+            
+            next.children(':first-child').clone().appendTo($(this));
+          }
+        });
+    </script>
 
   </head>
   <body class="background" height="100%">
