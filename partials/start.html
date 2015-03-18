@@ -1,6 +1,20 @@
 <div id="start">
 	<ng-include src="'partials/header.html'" ></ng-include>
-	<a href="#/search" class="btn btn-primary">Search</a>
-	<a href="#/track/test" class="btn btn-primary">Track</a>
-	<a href="#/quiz/test" class="btn btn-primary">quiz</a>
+	<ng-include src="'partials/overView.html'" ></ng-include>
+	<div class="row" margin-bottom="2cm">
+		<form>
+			<input class="center-block" type="text" placeholder="Search for a song!"/>
+			<input type="submit"/> <!-- hidden eventuellt gör den att enter funkar för att köra submit trots att knappen inte syns-->
+		</form>
+	</div>
+	<div class="row">
+		<table>
+			<tr class="center-block"> <!-- ng-repeat="song in songs" -->
+				<td class="col-md-2">imgtagg</td>
+				<td class="col-md-2">plocka ut sångnamn</td>
+				<td class="col-md-2">plocka ut artistnamn</td>
+				<td class="col-md-2">plocka ut album</td>
+			</tr>
+		</table>
+	</div>
 </div>

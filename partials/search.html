@@ -1,10 +1,11 @@
-<div id="search">
-	<ng-include src="'partials/header.html'" ></ng-include>
-	<ng-include src="'partials/start.html'" ></ng-include>
+<div id="start">
+	<ng-include src="'app/partials/header.html'" ></ng-include>
+	<ng-include src="'app/partials/overView.html'" ></ng-include>
 	<div class="row" margin-bottom="2cm">
 		<form style="margin-top: 40px">
 			<input class="center-block" type="text" placeholder="Search for a song!"/>
-			<input type"submit" hidden/> <!-- eventuellt gör den att enter funkar för att köra submit trots att knappen inte syns--></form>
+			<input type"submit" hidden/> <!-- eventuellt gör den att enter funkar för att köra submit trots att knappen inte syns-->
+		</form>
 	</div>
 	<div class="table row">
 		<table>
@@ -16,5 +17,4 @@
 			</tr>
 		</table>
 	</div>
-	<!-- http://www.w3schools.com/bootstrap/bootstrap_pagination.asp-->
 </div>
