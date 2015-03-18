@@ -36,6 +36,11 @@
   padding-left: 0px; 
   padding-right: 0px;
 }
+.table {
+  margin-top: 40px;
+  height: 200px;
+  overflow: hidden;
+}
 
 html, body, .container{
   height: 100%;
