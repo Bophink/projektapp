@@ -1,0 +1,15 @@
+<nav class="navbar navbar-default navbar-fixed-bottom" id="overView2">
+	<div ng-controller="CarouselCtrl">
+	  <carousel interval="myInterval">
+	    <slide ng-repeat="slideCollection in groupedSlides" active="slide.active">
+	      	<div class="row" style="padding:0px 30px;">
+	      		<div ng-repeat="albumCover in slideCollection" class="col-md-2" style="padding:0px 15px;">
+			      	<div class="col-md-12">
+			        	<img ng-src="{{albumCover.image}}" style="margin:auto" class="img-responsive">
+			        </div>
+			    </div>   
+	      	</div>
+	    </slide>
+	  </carousel>  
+	</div>
+</nav>
