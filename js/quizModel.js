@@ -68,7 +68,7 @@ this.getQuestion = function(position){
 }
 
 this.removeQuestion = function(position){
-	shiftPosition(getQuestion(position),Quiz.questions.length)
+	shiftPosition(position,Quiz.questions.length)
 	Quiz.questions.splice(Quiz.questions.length, 1);
 }
 
@@ -100,7 +100,7 @@ this.checkAnswer = function(answer,position,p){
 	}
 }
 
-thi.getQuizResult = function(){
+this.getQuizResult = function(){
 	return points;
 }
 
