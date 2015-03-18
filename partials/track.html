@@ -1,22 +1,25 @@
-<div id="track">
-	<ng-include src="'partials/header.html'" ></ng-include>
-	<ng-include src="'partials/start.html'" ></ng-include>
-	<a href="#search"><i class="glyphicon glyphicon-chevron-left"></i></a>
-	<h1 style="display:inline;">{{testrack.name}}</h1>
-	<h2>by Namn</h2>
+<ng-include src="'partials/header.html'" ></ng-include>
+<ng-include src="'partials/overView.html'" ></ng-include>
+<div style="margin-top:60px;">
+	<a href="#search"><h4><i class="glyphicon glyphicon-chevron-left"></i><b>Back</b></h4></a>
+	<span>
+		<h1 style="display:inline">{{track.name}}</h1>
+		<h4 style="display:inline"> by {{track.artists[0].name}}</h4>
+	</span>
+	<br/><audio controls autoplay ng-src="{{trustSrc}}" type="audio/mpeg"/ style="height:50px"/>
 	<div class="row row-centered">
-		<input id ="questionInput" class="col-md-8 col-centered" type="text" placeholder="Frågan är bla bla bla"/>
-		<div class="row">
-			<input id ="answerAInput" class="col-md-5 col-centered" type="text" placeholder="alternativ 1"/>
-			<input id ="answerBInput" class="col-md-5 col-centered" type="text" placeholder="alternativ 2"/>
-		</div>
-		<div class="row row-centered">
-			<input id ="answerCInput" class="col-md-5 col-centered" type="text" placeholder="alternativ 3"/>
-			<input id ="answerDInput" class="col-md-5 col-centered" type="text" placeholder="alternativ 4"/>
+		<textarea id ="questionInput" class="col-lg-4 col-md-6 col-centered" type="textarea" ng-model="q" placeholder="Frågan är bla bla bla"/>
+	</div>
+	<div class="row">
+		<div class="col-lg-3">
+			<input id ="answerAInput" class="" type="text" ng-model="a"  placeholder="Alternativ A"/><input type="radio" ng-model="r" value="a"/>
+			<input id ="answerBInput" class="" type="text" ng-model="b"  placeholder="Alternativ B"/><input type="radio" ng-model="r" value="b"/>
+			<input id ="answerCInput" class="" type="text" ng-model="c"  placeholder="Alternativ C"/><input type="radio" ng-model="r" value="c"/>
+			<input id ="answerDInput" class="" type="text" ng-model="d"  placeholder="Alternativ D"/><input type="radio" ng-model="r" value="d"/>
 		</div>
 	</div>
 	<div class="row">
-		<button type="button">Next question</button>
+		<button type="button" ng-click="done(q,a,b,c,d,r.value)">Confirm question</button>
 	</div>
 
 </div>

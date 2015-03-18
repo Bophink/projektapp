@@ -28,9 +28,9 @@ quizApp.factory('quizModel',function ($resource, $cookieStore) {
 
 var points = 0;
 
-var Quiz = {};
-this.songSearch = $resource('https://api.spotify.com/v1/search',{q:query,type:"track",limit:50});
-this.song = $resource('"https://api.spotify.com/v1/tracks/:trackId');
+var Quiz = this.Quiz = {};
+this.songSearch = $resource('https://api.spotify.com/v1/search');
+this.song = $resource('https://api.spotify.com/v1/tracks/:id');
 
 this.createQuiz = function(title, creator){
 	// generera quizID
@@ -56,7 +56,7 @@ this.createQuestion = function(question,a,b,c,d,songId,correct, position){
 }
 
 this.setQuestion = function(questionObj){
-	Quiz['questions'].append(questionObj);
+	Quiz['questions'].push(questionObj);
 }
 
 this.getQuestion = function(position){
@@ -68,7 +68,7 @@ this.getQuestion = function(position){
 }
 
 this.removeQuestion = function(position){
-	shiftPosition(getQuestion(position),Quiz.questions.length)
+	shiftPosition(position,Quiz.questions.length)
 	Quiz.questions.splice(Quiz.questions.length, 1);
 }
 
@@ -100,12 +100,14 @@ this.checkAnswer = function(answer,position,p){
 	}
 }
 
-thi.getQuizResult = function(){
+this.getQuizResult = function(){
 	return points;
 }
 
 //logOut() {loggedin = false}
 
+
+	this.createQuiz ('testquizet','testarn');
 
   return this;
 

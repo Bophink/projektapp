@@ -1,19 +1,19 @@
-<div id="start">
-	<ng-include src="'app/partials/header.html'" ></ng-include>
-	<ng-include src="'app/partials/overView.html'" ></ng-include>
+<ng-include src="'partials/header.html'"></ng-include>
+<ng-include src="'partials/overView.html'"></ng-include>
+<div ng-class="{Cprogress: waitingForInput}" >
 	<div class="row" margin-bottom="2cm">
-		<form style="margin-top: 40px">
-			<input class="center-block" type="text" placeholder="Search for a song!"/>
-			<input type"submit" hidden/> <!-- eventuellt gör den att enter funkar för att köra submit trots att knappen inte syns-->
+		<form style="margin-top: 50px">
+			<input class="center-block form-control" type="text" placeholder="Search for a song!" ng-model="query"/>
+			<button type="submit" class="btn btn-success" ng-click="songs(query)">Search</button>  <!--eventuellt gör den att enter funkar för att köra submit trots att knappen inte syns-->
 		</form>
 	</div>
-	<div class="table row">
-		<table>
-			<tr> <!-- ng-repeat="song in songs" -->
-				<td class="col-md-3">imgtagg</td>
-				<td class="col-md-3">plocka ut sångnamn</td>
-				<td class="col-md-3">plocka ut artistnamn</td>
-				<td class="col-md-3">plocka ut album</td>
+	<div class="row">
+		<table class="table table-hover" style="margin-bottom:70px;">
+			<tr ng-repeat="track in results" ng-click="selectTrack(track.id)" class="Cpointer">
+				<td class="col-md-3"><img ng-src="{{track.album.images[2].url}}"/></td>
+				<td class="col-md-3">{{track.name}}</td>
+				<td class="col-md-3">{{track.artists[0].name}}</td>
+				<td class="col-md-3">{{track.album.name}}</td>
 			</tr>
 		</table>
 	</div>
