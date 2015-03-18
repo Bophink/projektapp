@@ -18,7 +18,7 @@
   /*border: 3px solid;*/
 }
 .background{
-  background-color: #C4EDC5;
+  background-color: #686868;
 }
 .answerback  {
   background-color: rgb(120, 20, 71);
@@ -37,9 +37,8 @@
   padding-right: 0px;
 }
 .table {
-  margin-top: 40px;
-  height: 200px;
-  overflow: hidden;
+  background: #7aa32d;
+  overflow: auto;
 }
 
 html, body, .container{
@@ -47,4 +46,12 @@ html, body, .container{
 }
 h1, h2, h3 {
   color: #2A2B40;
+}
+
+.Cpointer *{
+  cursor: pointer;
+}
+
+.Cprogress *{
+  cursor: progress;
 }

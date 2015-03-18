@@ -8,7 +8,7 @@
 // also see that we included separate JavaScript files for these modules. Angular
 // has other core modules that you might want to use and explore when you go deeper
 // into developing Angular applications. For this lab, these two will suffice.
-var quizApp = angular.module('quizApp', ['ngRoute','ngResource','ngCookies']);
+var quizApp = angular.module('quizApp', ['ui.bootstrap','ngRoute','ngResource','ngCookies']);
 
 // Here we configure our application module and more specifically our $routeProvider. 
 // Route provider is used to tell angular to load a specific partial (view) for an individual
@@ -41,11 +41,11 @@ quizApp.config(['$routeProvider',
       }).
       when('/search', {
         templateUrl: 'partials/search.html',
-        controller: 'testCtrl'
+        controller: 'searchCtrl'
       }).
       when('/track/:trackId', {
         templateUrl: 'partials/track.html',
-        controller: 'testCtrl'
+        controller: 'trackCtrl'
       }).
       when('/quiz/:quizId', {
         templateUrl: 'partials/quiz.html',
