@@ -3,11 +3,11 @@
 		<carousel interval="myInterval">
 		    <slide ng-repeat="slide in slides" active="slide.active">
 		      	<div class="row" style="padding:0px 30px;">
-		      		<div class="col-md-2" ng-repeat="q in slide" style="padding:0px 15px;">
-				      	<div class="col-md-12">
+		      		<div class="col-md-2"  ng-repeat="q in slide" style="padding:0px 15px;">
+				      	<div class="col-md-12" ng-click="selectTrack(q.position)">
 				        	<img ng-src="{{q.img}}" style="margin:auto" class="img-responsive">
 				        </div>
-				        <div class="carousel-caption">
+				        <div class="carousel-caption" ng-click="selectTrack(q.position)">
 				        	<h1>{{q.position}}</h1>
 				        </div>
 				    </div>   
