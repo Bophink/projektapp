@@ -104,6 +104,10 @@ this.getQuizResult = function(){
 	return points;
 }
 
+this.setQuizResult = function(num){
+	points += num;
+}
+
 //logOut() {loggedin = false}
 
 

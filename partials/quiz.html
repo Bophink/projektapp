@@ -6,9 +6,10 @@
 			<span id="currentProgress">70</span><!--Make it count down-->
 		</div>
 	</div>
+	<audio autoplay ng-src="{{track.preview_url}}" type="audio/mpeg"/>
 	<div class="row">
 		<h1 class="col-md-6">{{Quiz.title}}</h1>
-		<h2 class="col-md-6 text-right">Total</h2>
+		<h2 class="col-md-6 text-right">Total {{getPoints()}}</h2>
 	</div>
 	<h2>by {{Quiz.creator}}</h2>
 	<div class="row">
