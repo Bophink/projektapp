@@ -56,3 +56,7 @@ quizApp.config(['$routeProvider',
         redirectTo: '/start'
       });
   }]);
+
+quizApp.config(function($sceDelegateProvider){
+     $sceDelegateProvider.resourceUrlWhitelist(['self','https://p.scdn.co/mp3-preview/*'])}
+  );

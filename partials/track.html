@@ -6,7 +6,7 @@
 		<h1 style="display:inline">{{track.name}}</h1>
 		<h4 style="display:inline"> by {{track.artists[0].name}}</h4>
 	</span>
-	<br/><audio controls autoplay ng-src="{{trustSrc}}" type="audio/mpeg"/ style="height:50px"/>
+	<br/><audio controls autoplay ng-src="{{track.preview_url}}" type="audio/mpeg"/ style="height:50px"/>
 	<div class="row row-centered">
 		<textarea id ="questionInput" class="col-lg-4 col-md-6 col-centered" type="textarea" ng-model="q" placeholder="Frågan är bla bla bla"/>
 	</div>

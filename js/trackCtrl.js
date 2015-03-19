@@ -4,8 +4,6 @@ quizApp.controller('trackCtrl', function ($scope,quizModel,$routeParams,$sce) {
 	$scope.waitingForInput = true;
 	quizModel.song.get({id:$routeParams.trackId}, function(data){
 		$scope.track = data;
-		$scope.trustSrc = $sce.trustAsResourceUrl($scope.track.preview_url);
-		console.log(data);
 		$scope.waitingForInput = false;
 	});
 
