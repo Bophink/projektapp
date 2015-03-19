@@ -7,9 +7,9 @@ quizApp.controller('trackCtrl', function ($scope,quizModel,$routeParams,$sce) {
 		$scope.waitingForInput = false;
 	});
 
-	$scope.done = function(q,a,b,c,d,r){
+	$scope.done = function(q,a,b,c,d){
 		//kolla att allt är ifyllt
-		quizModel.setQuestion(quizModel.createQuestion(q,a,b,c,d,$scope.track.id,r));
+		quizModel.setQuestion(quizModel.createQuestion(q,a,b,c,d,$scope.track.id,$scope.track.album.images[1].url));
 		console.log(quizModel.Quiz);
 		window.location = "#/search/";
 	}

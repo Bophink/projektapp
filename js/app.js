@@ -49,7 +49,7 @@ quizApp.config(['$routeProvider',
       }).
       when('/quiz/:quizId', {
         templateUrl: 'partials/quiz.html',
-        controller: 'testCtrl'
+        controller: 'quizCtrl'
       }).
       // TODO in Lab 5: add more conditions for the last two screens (overview and preparation)
       otherwise({

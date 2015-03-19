@@ -1,15 +1,24 @@
-<nav class="navbar navbar-default navbar-fixed-bottom" id="overView2">
-	<div ng-controller="CarouselCtrl">
-	  <carousel interval="myInterval">
-	    <slide ng-repeat="slideCollection in groupedSlides" active="slide.active">
-	      	<div class="row" style="padding:0px 30px;">
-	      		<div ng-repeat="albumCover in slideCollection" class="col-md-2" style="padding:0px 15px;">
-			      	<div class="col-md-12">
-			        	<img ng-src="{{albumCover.image}}" style="margin:auto" class="img-responsive">
-			        </div>
-			    </div>   
-	      	</div>
-	    </slide>
-	  </carousel>  
-	</div>
-</nav>
+<div ng-controller="CarouselCtrl">
+	<nav class="navbar navbar-default navbar-fixed-bottom" id="carousel">
+		<carousel interval="myInterval">
+		    <slide ng-repeat="slide in slides" active="slide.active">
+		      	<div class="row" style="padding:0px 30px;">
+		      		<div class="col-md-2" ng-repeat="q in slide" style="padding:0px 15px;">
+				      	<div class="col-md-12">
+				        	<img ng-src="{{q.img}}" style="margin:auto" class="img-responsive">
+				        </div>
+				        <div class="carousel-caption">
+				        	<h1>{{q.position}}</h1>
+				        </div>
+				    </div>   
+		      	</div>
+		    </slide>
+		    <slide ng-if="slides.length == 0" active="slide.active">
+		      	<div class="row" style="padding:0px 30px; height:233px; text-align:center; padding-top:80px;">
+		      		<h1>Your questions will pop up here when added to your quiz!</h1>	
+		      	</div>
+		    </slide>	    
+		</carousel>  
+	</nav>
+
+</div>
