@@ -1,6 +1,4 @@
-.html{
-  height: 100%;
-}
+
 .container {
   height: 100%;
   padding:0px 25px;
@@ -54,4 +52,10 @@ h1, h2, h3 {
 
 .Cprogress *{
   cursor: progress;
+}
+
+.carousel-control {
+  font-size:100px;
+  width:5%;
+  padding-top: 50px;
 }
