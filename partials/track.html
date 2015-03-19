@@ -12,14 +12,14 @@
 	</div>
 	<div class="row">
 		<div class="col-lg-3">
-			<input id ="answerAInput" class="" type="text" ng-model="a"  placeholder="Alternativ A"/><input type="radio" ng-model="r" value="a"/>
-			<input id ="answerBInput" class="" type="text" ng-model="b"  placeholder="Alternativ B"/><input type="radio" ng-model="r" value="b"/>
-			<input id ="answerCInput" class="" type="text" ng-model="c"  placeholder="Alternativ C"/><input type="radio" ng-model="r" value="c"/>
-			<input id ="answerDInput" class="" type="text" ng-model="d"  placeholder="Alternativ D"/><input type="radio" ng-model="r" value="d"/>
+			<input id ="answerAInput" class="" type="text" ng-model="a"  placeholder="Rätt alternativ"/>
+			<input id ="answerBInput" class="" type="text" ng-model="b"  placeholder="Alternativ B"/>
+			<input id ="answerCInput" class="" type="text" ng-model="c"  placeholder="Alternativ C"/>
+			<input id ="answerDInput" class="" type="text" ng-model="d"  placeholder="Alternativ D"/>
 		</div>
 	</div>
 	<div class="row">
-		<button type="button" ng-click="done(q,a,b,c,d,r.value)">Confirm question</button>
+		<button type="button" ng-click="done(q,a,b,c,d)">Confirm question</button>
 	</div>
 
 </div>
