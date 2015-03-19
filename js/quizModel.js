@@ -49,10 +49,10 @@ this.getQuiz = function(quizID){
 	return Quiz;
 }
 
-this.createQuestion = function(question,a,b,c,d,songId,correct, position){
+this.createQuestion = function(question,a,b,c,d,songId, albumImgUrl, position){
 	//sätter defaultvärde.
 	position = typeof position !== 'undefined' ? position : Quiz.questions.length+1;
-	return {"question":question,"position":position,"songId":songId,"correctAnswer":correct,"answers":{"1":a,"2":b,"3":c}};
+	return {"question":question,"position":position,"songId":songId,"answers":{"a":a,"b":b,"c":c,"d":d},"img": albumImgUrl};
 }
 
 this.setQuestion = function(questionObj){
@@ -92,7 +92,7 @@ this.shiftPosition = function(currentPosition, newPosition){
 }
 
 this.checkAnswer = function(answer,position,p){
-	if (answer == getQuestion(position).correctAnswer){
+	if (answer == getQuestion(position).correctAnswer){ //Behövs ändras då vi inte har correct answer längre!!!!
 		points += p;
 		return true;
 	}else{
