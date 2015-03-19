@@ -13,4 +13,8 @@ quizApp.controller('CarouselCtrl', function($scope,quizModel) {
       slide = [];
     }
   }
+
+  $scope.selectTrack = function(pos){
+    window.location = "#/track/quiz-" + pos;
+  }
 });

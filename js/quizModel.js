@@ -60,9 +60,9 @@ this.setQuestion = function(questionObj){
 }
 
 this.getQuestion = function(position){
-	for(var q in Quiz.questions){
-		if (q.position == position){
-			return q;
+	for(var q = 0; q <Quiz.questions.length; q++){
+		if (Quiz.questions[q].position === position){
+			return Quiz.questions[q];
 		}
 	} 
 }
