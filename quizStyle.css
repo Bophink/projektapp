@@ -106,6 +106,7 @@ h1, h2, h3 {
 .track-search-btn:hover{
   background-color:#555555;
   color:#CCCCCC;
+<<<<<<< HEAD
 }
 
 .inputAnswer {
@@ -134,3 +135,31 @@ h1, h2, h3 {
   border: none;
   outline:none;
 }
+=======
+};
+.img-wrap {
+    position: relative;
+    display: inline-block;
+    font-size: 0;
+}
+.img-wrap .close {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    z-index: 100;
+    background-color: #FFF;
+    padding: 5px 2px;
+    color: grey;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: .8;
+    text-align: center;
+    font-size: 16px;
+    line-height: 16px;
+    width:16px;
+    border-radius: 100%;
+}
+.img-wrap:hover .close {
+    opacity: 1;
+}
+>>>>>>> 53d39e6f9c47c0c0d79928bd9bb95b0f7674d209
