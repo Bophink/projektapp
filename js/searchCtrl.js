@@ -52,10 +52,6 @@ $scope.songs = function(searchParams) {
   	});
 }
 
-$scope.selectTrack = function(id){
-	window.location = "#/track/" + id;
-}
-
 $scope.playIt = function(url,id){
 	event.stopPropagation();
 	$("#preview")[0].setAttribute('src', url);

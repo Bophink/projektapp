@@ -106,4 +106,31 @@ h1, h2, h3 {
 .track-search-btn:hover{
   background-color:#555555;
   color:#CCCCCC;
-};
+}
+
+.inputAnswer {
+  width:45%;
+  border-radius:15px;
+  margin-top:10px;
+  text-align:center;
+  border: none;
+  outline:none;
+}
+
+.inputQuestion{
+  width:100%;
+  height:140px;
+  border-radius: 15px;
+  border: none;
+  outline:none;
+  padding:10px;
+}
+
+.btnConfirm{
+  color: white;
+  background:green;
+  border-radius: 10px;
+  margin-top:10px;
+  border: none;
+  outline:none;
+}
