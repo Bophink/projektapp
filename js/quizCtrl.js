@@ -53,7 +53,8 @@ quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$sce) {
 		//console.log(quizModel.userAnswers[$scope.currentQPos]);
 		if (($scope.Quiz.questions[$scope.currentQPos + 1]) != undefined) {
 			//console.log($scope.Quiz.questions[$scope.currentQPos].position);
-			window.location = ("#/quiz/" + ($routeParams.quizId + 1));
+
+			window.location = ("#/quiz/" + (parseInt($routeParams.quizId) + 1));
 		}
 		else {
 			window.location = ('#/quizScore');
@@ -61,7 +62,6 @@ quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$sce) {
 	}
 
 	$scope.getPoints = function(){
-		console.log('getPoints(): ' + quizModel.getQuizResult());
 		return quizModel.getQuizResult();
 	}
 
