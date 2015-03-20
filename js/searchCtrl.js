@@ -12,6 +12,7 @@ $(window).scroll(function() {
 });
 
 $scope.newSearch = function(query){
+	$("#search").animate({marginTop:'100px'}, 500, 'swing');
 	$scope.results = [];
 	var searchParams = {"query":query,"type":"track","limit":50}
 	$scope.songs(searchParams);
@@ -49,19 +50,22 @@ $scope.selectTrack = function(id){
 }
 
 $scope.playIt = function(url,id){
+	console.log("play");
 	$("#preview")[0].setAttribute('src', url);
 	$("#preview")[0].play();
 	$scope.playing = id;
 }
 
-$scope.stopIt = function(url){
+$scope.stopIt = function(){
+	console.log("stop");
 	$scope.playing = "";
 	$("#preview")[0].pause();
 	$("#preview")[0].currentTime = 0;
 }
 
-$("#preview").bind('ended', function(){
-	$scope.playing = "";
+$("#preview")[0].addEventListener('ended', function(){
+	console.log("end");
+	$scope.stopIt();
 });
 
 });
