@@ -6,7 +6,7 @@ quizApp.controller('trackCtrl', function ($scope,quizModel,$routeParams,$sce) {
 	var trackId = $routeParams.trackId;
 	// quiz-position
 	if($routeParams.trackId.substring(0,5) === "quiz-"){
-		var quizPosition = Number($routeParams.trackId.substring(5));
+		var quizPosition = Number($routeParams.trackId.substring(5))-1;
 		$scope.question = quizModel.getQuestion(quizPosition);
 		trackId = $scope.question.songId;
 		$scope.q = $scope.question.question;
