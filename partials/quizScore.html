@@ -1,0 +1,46 @@
+<div id="quizScore">
+	<ng-include src="'partials/header.html'" ></ng-include>
+	<div class="row" >
+		<h1 class="text-center" style="margin-top:150px">Grattis!</h1> <!-- Användarnamn -->
+	</div>
+	<div class="row text-center"><h3>Du fick {{getPoints()}} poäng</h3></div>
+	<div class="row">
+		<div class="col-md-6">
+			<button class="btn primary-btn col-md-2 pull-right">Dela quizzet</button>
+		</div>
+		<div class="col-md-6">
+			<button class="btn primary-btn col-md-2">Skapa Quiz</button>
+		</div>
+	</div>
+
+	<div>
+		<table class="table">
+			<thead>
+				<tr>
+					<th></th>
+					<th>Fråga</th>
+					<th>Rätt svar</th>
+					<th>Ditt svar</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="q in getQuestions()">
+					<td class="col-md-3">{{q.position}}. {{q.question}}</td>
+					<td class="col-md-2">{{q.answers['a']}}</td>
+					<td class="col-md-2">{{userAnswers[q.position-1]}}</td>
+					<td class="col-md-3">
+							<h3>{{songList[q.position-1].name}}</h3>
+							<h4>{{songList[q.position-1].artists[0].name}}</h4>
+							<h5>{{songList[q.position-1].album.name}}</h5>
+					</td>
+					<td class="col-md-2">
+						<img ng-src="{{songList[q.position-1].album.images[2].url}}" ng-mouseover="playIt(songList[q.position-1].preview_url,songList[q.position-1].id)" ng-mouseout="stopIt()"/>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<audio id="preview" type="audio/mpeg"/>
+	</div>
+
+</div>

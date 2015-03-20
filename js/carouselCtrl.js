@@ -8,7 +8,7 @@ quizApp.controller('CarouselCtrl', function($scope,quizModel) {
 
   for(var k = 0; k<quiz.questions.length; k++){
     var localQ = quiz.questions[k];
-    localQ.position = k;
+    localQ.position = k+1;
     slide.push(localQ);
     if((k+1)%6 === 0 || (k+1) === quiz.questions.length){
       $scope.slides.push(slide);

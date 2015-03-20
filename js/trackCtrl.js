@@ -6,7 +6,7 @@ quizApp.controller('trackCtrl', function ($scope,quizModel,$routeParams,$sce) {
 	var trackId = $routeParams.trackId;
 	// quiz-position
 	if($routeParams.trackId.substring(0,5) === "quiz-"){
-		var quizPosition = Number($routeParams.trackId.substring(5));
+		var quizPosition = Number($routeParams.trackId.substring(5))-1;
 		$scope.question = quizModel.getQuestion(quizPosition);
 		trackId = $scope.question.songId;
 		$scope.q = $scope.question.question;
@@ -25,7 +25,7 @@ quizApp.controller('trackCtrl', function ($scope,quizModel,$routeParams,$sce) {
 
 	$scope.done = function(q,a,b,c,d){
 		//kolla att allt är ifyllt
-		quizModel.setQuestion(quizModel.createQuestion(q,a,b,c,d,$scope.track.id,$scope.track.album.images[1].url));
+		quizModel.setQuestion(quizModel.createQuestion(q,a,b,c,d,$scope.track.id,$scope.track.album.images[1].url),quizPosition);
 		console.log(quizModel.Quiz);
 		window.location = "#/search/";
 	}

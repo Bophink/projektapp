@@ -1,19 +1,23 @@
 <div id="quiz">
-	<ng-include src="'partials/header.html'" ></ng-include>
+	<ng-include src="'partials/header.html'" ng-controller ="headerCtrl" ></ng-include>
 	<div class="progress">
 		<div class="progress-bar" role="progressbar" aria-valuenow="70"
 		aria-valuemin="0" aria-valuemax="100" style="width:70%">
 			<span id="currentProgress">70</span><!--Make it count down-->
 		</div>
 	</div>
-	<audio autoplay ng-src="{{track.preview_url}}" type="audio/mpeg"/>
+	<audio id="quizAudio" autoplay ng-src="{{track.preview_url}}" type="audio/mpeg"/>
+	<script>
+		var song = $('#quizAudio')
+		setTimeout(function() {song.animate({volume: 0}, 2000)},28000);
+	</script>
 	<div class="row">
 		<h1 class="col-md-6">{{Quiz.title}}</h1>
 		<h2 class="col-md-6 text-right">Total {{getPoints()}}</h2>
 	</div>
 	<h2>by {{Quiz.creator}}</h2>
 	<div class="row">
-		<h3>{{Quiz.questions[0].question}}</h3>
+		<h3>{{Quiz.questions[currentQPos].question}}</h3>
 		<div class="row">
 			<button ng-click="checkAnswer(answer)" ng-repeat="answer in shuffledArray" class="answers btn btn-default col-md-5" type="button">{{answer}}</button> <!-- ng-repeat="for answer in answers", lär lägga till i stylesheet med padding på quizknapparna också -->
 		</div>
