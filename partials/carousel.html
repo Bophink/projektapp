@@ -2,13 +2,14 @@
 	<nav class="navbar navbar-default navbar-fixed-bottom" id="carousel">
 		<carousel interval="myInterval">
 		    <slide ng-repeat="slide in slides" active="slide.active">
-		      	<div class="col-md-2 col-sm-2 col-xs-4 img-wrap" ng-repeat="q in slide" style="padding:0px 15px;" ng-click="selectTrack(q.position)">
-
-			       	<img ng-src="{{q.img}}" style="margin:0 auto;max-height:150px" class="img-responsive"/>
-			        <div class="carousel-caption" ng-click="selectTrack(q.position)">
-			        	<h1 style="color:white">{{q.position}}</h1>
-			        	<h4 style="color:white;font-size:22px"><a href=""#>&times;</a></h4>
-			        </div>
+		      	<div class="col-md-2 col-sm-2 col-xs-4" ng-repeat="q in slide" style="padding:0px 15px;">
+		      		<div class="img-wrap">
+		      			<span class="close" ng-click="removeTrack(q.position)">X</span>
+				       	<img ng-src="{{q.img}}" style="margin:0 auto;max-height:150px" class="img-responsive"/>
+				        <div class="carousel-caption" ng-click="selectTrack(q.position)">
+				        	<h1 style="color:white">{{q.position}}</h1>
+				        </div>
+			    	</div>
 			    </div>   
 		    </slide>
 
@@ -20,3 +21,4 @@
 		</carousel>  
 	</nav>
 </div>
+
