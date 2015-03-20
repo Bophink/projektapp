@@ -12,6 +12,9 @@ $(window).scroll(function() {
 });
 
 $scope.newSearch = function(query){
+	if (query == ""){
+		return
+	}
 	$("#search").animate({marginTop:'100px'}, 500, 'swing');
 	$scope.results = [];
 	var searchParams = {"query":query,"type":"track","limit":50}
