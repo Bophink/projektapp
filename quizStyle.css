@@ -19,6 +19,7 @@
   background: url('img/mouse.jpg');
   background-size: cover;
   background-attachment: fixed;
+  background-position: center;
 }
 .answerback  {
   background-color: rgb(120, 20, 71);
