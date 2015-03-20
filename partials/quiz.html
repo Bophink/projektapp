@@ -6,7 +6,11 @@
 			<span id="currentProgress">70</span><!--Make it count down-->
 		</div>
 	</div>
-	<audio autoplay ng-src="{{track.preview_url}}" type="audio/mpeg"/>
+	<audio id="quizAudio" autoplay ng-src="{{track.preview_url}}" type="audio/mpeg"/>
+	<script>
+		var song = $('#quizAudio')
+		setTimeout(function() {song.animate({volume: 0}, 2000)},28000);
+	</script>
 	<div class="row">
 		<h1 class="col-md-6">{{Quiz.title}}</h1>
 		<h2 class="col-md-6 text-right">Total {{getPoints()}}</h2>
