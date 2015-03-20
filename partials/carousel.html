@@ -2,23 +2,21 @@
 	<nav class="navbar navbar-default navbar-fixed-bottom" id="carousel">
 		<carousel interval="myInterval">
 		    <slide ng-repeat="slide in slides" active="slide.active">
-		      	<div class="row" style="padding:0px 30px;">
-		      		<div class="col-md-2"  ng-repeat="q in slide" style="padding:0px 15px;">
-				      	<div class="col-md-12" ng-click="selectTrack(q.position)">
-				        	<img ng-src="{{q.img}}" style="margin:auto" class="img-responsive">
-				        </div>
-				        <div class="carousel-caption" ng-click="selectTrack(q.position)">
-				        	<h1>{{q.position}}</h1>
-				        </div>
-				    </div>   
-		      	</div>
+		      	<div class="col-md-2 col-sm-2 col-xs-4 img-wrap" ng-repeat="q in slide" style="padding:0px 15px;" ng-click="selectTrack(q.position)">
+
+			       	<img ng-src="{{q.img}}" style="margin:0 auto;max-height:150px" class="img-responsive"/>
+			        <div class="carousel-caption" ng-click="selectTrack(q.position)">
+			        	<h1 style="color:white">{{q.position}}</h1>
+			        	<h4 style="color:white;font-size:22px"><a href=""#>&times;</a></h4>
+			        </div>
+			    </div>   
 		    </slide>
+
 		    <slide ng-if="slides.length == 0" active="slide.active">
-		      	<div class="row" style="padding:0px 30px; height:23px; text-align:center; padding-top:80px;">
+		      	<div class="row" style="padding:0px 30px; text-align:center;height:150px">
 		      		<h1>Your questions will pop up here when added to your quiz!</h1>	
 		      	</div>
 		    </slide>	    
 		</carousel>  
 	</nav>
-
 </div>
