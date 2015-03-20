@@ -51,6 +51,10 @@ quizApp.config(['$routeProvider',
         templateUrl: 'partials/quiz.html',
         controller: 'quizCtrl'
       }).
+      when('/quizScore', {
+        templateUrl: 'partials/quizScore.html',
+        controller: 'quizScoreCtrl'
+      }).
       // TODO in Lab 5: add more conditions for the last two screens (overview and preparation)
       otherwise({
         redirectTo: '/start'

@@ -13,7 +13,7 @@
 	</div>
 	<h2>by {{Quiz.creator}}</h2>
 	<div class="row">
-		<h3>{{Quiz.questions[0].question}}</h3>
+		<h3>{{Quiz.questions[currentQPos].question}}</h3>
 		<div class="row">
 			<button ng-click="checkAnswer(answer)" ng-repeat="answer in shuffledArray" class="answers btn btn-default col-md-5" type="button">{{answer}}</button> <!-- ng-repeat="for answer in answers", lär lägga till i stylesheet med padding på quizknapparna också -->
 		</div>

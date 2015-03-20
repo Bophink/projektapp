@@ -29,6 +29,8 @@ quizApp.factory('quizModel',function ($resource, $cookieStore) {
 var points = 0;
 
 var Quiz = this.Quiz = {};
+var userAnswers = this.userAnswers = [];
+
 this.songSearch = $resource('https://api.spotify.com/v1/search');
 this.song = $resource('https://api.spotify.com/v1/tracks/:id');
 
