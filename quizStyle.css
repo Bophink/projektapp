@@ -40,7 +40,10 @@
 .table {
   background: rgba(150,150,150,0.5);
   overflow: auto;
-  vertical-align: middle;
+}
+
+.table h4{
+  margin-top:20px;
 }
 
 html, body, .container{
@@ -84,6 +87,7 @@ h1, h2, h3 {
 }
 
 .track-search-btn{
+  background-color:#CCCCCC;
   border-bottom-right-radius:25px;
   border-top-right-radius:25px;
   border-bottom-left-radius:0;
@@ -98,3 +102,8 @@ h1, h2, h3 {
   border:none;
   outline:none;
 }
+
+.track-search-btn:hover{
+  background-color:#555555;
+  color:#CCCCCC;
+};
