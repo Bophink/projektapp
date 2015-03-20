@@ -51,56 +51,28 @@ this.getQuiz = function(quizID){
 	return Quiz;
 }
 
-this.createQuestion = function(question,a,b,c,d,songId, albumImgUrl, position){
-	//sätter defaultvärde.
-	position = typeof position !== 'undefined' ? position : Quiz.questions.length+1;
-	return {"question":question,"position":position,"songId":songId,"answers":{"a":a,"b":b,"c":c,"d":d},"img": albumImgUrl};
+this.createQuestion = function(question,a,b,c,d,songId, albumImgUrl){
+	return {"question":question,"songId":songId,"answers":{"a":a,"b":b,"c":c,"d":d},"img": albumImgUrl};
 }
 
-this.setQuestion = function(questionObj){
-	Quiz['questions'].push(questionObj);
+this.setQuestion = function(questionObj,index){
+	index = typeof index !== 'undefined' ? index : Quiz.questions.length;
+	Quiz.questions[index] = questionObj;
 }
 
-this.getQuestion = function(position){
-	for(var q = 0; q <Quiz.questions.length; q++){
-		if (Quiz.questions[q].position === position){
-			return Quiz.questions[q];
-		}
-	} 
+this.getQuestion = function(index){
+	return Quiz.questions[index];
 }
 
-this.removeQuestion = function(position){
-	shiftPosition(position,Quiz.questions.length)
-	Quiz.questions.splice(Quiz.questions.length, 1);
+this.removeQuestion = function(index){
+	Quiz.questions.splice(index,1);
 }
 
 this.shiftPosition = function(currentPosition, newPosition){
-	var selectedQ = getQuestion(currentPosition);
-	if (newPosition < currentPosition){
-	 	for(var q in Quiz.questions){
-	 		if (q.position < currentPosition && q.position >= newPosition){
-	 			q.position += 1;
-	 		}
-	 	}
-	}
-	else{
-		for(var q in Quiz.questions){
-	 		if (q.position > currentPosition && q.position <= newPosition){
-	 			q.position -= 1;
-	 		} 	
-	 	}
-	}
-	selectedQ.position = newPosition;
+	selectedQuestion = Quiz.questions.splice(currentPosition,1);
+	Quiz.questions.splice(newPosition,0,selectedQuestion);
 }
 
-this.checkAnswer = function(answer,position,p){
-	if (answer == getQuestion(position).correctAnswer){ //Behövs ändras då vi inte har correct answer längre!!!!
-		points += p;
-		return true;
-	}else{
-		return false;
-	}
-}
 
 this.getQuizResult = function(){
 	return points;
