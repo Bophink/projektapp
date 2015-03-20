@@ -50,6 +50,7 @@ $scope.selectTrack = function(id){
 }
 
 $scope.playIt = function(url,id){
+	event.stopPropagation();
 	console.log("play");
 	$("#preview")[0].setAttribute('src', url);
 	$("#preview")[0].play();
@@ -57,6 +58,7 @@ $scope.playIt = function(url,id){
 }
 
 $scope.stopIt = function(){
+	event.stopPropagation();
 	console.log("stop");
 	$scope.playing = "";
 	$("#preview")[0].pause();
