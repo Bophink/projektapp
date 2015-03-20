@@ -18,6 +18,7 @@ quizApp.controller('quizScoreCtrl', function ($scope,quizModel,$routeParams) {
 		for (var k=0; k<quizModel.Quiz.questions.length; k++){
 			var localQ = quizModel.Quiz.questions[k];
 	 		localQ['position'] = k+1;
+	 		localQ['question'] = localQ['question'].slice(0,200);
 	 		$scope.localQuestions.push(localQ);
 		}
 		return $scope.localQuestions;
