@@ -1,0 +1,26 @@
+<div id="quizScore">
+	<ng-include src="'partials/header.html'" ></ng-include>
+	<div class="row" >
+		<h1 class="text-center" style="margin-top:150px">Grattis!</h1> <!-- Användarnamn -->
+	</div>
+	<div class="row text-center"><h3>Du fick {{getPoints()}} poäng</h3></div>
+	<div class="row">
+		<div class="col-md-6">
+			<button class="btn primary-btn col-md-2 pull-right">Dela quizzet</button>
+		</div>
+		<div class="col-md-6">
+			<button class="btn primary-btn col-md-2">Skapa Quiz</button>
+		</div>
+	</div>
+
+	<div ng-repeat="q in getQuestions()">
+		<div class="row">
+			<div class="col-md-3">{{q.position}}. {{q.question}}</div>
+			<div class="col-md-2">{{q.answers['a']}}</div>
+			<div class="col-md-2">{{userAnswers[q.position-1]}}</div>
+			<div class="col-md-3">Låtinfo: Lok</div>
+			<div class="col-md-2">Bild</div>
+		</div>
+	</div>
+
+</div>
