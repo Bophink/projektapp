@@ -1,42 +1,43 @@
 <div id="quizScore">
 	<ng-include src="'partials/header.html'" ></ng-include>
 	<div class="row" >
-		<h1 class="text-center" style="margin-top:150px">Grattis!</h1> <!-- Användarnamn -->
+		<h1 class="text-center" style="margin-top:150px">Bra jobbat!</h1> <!-- Användarnamn -->
 	</div>
 	<div class="row text-center"><h3>Du fick {{getPoints()}} poäng</h3></div>
-	<div class="row">
-		<div class="col-md-6">
-			<button class="btn primary-btn col-lg-2 col-md-2 col-sm-2 pull-right">Dela quizzet</button>
+	<div class="row" style="padding:15px 0px 30px 0px">
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+			<button class="btnScore btn btn-primary col-lg-2 col-md-3 col-sm-3 col-xs-6 pull-right">Dela quizzet</button>
 		</div>
-		<div class="col-md-6">
-			<button class="btn primary-btn col-lg-2 col-md-2 col-sm-2 pull-left">Skapa Quiz</button>
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+			<button class="btnScore btn btn-primary col-lg-2 col-md-3 col-sm-3 col-xs-6">Skapa Quiz</button>
 		</div>
 	</div>
 
 	<div>
-		<table class="table">
+		<table class="table table-score">
 			<thead>
 				<tr>
-					<th></th>
-					<th><h4>Fråga</h4></th>
-					<th><h4>Rätt svar</h4></th>
-					<th><h4>Du svarade</h4></th>
-					<th></th>
+					<th class="col-lg-1 col-md-1"></th>
+					<th class="col-lg-4 col-md-4"><h4>Fråga</h4></th>
+					<th class="col-lg-1 col-md-1"><h4>Rätt svar</h4></th>
+					<th class="col-lg-1 col-md-1"><h4>Du svarade</h4></th>
+					<th class="col-lg-4 col-md-4"></th>
+					<th class="col-lg-1 col-md-1"></th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr ng-repeat="q in getQuestions()">
-					<td class="col-md-1"><h4>{{q.position}}.</h4></td>
-					<td class="col-md-4">{{q.question}}</td>
-					<td class="col-md-1">{{q.answers['a']}}</td>
-					<td class="col-md-1">{{userAnswers[q.position-1]}}</td>
-					<td class="col-md-4">
+					<td class="col-lg-1 col-md-1" style="text-align:center"><h1>{{q.position}}.</h1></td>
+					<td class="col-lg-4 col-md-4">{{q.question}}</td>
+					<td class="col-lg-1 col-md-1">{{q.answers['a']}}</td>
+					<td class="col-lg-1 col-md-1">{{userAnswers[q.position-1]}}</td>
+					<td class="col-lg-4 col-md-4">
 							<h3>{{songList[q.position-1].name}}</h3>
 							<h4>{{songList[q.position-1].artists[0].name}}</h4>
 							<h5>{{songList[q.position-1].album.name}}</h5>
 					</td>
-					<td class="col-md-1">
-						<img class="pull-right" ng-src="{{songList[q.position-1].album.images[2].url}}" ng-mouseover="playIt(songList[q.position-1].preview_url,songList[q.position-1].id)" ng-mouseout="stopIt()"/>
+					<td class="col-lg-1 col-md-1">
+						<img ng-src="{{songList[q.position-1].album.images[2].url}}" ng-mouseover="playIt(songList[q.position-1].preview_url,songList[q.position-1].id)" ng-mouseout="stopIt()"/>
 					</td>
 				</tr>
 			</tbody>
