@@ -56,17 +56,15 @@ $scope.songs = function(searchParams) {
 }
 
 $scope.playIt = function(url,id){
-	event.stopPropagation();
 	$("#preview")[0].setAttribute('src', url);
 	$("#preview")[0].play();
 	$scope.playing = id;
 }
 
 $scope.stopIt = function(){
-	event.stopPropagation();
-	$scope.playing = "";
 	$("#preview")[0].pause();
 	$("#preview")[0].currentTime = 0;
+	$scope.playing = "";
 }
 
 $("#preview")[0].addEventListener('ended', function(){
