@@ -21,7 +21,7 @@
 			<input id ="answerDInput" class="inputAnswer" style="margin-left:4%;" type="text" ng-model="d"  placeholder="This is a bicycle"/>
 			<button type="button" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 btnConfirm" ng-click="done(q,a,b,c,d)">Confirm question</button>
 		</div>
-		<div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+		<div class="col-lg-5 col-md-5 col-sm-12 col-xs-12" ng-if="bio != undefined">
 			<h4>Need inspiration?</h4>
 			<div class="biography" readonly>{{bio.text}}<br/><p align="right" class="bioProvider">provided by <a href="{{bio.url}}">{{bio.site}}</a></p></div>
 		</div>
