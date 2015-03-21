@@ -13,13 +13,17 @@
 		</div>
 		<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
 			<h4>What's the question?</h4>
-			<textarea id ="questionInput" class="inputQuestion" type="textarea" ng-model="q" placeholder="Who did let the dogs out?" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Who did let the dogs out?'"/>
+			<textarea id ="questionInput" class="inputQuestion" ng-model="q" placeholder="Who did let the dogs out?" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Who did let the dogs out?'"/>
 			<h4>... and the answers?</h4>
 			<input id ="answerAInput" class="inputAnswer" style="margin-right:4%;"type="text" ng-model="a"  placeholder="Correct answer"/>
 			<input id ="answerBInput" class="inputAnswer" style="margin-left:4%;" type="text" ng-model="b"  placeholder="Almost right.."/>
 			<input id ="answerCInput" class="inputAnswer" style="margin-right:4%;" type="text" ng-model="c"  placeholder="Not even close!"/>
 			<input id ="answerDInput" class="inputAnswer" style="margin-left:4%;" type="text" ng-model="d"  placeholder="This is a bicycle"/>
 			<button type="button" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 btnConfirm" ng-click="done(q,a,b,c,d)">Confirm question</button>
+		</div>
+		<div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+			<h4>Need inspiration?</h4>
+			<textarea class="biography" readonly>{{bio}}</textarea>
 		</div>
 	</div>
 </div>
