@@ -131,11 +131,27 @@ h1, h2, h3 {
   color: white;
   background:green;
   border-radius: 10px;
-  margin-top:10px;
+  margin-top:15px;
   border: none;
   outline:none;
 }
-=======
+
+.biography{
+  width:100%;
+  height:280px;
+  border-radius: 15px;
+  border: none;
+  outline:none;
+  padding:10px;
+  overflow:auto;
+  background: #FFFFFF;
+}
+
+.bioProvider{
+  font-size: 10px;
+  color: #DDDDDD;
+}
+
 };
 .img-wrap {
     position: relative;
@@ -162,4 +178,4 @@ h1, h2, h3 {
 .img-wrap:hover .close {
     opacity: 1;
 }
->>>>>>> 53d39e6f9c47c0c0d79928bd9bb95b0f7674d209
+

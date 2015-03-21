@@ -23,7 +23,7 @@ quizApp.controller('trackCtrl', function ($scope,quizModel,$routeParams,$sce) {
 		$scope.waitingForInput = false;
 		quizModel.biography.get({id:'spotify:artist:' + $scope.track.artists[0].id}, function(data){
 			console.log(data);
-			$scope.bio = data.response.biographies[0].text;
+			$scope.bio = data.response.biographies[0];
 			
 			console.log($scope.bio);
 		});
