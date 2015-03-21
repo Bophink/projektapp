@@ -5,7 +5,6 @@ quizApp.controller('CarouselCtrl', function($scope,quizModel) {
 
   $scope.update = function(){
     $scope.slides = [];
-
     var slide = [];
     var quiz = quizModel.getQuiz();
 
@@ -13,13 +12,23 @@ quizApp.controller('CarouselCtrl', function($scope,quizModel) {
       var localQ = quiz.questions[k];
       localQ.position = k+1;
       slide.push(localQ);
-      if((k+1)%6 === 0 || (k+1) === quiz.questions.length){
-        $scope.slides.push(slide);
-        slide = [];
+
+      // width > 768px -> laptop & desktop
+      if($(window).width() > 768 ){
+        if((k+1)%6 === 0 || (k+1) === quiz.questions.length){
+          $scope.slides.push(slide);
+          slide = [];
+        }
+      }
+      // width <= 768px -> tablet & phone
+      else{
+        if((k+1)%3 === 0 || (k+1) === quiz.questions.length){
+          $scope.slides.push(slide);
+          slide = [];
+        } 
       }
     }
-  }
-  $scope.update();
+  }  
 
   $scope.selectTrack = function(pos){
     window.location = "#/track/quiz-" + pos;
@@ -28,7 +37,17 @@ quizApp.controller('CarouselCtrl', function($scope,quizModel) {
   $scope.removeTrack = function(pos){
     quizModel.removeQuestion(pos-1);
     this.update();
-    
   }
 
+  $(window).on("resize.doResize", function(){
+      $scope.$apply(function() {
+        $scope.update();
+      });
+  });
+
+  $scope.$on("$destroy", function(){
+    $(window).off("resize.doResize");
+  });
+
+  $scope.update();
 });
