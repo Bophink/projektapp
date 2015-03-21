@@ -2,7 +2,7 @@
 	<nav class="navbar navbar-default navbar-fixed-bottom" id="carousel">
 		<carousel interval="myInterval">
 		    <slide ng-repeat="slide in slides" active="slide.active">
-		      	<div class="col-md-2 col-sm-2 col-xs-4" ng-repeat="q in slide" style="padding:0px 15px;">
+		      	<div class="col-md-2 col-sm-3 col-xs-4" ng-repeat="q in slide" style="padding:0px 15px;">
 		      		<div class="img-wrap">
 		      			<span class="close" ng-click="removeTrack(q.position)">X</span>
 				       	<img ng-src="{{q.img}}" style="margin:0 auto;max-height:150px" class="img-responsive"/>
