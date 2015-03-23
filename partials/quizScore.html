@@ -37,7 +37,9 @@
 							<h5>{{songList[q.position-1].album.name}}</h5>
 					</td>
 					<td class="col-lg-1 col-md-1">
-						<img ng-src="{{songList[q.position-1].album.images[2].url}}" ng-mouseover="playIt(songList[q.position-1].preview_url,songList[q.position-1].id)" ng-mouseout="stopIt()"/>
+						<div ng-style="{'background-image':'url(' + songList[q.position-1].album.images[2].url + ')', 'height':'64px', 'width':'64px'}" ng-mouseover="playIt(songList[q.position-1].preview_url,songList[q.position-1].id)" ng-mouseout="stopIt()">
+						<img ng-src="img/play_button.png" ng-mouseover="playIt(songList[q.position-1].preview_url,songList[q.position-1].id)" ng-mouseout="stopIt()" style="height:64xpx;width:64px" ng-if="playing != songList[q.position-1].id"/>
+						</div>
 					</td>
 				</tr>
 			</tbody>
