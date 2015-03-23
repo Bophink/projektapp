@@ -3,9 +3,9 @@ quizApp.controller('searchCtrl', function ($scope,$sce,quizModel) {
 $scope.waitingForInput = false;
 $scope.status = "";
 
-var typingTimer;	// initierar en timer.
-var doneTypingInterval = 100; //tid i ms som användaren får vänta efter att han skrivit till API-anrop.
 
+typingTimer = null;	// initierar en timer.
+doneTypingInterval = 300; //tid i ms som användaren får vänta efter att han skrivit till API-anrop.
 
 
 $(window).scroll(function() {
@@ -73,17 +73,18 @@ $("#preview")[0].addEventListener('ended', function(){
 
 $('.track-search-field').keyup(function(){
     clearTimeout(typingTimer);
-    typingTimer = setTimeout(doneTyping, doneTypingInterval);
+    typingTimer = setTimeout($scope.doneTyping, doneTypingInterval);//$scope.doneTypingInterval);
+    //console.log(typingTimer);
 });
 //on keydown, clear the countdown 
 $('.track-search-field').keydown(function(){
     clearTimeout(typingTimer);
+    //console.log("nollställd "+typingTimer);
 });
 
 //user is "finished typing," do something
-function doneTyping () {
+$scope.doneTyping = function() {
 	$scope.newSearch($scope.query);
-    //do something
+	console.log("gör sök på: "+$scope.query);
 }
-
 });
