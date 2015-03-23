@@ -3,11 +3,13 @@ quizApp.controller('quizScoreCtrl', function ($scope,quizModel,$routeParams) {
 	$scope.songList = [];
 	for(var i = 0; i<quizModel.Quiz.questions.length; i++){
 		quizModel.song.get({id:quizModel.Quiz.questions[i].songId}, function(data){
+			console.log("track " + track)
 			var track = data;
 			$scope.songList.push(track);
 		});
-		console.log($scope.songList);
+		//console.log($scope.songList);
 	}
+	console.log($scope.songList);
 
 	$scope.getUserAnswers = function(){
 		return quizModel.userAnswers;

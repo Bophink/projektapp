@@ -1,24 +1,24 @@
 quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$sce) {
 
 
-	$scope.currentQPos = $routeParams.quizId - 1; //ÄNDRA SEN SÅ ATT DET INTE HETER QUZIID
-
-	quizModel.song.get({id:quizModel.Quiz.questions[$scope.currentQPos].songId}, function(data){
-		$scope.track = data;
-		$scope.waitingForInput = false;
-	});
+	$scope.currentQPos = 0; //ÄNDRA SEN SÅ ATT DET INTE HETER QUZIID
+	$scope.qAnswered = false;
+	quizModel.setQuizResult(0);
+	quizModel.userAnswers = [];
 
 	$scope.Quiz = quizModel.Quiz;
-	//console.log($scope.Quiz);
-	//console.log($scope.Quiz.questions[0].answers);
 	$scope.answers = [];
 
-	for (var i in $scope.Quiz.questions[$scope.currentQPos].answers) { //ÄNDRA SÅ ATT DEN INCREMENTAR QUESTIONS NÄR MAN KLICKAR PÅ NÄSTA FRÅGA! DEN SKA VARA POSITION
+	$scope.getNewAnswers = function() {
+		$scope.answers = [];
+		for (var i in $scope.Quiz.questions[$scope.currentQPos].answers) { //ÄNDRA SÅ ATT DEN INCREMENTAR QUESTIONS NÄR MAN KLICKAR PÅ NÄSTA FRÅGA! DEN SKA VARA POSITION
 		$scope.answers.push($scope.Quiz.questions[$scope.currentQPos].answers[i]);
+		}
+		quizModel.song.get({id:quizModel.Quiz.questions[$scope.currentQPos].songId}, function(data){
+			$scope.track = data;
+			$scope.waitingForInput = false;
+		});
 	}
-
-
-	//$scope.answers = $scope.Quiz.questions[0].answers;
 
 	$scope.shuffle = function(array) {
 	 	var m = array.length, t, i;
@@ -37,24 +37,35 @@ quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$sce) {
 
 	  return array;
 	}
-	$scope.checkAnswer = function(answer) {
-		if (answer === $scope.Quiz.questions[$scope.currentQPos].answers['a']){
-			alert("Rätt");
-			quizModel.setQuizResult(1);
-			console.log("Spain, deux points: " + quizModel.getQuizResult())
-			
-			//add points, routea till nästa question med en increment i position eller dyl.
-		}
-		else {
-			alert("Fel!");
-			//routea till nästa med increment
-		}
-		quizModel.userAnswers.push(answer);
-		//console.log(quizModel.userAnswers[$scope.currentQPos]);
-		if (($scope.Quiz.questions[$scope.currentQPos + 1]) != undefined) {
-			//console.log($scope.Quiz.questions[$scope.currentQPos].position);
 
-			window.location = ("#/quiz/" + (parseInt($routeParams.quizId) + 1));
+	$scope.checkAnswer = function(answer) {
+		if ($scope.qAnswered != true){
+			if (answer === $scope.Quiz.questions[$scope.currentQPos].answers['a']){
+				alert("Rätt");
+				quizModel.setQuizResult(quizModel.getQuizResult() + 1);
+				//add points, routea till nästa question med en increment i position eller dyl.
+			}
+			else {
+				alert("Fel!");
+				//routea till nästa med increment
+			}
+			quizModel.userAnswers.push(answer);
+		}
+		$scope.qAnswered = true;
+	}
+
+
+	$scope.moveOn = function() {
+		console.log("Move on!")
+		if (quizModel.userAnswers[$scope.currentQPos] === undefined) {
+			quizModel.userAnswers.push("no answer");
+		}
+		if (($scope.Quiz.questions[$scope.currentQPos + 1]) != undefined) {
+			$scope.currentQPos += 1;
+			$scope.qAnswered = false;
+			$scope.getNewAnswers();
+			$scope.shuffledArray = $scope.shuffle($scope.answers);
+			//window.location = ("#/quiz");
 		}
 		else {
 			window.location = ('#/quizScore');
@@ -65,6 +76,8 @@ quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$sce) {
 		return quizModel.getQuizResult();
 	}
 
+	$scope.getNewAnswers();
 	$scope.shuffledArray = $scope.shuffle($scope.answers);
+
 
 });
