@@ -23,7 +23,12 @@ quizApp.controller('trackCtrl', function ($scope,quizModel,$routeParams,$sce) {
 		$scope.waitingForInput = false;
 		quizModel.biography.get({id:'spotify:artist:' + $scope.track.artists[0].id}, function(data){
 			console.log(data);
-			$scope.bio = data.response.biographies[0];
+			for (bio in data.response.biographies){
+				if (data.response.biographies[bio].site == 'last.fm'){
+					$scope.bio = data.response.biographies[bio];
+				}
+			}
+			
 			
 			console.log($scope.bio);
 		});

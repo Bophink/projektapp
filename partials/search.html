@@ -26,8 +26,11 @@
 			</thead>
 			<tbody>
 				<tr ng-repeat="track in results" style="height:70px" ng-click="">
-					<td style="width:20%"><img ng-src="{{track.album.images[2].url}}" ng-mouseover="playIt(track.preview_url,track.id)" ng-mouseout="stopIt()" class="Cpointer" style="margin:0;z-index:0"/>
-					<img src="img/speaker.png" height="50px" ng-class="{hide:playing == track.id}" style="position:relative;margin-left:-62px;margin-right:0;z-index:1"></td>
+					<td style="width:20%">
+						<div ng-style="{'background-image':'url(' + track.album.images[2].url + ')', 'height':'64px', 'width':'64px', 'margin':'auto'}" ng-mouseover="playIt(track.preview_url,track.id)" ng-mouseout="stopIt()">
+						<img ng-src="img/play_button.png" ng-mouseover="playIt(track.preview_url,traCK.id)" ng-mouseout="stopIt()" style="height:64xpx;width:64px" ng-if="playing != track.id"/>
+						</div>
+					</td>
 					<td style="width:20%"><h4><a href ng-click="newSearch(track.name)">{{track.name}}</a></h4></td>
 					<td style="width:20%"><h4><a href ng-click="newSearch(track.artists[0].name, 'artist')">{{track.artists[0].name}}</a></h4></td>
 					<td style="width:20%"><h4><a href ng-click="newSearch(track.album.name, 'album')">{{track.album.name}}</a></h4></td>
