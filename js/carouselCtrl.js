@@ -5,14 +5,11 @@ quizApp.controller('CarouselCtrl', function($scope,quizModel) {
 
   //Sets number of questions/page When page loads
   if($(window).width() > 992){
-    $scope.nrOfQperSlide=6;
-    console.log('i lg '+$scope.nrOfQperSlide);  
+    $scope.nrOfQperSlide=6; 
   }else if($(window).width() < 768){
     $scope.nrOfQperSlide=3;
-    console.log('i xs '+$scope.nrOfQperSlide);
   }else{
     $scope.nrOfQperSlide=4;
-    console.log('i sm '+$scope.nrOfQperSlide);
   }
   
   
@@ -43,14 +40,12 @@ quizApp.controller('CarouselCtrl', function($scope,quizModel) {
       });
     }else if(quizModel.getQuiz().questions.length != $scope.quisLen){
       $scope.createCarousel($scope.nrOfQperSlide);
-      console.log($scope.nrOfQperSlide);
     }
 
     ow = newWidth;
   }
 
   $scope.createCarousel = function(nrOfQperSlide){
-    console.log("i create");
     $scope.slides = [];
     var slide = [];
     var quiz = quizModel.getQuiz();
