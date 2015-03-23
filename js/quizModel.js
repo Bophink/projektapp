@@ -82,7 +82,7 @@ this.getQuizResult = function(){
 }
 
 this.setQuizResult = function(num){
-	points += num;
+	points = num;
 }
 
 //logOut() {loggedin = false}
