@@ -7,36 +7,65 @@
 		</div>
 	</div>
 
-	<div class="row" style="margin-top:20px;background:rgba(150,150,150,0.5);padding:5px 0 50px 0;">
+	<div class="container-fluid" style="margin-top:20px;background:rgba(150,150,150,0.5);padding:5px 0px 50px 0px;">
 
 		<audio id="quizAudio" autoplay ng-src="{{track.preview_url}}" type="audio/mpeg"/>
 
-		<div class="row row-centered">
-			<div class="col-lg-3 col-md-2 col-sm-3 col-xs-3"></div>
-			<div class="col-lg-6 col-md-8 col-sm-6 col-xs-6">
-				<h1 style="color:white">{{Quiz.title}}</h1>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-9">
+					<h1 style="color:white">{{Quiz.title}}  <span style="font-size:15px">by {{Quiz.creator}}</span></h1>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-3">
+					<h1 class="pull-right" style="color:white">{{getPoints()}} p</h1>
+				</div>
 			</div>
-			<div class="col-lg-3 col-md-2 col-sm-3 col-xs-3">
-				<h2 style="color:white">{{getPoints()}} Points</h2>
+		</div>
+
+		<div class="container-fluid">
+			<div class="row" style="margin-bottom:20px">
+				<div class="col-centered col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12">
+					<h1 style="color:white;display:inline">{{currentQPos}}) </h1><h3 style="color:white;display:inline;white-space:pre-wrap;">{{Quiz.questions[currentQPos].question}}</h3>
+				</div>
 			</div>
 		</div>
 
-		<div class="row" style="text-align:center">
-			<h3 style="color:white">{{Quiz.questions[currentQPos].question}}</h3>
-			<div class="row row-centered" ng-repeat="answer in shuffledArray" style="padding:8px 0 8px 0">
-				<button class="btnQuestion col-centered btn btn-primary col-lg-4 col-md-4 col-sm-6 col-xs-8 " type="button" ng-click="checkAnswer(answer)" ng-class="{'btn-success':shuffledArray[$index] == correctAnswer, 'btn-warning':falseAnswers.indexOf(shuffledArray[$index]) > -1}">{{answer}}</button>
+		<div class="container-fluid">
+			<div class="row row-centered">
+
+				<div class="col-lg-4 col-md-3 col-sm-3 col-xs-2"></div>
+
+				<div class="col-lg-4 col-md-6 col-sm-6 col-xs-8">
+					<button class="btnQuestion btn btn-primary col-lg-6 col-md-6 col-sm-6 col-xs-6" type="button" ng-click="checkAnswer(shuffledArray[0])" ng-class="{'btn-success':shuffledArray[0] == correctAnswer, 'btn-warning':falseAnswers.indexOf(shuffledArray[0]) > -1}" style="margin:5px 0 0 -5px">{{shuffledArray[0]}}</button>
+					<button class="pull-right btnQuestion btn btn-primary col-lg-6 col-md-6 col-sm-6 col-xs-6" type="button" ng-click="checkAnswer(shuffledArray[1])" ng-class="{'btn-success':shuffledArray[1] == correctAnswer, 'btn-warning':falseAnswers.indexOf(shuffledArray[1]) > -1}" style="margin:5px -5px 0 0">{{shuffledArray[1]}}</button>
+				</div>
+
+				<div class="col-lg-4 col-md-3 col-sm-3 col-xs-2"></div>
 			</div>
 
+			<div class="row row-centered">
+
+				<div class="col-lg-4 col-md-3 col-sm-3 col-xs-2"></div>
+
+				<div class="col-lg-4 col-md-6 col-sm-6 col-xs-8">
+					<button class="btnQuestion btn btn-primary col-lg-6 col-md-6 col-sm-6 col-xs-6" type="button" ng-click="checkAnswer(shuffledArray[2])" ng-class="{'btn-success':shuffledArray[2] == correctAnswer, 'btn-warning':falseAnswers.indexOf(shuffledArray[2]) > -1}" style="margin:5px 0 0 -5px">{{shuffledArray[2]}}</button>
+					<button class="pull-right btnQuestion btn btn-primary col-lg-6 col-md-6 col-sm-6 col-xs-6" type="button" ng-click="checkAnswer(shuffledArray[3])" ng-class="{'btn-success':shuffledArray[3] == correctAnswer, 'btn-warning':falseAnswers.indexOf(shuffledArray[3]) > -1}" style="margin:5px -5px 0 0">{{shuffledArray[3]}}</button>
+				</div>
+
+				<div class="col-lg-3 col-lg-offset-1 col-md-2 col-md-offset-1 col-sm-12 col-xs-12">
+					<button ng-show="Quiz.questions.length != currentQPos+1 && qAnswered" class="btn btn-primary col-lg-10 col-md-12 col-sm-12 col-xs-12" ng-click="moveOn()" style="margin-top:5px">Next question!</button>
+					<button ng-show="Quiz.questions.length == currentQPos+1 && qAnswered" class="btn btn-success col-lg-10 col-md-12 col-sm-12 col-xs-12" ng-click="moveOn()" style="margin-top:5px">To Result!</button>
+				</div>
+
+			</div>
 		</div>
 
-		<div class="row row-centered" style="text-align:center" >
-			<button ng-show="Quiz.questions.length != currentQPos+1 && qAnswered" class="btn btn-primary col-lg-3 col-md-3 col-sm-4 col-xs-4 col-centered" ng-click="moveOn()">Next question!</button>
-			<button ng-show="Quiz.questions.length == currentQPos+1 && qAnswered" class="btn btn-success col-lg-3 col-md-3 col-sm-4 col-xs-4 col-centered" ng-click="moveOn()">To Result!</button>
-		</div>
-
-		<div class="row" style="text-align:center">
-			<h2 class="col-md-3 col-md-offset-9" style="color:white">by {{Quiz.creator}}</h2>
-		</div>
+		<!--div class="container-fluid">
+			<div class="row row-centered">
+				<button ng-show="Quiz.questions.length != currentQPos+1 && qAnswered" class="btn btn-primary col-lg-3 col-md-3 col-sm-4 col-xs-4 col-centered" ng-click="moveOn()">Next question!</button>
+				<button ng-show="Quiz.questions.length == currentQPos+1 && qAnswered" class="btn btn-success col-lg-3 col-md-3 col-sm-4 col-xs-4 col-centered" ng-click="moveOn()">To Result!</button>
+			</div>
+		</div-->
 
 		<script>
 			var song = $('#quizAudio')
