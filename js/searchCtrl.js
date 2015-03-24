@@ -7,6 +7,32 @@ $scope.status = "";
 typingTimer = null;	// initierar en timer.
 doneTypingInterval = 300; //tid i ms som användaren får vänta efter att han skrivit till API-anrop.
 
+$scope.sort = function(attr){
+	if ($scope.sorted == attr[0]){
+		var order = -1;
+		$scope.sorted = attr[0] + "R";
+	}else{
+		var order = 1;
+		$scope.sorted = attr[0];
+	}
+	console.log($scope.sorted);
+	$scope.results.sort(function(a,b){ 
+		var attrA = a;
+		var attrB = b;
+		for (var level in attr){
+			attrA = attrA[attr[level]];
+			attrB = attrB[attr[level]];
+		}
+		var attrA = attrA.toLowerCase(); 
+		var attrB = attrB.toLowerCase();
+		if (attrA < attrB){
+			return -1 * order;
+		}else if (attrA > attrB){
+			return 1 * order;
+		}
+		return 0
+	});
+	}
 
 $(window).scroll(function() {
    	if(($(window).scrollTop() + $(window).height() - ($(document).height()) > -50) && $scope.nextParams != null) {
@@ -30,9 +56,18 @@ $scope.songs = function(searchParams) {
 	$scope.waitingForInput = true;
 	$scope.status = "Loading ..."
 	quizModel.songSearch.get(searchParams, function(data){
+	var duplicate = false;
 		for (track in data.tracks.items){
+			duplicate = false;
 			if ($scope.type == undefined || ($scope.type == 'artist' && $scope.query == data.tracks.items[track].artists[0].name) || ($scope.type == 'album' && $scope.query == data.tracks.items[track].album.name)){
-				$scope.results.push(data.tracks.items[track]);
+				for (var alreadyIn in $scope.results){
+					if($scope.results[alreadyIn].name == data.tracks.items[track].name && $scope.results[alreadyIn].artists[0].name == data.tracks.items[track].artists[0].name && $scope.results[alreadyIn].album.name == data.tracks.items[track].album.name ){
+						duplicate = true;
+					}
+				}
+				if (!duplicate){
+					$scope.results.push(data.tracks.items[track]);
+				}
 			}
 		}
 

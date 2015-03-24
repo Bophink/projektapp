@@ -19,9 +19,9 @@
 			<thead>
 				<tr ng-if="results.length > 0">
 					<td width="20%">Listen</td>
-					<td width="20%">Track</td>
-					<td width="20%">Artist</td>
-					<td width="20%">Album</td>
+					<td width="20%"><a href ng-click="sort(['name'])">Track <span class="glyphicon glyphicon-chevron-down" ng-if="sorted == 'name'"></span><span class="glyphicon glyphicon-chevron-up" ng-if="sorted == 'nameR'"></span></a></td>
+					<td width="20%"><a href ng-click="sort(['artists','0','name'])">Artist <span class="glyphicon glyphicon-chevron-down" ng-if="sorted == 'artists'"></span><span class="glyphicon glyphicon-chevron-up" ng-if="sorted == 'artistsR'"></span></a></td>
+					<td width="20%"><a href ng-click="sort(['album','name'])">Album <span class="glyphicon glyphicon-chevron-down" ng-if="sorted == 'album'"></span><span class="glyphicon glyphicon-chevron-up" ng-if="sorted == 'albumR'"></span></a></td>
 					<td width="20%"></td>
 			</thead>
 			<tbody>
