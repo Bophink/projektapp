@@ -41,21 +41,22 @@ quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$sce) {
 	$scope.checkAnswer = function(answer) {
 		if ($scope.qAnswered != true){
 			if (answer === $scope.Quiz.questions[$scope.currentQPos].answers['a']){
-				alert("Rätt");
 				quizModel.setQuizResult(quizModel.getQuizResult() + 1);
 				//add points, routea till nästa question med en increment i position eller dyl.
 			}
-			else {
-				alert("Fel!");
-				//routea till nästa med increment
-			}
 			quizModel.userAnswers.push(answer);
 		}
+
+		$scope.correctAnswer = $scope.Quiz.questions[$scope.currentQPos].answers['a'];
+		$scope.falseAnswers = [$scope.Quiz.questions[$scope.currentQPos].answers['b'], $scope.Quiz.questions[$scope.currentQPos].answers['c'], $scope.Quiz.questions[$scope.currentQPos].answers['d']];
 		$scope.qAnswered = true;
 	}
 
 
 	$scope.moveOn = function() {
+		$scope.correctAnswer = null;
+		$scope.falseAnswers = null;
+
 		console.log("Move on!")
 		if (quizModel.userAnswers[$scope.currentQPos] === undefined) {
 			quizModel.userAnswers.push("no answer");

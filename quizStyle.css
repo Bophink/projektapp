@@ -25,10 +25,11 @@
   background-color: rgb(120, 20, 71);
 }
 .answers {
-  background-color: rgb(67, 171, 34);
-  margin: 20px;
-  padding: 20px;
+  /*background-color: rgb(67, 171, 34);*/
+  /*margin: 20px;*/
+  /*padding: 10px;*/
 }
+
 .courseThumb{
   border: 3px solid;
   background-size:100% 100%;
@@ -144,6 +145,11 @@ h1, h2, h3 {
   outline:none;
 }
 
+.btnQuestion{
+  height: 50px;
+  border-radius: 10px;
+}
+
 .btnScore{
   height: 50px;
   border-radius: 10px;
@@ -192,4 +198,13 @@ h1, h2, h3 {
 .img-wrap:hover .close {
     opacity: 1;
 }
+
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+}
+
 
