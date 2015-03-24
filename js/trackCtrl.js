@@ -4,6 +4,7 @@ quizApp.controller('trackCtrl', function ($scope,quizModel,$routeParams,$sce) {
 	console.log("param1: "+$routeParams.trackId);
 	console.log($routeParams.trackId.substring(0,5));
 	var trackId = $routeParams.trackId;
+	$scope.alert = [];
 	// quiz-position
 	if($routeParams.trackId.substring(0,5) === "quiz-"){
 		var quizPosition = Number($routeParams.trackId.substring(5))-1;
@@ -35,11 +36,17 @@ quizApp.controller('trackCtrl', function ($scope,quizModel,$routeParams,$sce) {
 		
 	});
 
-
+	$scope.closeAlert = function(index){
+		$scope.alert.splice(index,1);
+	}
 	
 
 	$scope.done = function(q,a,b,c,d){
-		//kolla att allt är ifyllt
+		console.log(q);
+		if(q == undefined || a == undefined || b == undefined || c == undefined || d == undefined || q == "" || a == "" || b == "" || c == "" || d == ""){
+			$scope.alert.push({'type':'Error!','text':'Please make sure that you have filled out all the text fields.'});
+			return
+		}
 		quizModel.setQuestion(quizModel.createQuestion(q,a,b,c,d,$scope.track.id,$scope.track.album.images[1].url),quizPosition);
 		console.log(quizModel.Quiz);
 		window.location = "#/search/";
