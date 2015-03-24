@@ -25,7 +25,7 @@ quizApp.controller('trackCtrl', function ($scope,quizModel,$routeParams,$sce) {
 		quizModel.biography.get({id:'spotify:artist:' + $scope.track.artists[0].id}, function(data){
 			console.log(data);
 			for (bio in data.response.biographies){
-				if (data.response.biographies[bio].site == 'last.fm'){
+				if (data.response.biographies[bio].site == 'last.fm' && data.response.biographies[bio].text.length > 200){
 					$scope.bio = data.response.biographies[bio];
 				}
 			}

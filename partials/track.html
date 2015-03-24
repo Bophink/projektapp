@@ -3,7 +3,7 @@
 	height:174px;
 }
 .biography{
-	height:320px;
+	max-height:320px;
 }
 .alert{
 	z-index:1;
@@ -13,8 +13,8 @@
 <ng-include src="'partials/header.html'" ng-controller ="headerCtrl"></ng-include>
 <ng-include src="'partials/carousel.html'" ng-controller="CarouselCtrl"></ng-include>
 <div style="margin-top:60px;background:rgba(150,150,150,0.5);padding:20px;">
-	<div class="alert alert-warning" ng-if="alert" ng-repeat="msg in alert">
-        <a href class="close" ng-click="closeAlert(msg.index)">&times;</a>
+	<div class="alert alert-warning" ng-repeat="msg in alert">
+        <a href class="close" ng-click="closeAlert($index)">&times;</a>
         <strong>{{msg.type}}</strong> {{msg.text}}
     </div>
 	<h4><a href="#search"><span class="glyphicon glyphicon-chevron-left"></span><b>Back</b></h4></a>
@@ -35,7 +35,7 @@
 			<input id ="answerBInput" class="inputAnswer" style="margin-left:4%;color:red" type="text" ng-model="b"  placeholder="Almost right.." onfocus="this.placeholder = ''" onblur="this.placeholder = 'Almost right..'" maxlength="50"/>
 			<input id ="answerCInput" class="inputAnswer" style="margin-right:4%;color:red" type="text" ng-model="c"  placeholder="Not even close!" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Not even close!'" maxlength="50"/>
 			<input id ="answerDInput" class="inputAnswer" style="margin-left:4%;color:red" type="text" ng-model="d"  placeholder="This is a bicycle" onfocus="this.placeholder = ''" onblur="this.placeholder = 'This is a bicycle'" maxlength="50"/>
-			<button type="button" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 btnConfirm" ng-click="done(q,a,b,c,d)">Add this question</button>
+			<button type="button" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 btnConfirm" ng-click="done(q,a,b,c,d)">Confirm question</button>
 		</div>
 		<div class="col-lg-5 col-md-4 col-sm-12 col-xs-12" ng-if="bio != undefined">
 			<h4>Need inspiration?</h4>
