@@ -1,27 +1,36 @@
+<style>
+.inputQuestion{
+	height:174px;
+}
+.biography{
+	height:320px;
+}
+</style>
+
 <ng-include src="'partials/header.html'" ng-controller ="headerCtrl"></ng-include>
 <ng-include src="'partials/carousel.html'" ng-controller="CarouselCtrl"></ng-include>
 <div style="margin-top:60px;background:rgba(150,150,150,0.5);padding:20px;">
-	<a href="#search"><h4><span class="glyphicon glyphicon-chevron-left"></span><b>Back</b></h4></a>
+	<h4><a href="#search"><span class="glyphicon glyphicon-chevron-left"></span><b>Back</b></h4></a>
 	<span>
 		<h1 style="display:inline">{{track.name}}</h1>
 		<h4 style="display:inline"> by {{track.artists[0].name}}</h4>
 	</span>
 	<div class="row">
-		<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			<img ng-src="{{track.album.images[1].url}}" style="margin-top:10px">
+		<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+			<img ng-src="{{track.album.images[1].url}}" style="margin-top:10px;width:300px;height:300px">
 			<audio controls ng-src="{{track.preview_url}}" type="audio/mpeg"/ style="height:50px"/>
 		</div>
 		<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
 			<h4>What's the question?</h4>
 			<textarea id ="questionInput" class="inputQuestion" ng-model="q" placeholder="Who did let the dogs out?" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Who did let the dogs out?'"/>
 			<h4>... and the answers?</h4>
-			<input id ="answerAInput" class="inputAnswer" style="margin-right:4%;"type="text" ng-model="a"  placeholder="Correct answer"/>
-			<input id ="answerBInput" class="inputAnswer" style="margin-left:4%;" type="text" ng-model="b"  placeholder="Almost right.."/>
-			<input id ="answerCInput" class="inputAnswer" style="margin-right:4%;" type="text" ng-model="c"  placeholder="Not even close!"/>
-			<input id ="answerDInput" class="inputAnswer" style="margin-left:4%;" type="text" ng-model="d"  placeholder="This is a bicycle"/>
-			<button type="button" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 btnConfirm" ng-click="done(q,a,b,c,d)">Confirm question</button>
+			<input id ="answerAInput" class="inputAnswer" style="margin-right:4%;color:green"type="text" ng-model="a"  placeholder="Correct answer" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Correct answer'"/>
+			<input id ="answerBInput" class="inputAnswer" style="margin-left:4%;color:red" type="text" ng-model="b"  placeholder="Almost right.." onfocus="this.placeholder = ''" onblur="this.placeholder = 'Almost right..'"/>
+			<input id ="answerCInput" class="inputAnswer" style="margin-right:4%;color:red" type="text" ng-model="c"  placeholder="Not even close!" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Not even close!'"/>
+			<input id ="answerDInput" class="inputAnswer" style="margin-left:4%;color:red" type="text" ng-model="d"  placeholder="This is a bicycle" onfocus="this.placeholder = ''" onblur="this.placeholder = 'This is a bicycle'"/>
+			<button type="button" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 btnConfirm" ng-click="done(q,a,b,c,d)">Add this question</button>
 		</div>
-		<div class="col-lg-5 col-md-5 col-sm-12 col-xs-12" ng-if="bio != undefined">
+		<div class="col-lg-5 col-md-4 col-sm-12 col-xs-12" ng-if="bio != undefined">
 			<h4>Need inspiration?</h4>
 			<div class="biography" readonly>{{bio.text}}<br/><p align="right" class="bioProvider">provided by <a href="{{bio.url}}">{{bio.site}}</a></p></div>
 		</div>
