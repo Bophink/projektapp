@@ -6,7 +6,7 @@
 
 	<div class="container-fluid" style="margin-top:50px;background:rgba(150,150,150,0.5);padding:5px 0px 0px 0px;height:605px">
 
-		<audio id="quizAudio" autoplay ng-src="{{track.preview_url}}" type="audio/mpeg"/>
+		<audio quiz-audio autoplay ng-src="{{track.preview_url}}" type="audio/mpeg"/>
 
 		<div class="container-fluid">
 			<div class="row">
@@ -38,8 +38,11 @@
 				</div>
 
 				<div class="col-lg-3 col-lg-offset-1 col-md-3 col-sm-3 col-xs-2">
-					<div><h1 style="color:white">10 p</h1></div>
-					<div id="progressTimer"></div>
+					<div><h1 style="color:white;font-size:100px">{{points}}</h1></div>
+					<div class="progress">
+						<div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" ng-style="{'width': (30-timeElapsed)/0.3 + '%'}"></div>
+					</div>
+					<div class="progressbar progress-striped active" animate="true" value="{{(30-timeElapsed)/0.3}}" type="success"></div>
 				</div>
 			</div>
 
