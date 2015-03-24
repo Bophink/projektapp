@@ -77,8 +77,31 @@ quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$sce) {
 		return quizModel.getQuizResult();
 	}
 
+	$scope.resetTime = function() {
+		
+		// resets audio-timer
+		song.currentTime = 0;
+		setTimeout(function() {song.animate({volume: 0}, 2000)},28000);
+	}
+
 	$scope.getNewAnswers();
 	$scope.shuffledArray = $scope.shuffle($scope.answers);
+	$scope.song = $('#quizAudio');
+	console.log($scope.song.currentTime);
+
+
+	$("#progressTimer").progressTimer({
+		// limit in seconds
+	    timeLimit: 30,
+	    // seconds remaining when the timer changes to warning
+	    warningThreshold: 5,
+	    baseStyle: 'progress-bar-warning',
+	    warningStyle: 'progress-bar-danger',
+	    completeStyle: 'progress-bar-success',
+	    onFinish: function() {
+	        console.log("I'm done");
+	    }
+	});
 
 
 });
