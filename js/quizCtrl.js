@@ -86,60 +86,45 @@ quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$sce) {
 	$scope.stopAudio = function() {
 		// resets audio-timer
 		//setTimeout(function() {song.animate({volume: 0}, 2000)},28000);
-		$scope.song.animate({volume: 0}, 500, function(){
-			$scope.song[0].pause();
-		});
-		
-		//song.currentTime = 0;
-		
+		// $scope.song.animate({volume: 0}, 500, function(){
+		// 	$scope.song[0].pause();
+		// });
+		console.log("click");
 	}
 
 	$scope.getNewAnswers();
 	$scope.shuffledArray = $scope.shuffle($scope.answers);
-
-
-
-	// $("#progressTimer").progressTimer({
-	// 	// limit in seconds
-	//     timeLimit: 30,
-	//     // seconds remaining when the timer changes to warning
-	//     warningThreshold: 5,
-	//     baseStyle: 'progress-bar-warning',
-	//     warningStyle: 'progress-bar-danger',
-	//     completeStyle: 'progress-bar-success',
-	//     onFinish: function() {
-	//         console.log("I'm done");
-	//     }
-	// });
-
-
 });
+
 quizApp.directive("quizAudio", function(){
     return function($scope, element, attrs){
         element.bind("timeupdate", function(){
-            $scope.timeElapsed = element[0].currentTime;
-            if ($scope.timeElapsed < 3){
-            	$scope.points = 10;
-            }else if ($scope.timeElapsed > 3 && $scope.timeElapsed <= 6){
-            	$scope.points = 9;
-            }else if ($scope.timeElapsed > 6  && $scope.timeElapsed <= 9){
-            	$scope.points = 8;
-            }else if ($scope.timeElapsed > 9  && $scope.timeElapsed <= 12){
-            	$scope.points = 7;
-            }else if ($scope.timeElapsed > 12  && $scope.timeElapsed <= 15){
-            	$scope.points = 6;
-            }else if ($scope.timeElapsed > 15  && $scope.timeElapsed <= 19){
-            	$scope.points = 5;
-            }else if ($scope.timeElapsed > 19  && $scope.timeElapsed <= 23){
-            	$scope.points = 4;
-            }else if ($scope.timeElapsed > 23  && $scope.timeElapsed <= 26){
-            	$scope.points = 3;
-            }else if ($scope.timeElapsed > 26  && $scope.timeElapsed <= 29){
-            	$scope.points = 2;
-            }else if ($scope.timeElapsed > 29){
-            	$scope.points = 1;
-            	$scope.song.animate({volume: 0}, 1000);
-            }
+        	if(!$scope.qAnswered){
+	            $scope.timeElapsed = element[0].currentTime;
+	            if ($scope.timeElapsed < 3){
+	            	$scope.points = 10;
+	            }else if ($scope.timeElapsed > 3 && $scope.timeElapsed <= 6){
+	            	$scope.points = 9;
+	            	console.log("9");
+	            }else if ($scope.timeElapsed > 6  && $scope.timeElapsed <= 9){
+	            	$scope.points = 8;
+	            }else if ($scope.timeElapsed > 9  && $scope.timeElapsed <= 12){
+	            	$scope.points = 7;
+	            }else if ($scope.timeElapsed > 12  && $scope.timeElapsed <= 15){
+	            	$scope.points = 6;
+	            }else if ($scope.timeElapsed > 15  && $scope.timeElapsed <= 19){
+	            	$scope.points = 5;
+	            }else if ($scope.timeElapsed > 19  && $scope.timeElapsed <= 23){
+	            	$scope.points = 4;
+	            }else if ($scope.timeElapsed > 23  && $scope.timeElapsed <= 26){
+	            	$scope.points = 3;
+	            }else if ($scope.timeElapsed > 26  && $scope.timeElapsed <= 29){
+	            	$scope.points = 2;
+	            }else if ($scope.timeElapsed > 29){
+	            	$scope.points = 1;
+	            	$scope.song.animate({volume: 0}, 500);
+	            }
+	        }
             $scope.$apply();
         });
     }
