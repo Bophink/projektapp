@@ -6,7 +6,7 @@
 
 	<div class="container-fluid" style="margin-top:50px;background:rgba(150,150,150,0.5);padding:5px 0px 0px 0px;height:605px">
 
-		<audio quiz-audio autoplay ng-src="{{track.preview_url}}" type="audio/mpeg"/>
+		<audio id="songQ" quiz-audio autoplay ng-src="{{track.preview_url}}" type="audio/mpeg"/>
 
 		<div class="container-fluid">
 			<div class="row">
@@ -33,12 +33,12 @@
 				<div class="col-lg-4 col-md-3 col-sm-3 col-xs-2"></div>
 
 				<div class="col-lg-4 col-md-6 col-sm-6 col-xs-8">
-					<button class="btnQuestion btn btn-primary col-lg-6 col-md-6 col-sm-6 col-xs-6" type="button" ng-click="checkAnswer(shuffledArray[0])" ng-class="{'btn-success':shuffledArray[0] == correctAnswer, 'btn-warning':falseAnswers.indexOf(shuffledArray[0]) > -1}" style="margin:5px 0 0 -5px">{{shuffledArray[0]}}</button>
-					<button class="pull-right btnQuestion btn btn-primary col-lg-6 col-md-6 col-sm-6 col-xs-6" type="button" ng-click="checkAnswer(shuffledArray[1])" ng-class="{'btn-success':shuffledArray[1] == correctAnswer, 'btn-warning':falseAnswers.indexOf(shuffledArray[1]) > -1}" style="margin:5px -5px 0 0">{{shuffledArray[1]}}</button>
+					<button class="btnQuestion btn btn-primary col-lg-6 col-md-6 col-sm-6 col-xs-6" type="button" ng-click="checkAnswer(shuffledArray[0]);stopAudio()" ng-class="{'btn-success':shuffledArray[0] == correctAnswer, 'btn-warning':falseAnswers.indexOf(shuffledArray[0]) > -1}" ng-disabled="qAnswered" style="margin:5px 0 0 -5px">{{shuffledArray[0]}}</button>
+					<button class="pull-right btnQuestion btn btn-primary col-lg-6 col-md-6 col-sm-6 col-xs-6" type="button" ng-click="checkAnswer(shuffledArray[1]);stopAudio()" ng-class="{'btn-success':shuffledArray[1] == correctAnswer, 'btn-warning':falseAnswers.indexOf(shuffledArray[1]) > -1}" ng-disabled="qAnswered" style="margin:5px -5px 0 0">{{shuffledArray[1]}}</button>
 				</div>
 
 				<div class="col-lg-3 col-lg-offset-1 col-md-3 col-sm-3 col-xs-2">
-					<div><h1 style="color:white;font-size:100px">{{points}}</h1></div>
+					<div><h1 style="color:white;font-size:100px">{{points}} p</h1></div>
 					<div class="progress">
 						<div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" ng-style="{'width': (30-timeElapsed)/0.3 + '%'}"></div>
 					</div>
@@ -51,12 +51,12 @@
 				<div class="col-lg-4 col-md-3 col-sm-3 col-xs-2"></div>
 
 				<div class="col-lg-4 col-md-6 col-sm-6 col-xs-8">
-					<button class="btnQuestion btn btn-primary col-lg-6 col-md-6 col-sm-6 col-xs-6" type="button" ng-click="checkAnswer(shuffledArray[2])" ng-class="{'btn-success':shuffledArray[2] == correctAnswer, 'btn-warning':falseAnswers.indexOf(shuffledArray[2]) > -1}" style="margin:5px 0 0 -5px">{{shuffledArray[2]}}</button>
-					<button class="pull-right btnQuestion btn btn-primary col-lg-6 col-md-6 col-sm-6 col-xs-6" type="button" ng-click="checkAnswer(shuffledArray[3])" ng-class="{'btn-success':shuffledArray[3] == correctAnswer, 'btn-warning':falseAnswers.indexOf(shuffledArray[3]) > -1}" style="margin:5px -5px 0 0">{{shuffledArray[3]}}</button>
+					<button class="btnQuestion btn btn-primary col-lg-6 col-md-6 col-sm-6 col-xs-6" type="button" ng-click="checkAnswer(shuffledArray[2]);stopAudio()" ng-class="{'btn-success':shuffledArray[2] == correctAnswer, 'btn-warning':falseAnswers.indexOf(shuffledArray[2]) > -1}" ng-disabled="qAnswered" style="margin:5px 0 0 -5px">{{shuffledArray[2]}}</button>
+					<button class="pull-right btnQuestion btn btn-primary col-lg-6 col-md-6 col-sm-6 col-xs-6" type="button" ng-click="checkAnswer(shuffledArray[3]);stopAudio()" ng-class="{'btn-success':shuffledArray[3] == correctAnswer, 'btn-warning':falseAnswers.indexOf(shuffledArray[3]) > -1}" ng-disabled="qAnswered" style="margin:5px -5px 0 0">{{shuffledArray[3]}}</button>
 				</div>
 
 				<div class="col-lg-3 col-lg-offset-1 col-md-2 col-md-offset-1 col-sm-12 col-xs-12" style="text-align:bottom">
-					<button id="nextQ" ng-show="Quiz.questions.length != currentQPos+1 && qAnswered" class="btn btn-primary col-lg-10 col-md-12 col-sm-12 col-xs-12" ng-click="moveOn();resetTime()" style="margin-top:5px">Next question!</button>
+					<button id="nextQ" ng-show="Quiz.questions.length != currentQPos+1 && qAnswered" class="btn btn-primary col-lg-10 col-md-12 col-sm-12 col-xs-12" ng-click="moveOn()" style="margin-top:5px">Next question!</button>
 					<button ng-show="Quiz.questions.length == currentQPos+1 && qAnswered" class="btn btn-success col-lg-10 col-md-12 col-sm-12 col-xs-12" ng-click="moveOn()" style="margin-top:5px">To Result!</button>
 				</div>
 

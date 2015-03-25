@@ -9,6 +9,7 @@ quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$sce) {
 	$scope.Quiz = quizModel.Quiz;
 	$scope.answers = [];
 	$scope.points = 10;
+	$scope.song = $('#songQ');
 
 	$scope.getNewAnswers = function() {
 		$scope.answers = [];
@@ -42,7 +43,7 @@ quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$sce) {
 	$scope.checkAnswer = function(answer) {
 		if ($scope.qAnswered != true){
 			if (answer === $scope.Quiz.questions[$scope.currentQPos].answers['a']){
-				quizModel.setQuizResult(quizModel.getQuizResult() + 1);
+				quizModel.setQuizResult(quizModel.getQuizResult() + $scope.points);
 				//add points, routea till nästa question med en increment i position eller dyl.
 			}
 			quizModel.userAnswers.push(answer);
@@ -67,6 +68,10 @@ quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$sce) {
 			$scope.qAnswered = false;
 			$scope.getNewAnswers();
 			$scope.shuffledArray = $scope.shuffle($scope.answers);
+
+			$scope.song.animate({volume: 1},500, function(){
+				$scope.song[0].play();	
+			});
 			//window.location = ("#/quiz");
 		}
 		else {
@@ -78,17 +83,20 @@ quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$sce) {
 		return quizModel.getQuizResult();
 	}
 
-	$scope.resetTime = function() {
-		
+	$scope.stopAudio = function() {
 		// resets audio-timer
-		song.currentTime = 0;
-		setTimeout(function() {song.animate({volume: 0}, 2000)},28000);
+		//setTimeout(function() {song.animate({volume: 0}, 2000)},28000);
+		$scope.song.animate({volume: 0}, 500, function(){
+			$scope.song[0].pause();
+		});
+		
+		//song.currentTime = 0;
+		
 	}
 
 	$scope.getNewAnswers();
 	$scope.shuffledArray = $scope.shuffle($scope.answers);
-	$scope.song = $('#quizAudio');
-	console.log($scope.song.currentTime);
+
 
 
 	// $("#progressTimer").progressTimer({
@@ -110,7 +118,9 @@ quizApp.directive("quizAudio", function(){
     return function($scope, element, attrs){
         element.bind("timeupdate", function(){
             $scope.timeElapsed = element[0].currentTime;
-            if ($scope.timeElapsed > 3 && $scope.timeElapsed <= 6){
+            if ($scope.timeElapsed < 3){
+            	$scope.points = 10;
+            }else if ($scope.timeElapsed > 3 && $scope.timeElapsed <= 6){
             	$scope.points = 9;
             }else if ($scope.timeElapsed > 6  && $scope.timeElapsed <= 9){
             	$scope.points = 8;
@@ -128,6 +138,7 @@ quizApp.directive("quizAudio", function(){
             	$scope.points = 2;
             }else if ($scope.timeElapsed > 29){
             	$scope.points = 1;
+            	$scope.song.animate({volume: 0}, 1000);
             }
             $scope.$apply();
         });
