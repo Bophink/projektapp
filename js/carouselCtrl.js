@@ -17,32 +17,35 @@ quizApp.controller('CarouselCtrl', function($scope,quizModel) {
   $scope.update = function(oldWidth){
     var newWidth = $(window).width();
 
-    //Kontrollerar om man nått en brytpunkt vid window.resize eller om man lagt till/ tagit bort fråga
-    if(oldWidth >= 992 && newWidth < 992){
-      $scope.$apply(function(){
-        $scope.nrOfQperSlide=4;
-        $scope.createCarousel(4);
-      });
-    }else if(oldWidth < 992 && newWidth >= 992){
-      $scope.$apply(function(){
-        $scope.nrOfQperSlide=6;
-        $scope.createCarousel(6);
-      });
-    }else if((oldWidth < 992 && oldWidth >= 768) && (newWidth < 768)){
-      $scope.$apply(function(){
-        $scope.nrOfQperSlide = 3;
-        $scope.createCarousel(3);
-      });
-    }else if((oldWidth < 768) && (newWidth >= 768)){
-      $scope.$apply(function(){
-        $scope.nrOfQperSlide=4;
-        $scope.createCarousel(4);
-      });
-    }else if(quizModel.getQuiz().questions.length != $scope.quisLen){
-      $scope.createCarousel($scope.nrOfQperSlide);
-    }
+    if(quizModel.getQuiz().questions){
 
-    ow = newWidth;
+      //Kontrollerar om man nått en brytpunkt vid window.resize eller om man lagt till/ tagit bort fråga
+      if(oldWidth >= 992 && newWidth < 992){
+        $scope.$apply(function(){
+          $scope.nrOfQperSlide=4;
+          $scope.createCarousel(4);
+        });
+      }else if(oldWidth < 992 && newWidth >= 992){
+        $scope.$apply(function(){
+          $scope.nrOfQperSlide=6;
+          $scope.createCarousel(6);
+        });
+      }else if((oldWidth < 992 && oldWidth >= 768) && (newWidth < 768)){
+        $scope.$apply(function(){
+          $scope.nrOfQperSlide = 3;
+          $scope.createCarousel(3);
+        });
+      }else if((oldWidth < 768) && (newWidth >= 768)){
+        $scope.$apply(function(){
+          $scope.nrOfQperSlide=4;
+          $scope.createCarousel(4);
+        });
+      }else if(quizModel.getQuiz().questions.length != $scope.quisLen){
+        $scope.createCarousel($scope.nrOfQperSlide);
+      }
+
+      ow = newWidth;
+    }
   }
 
   $scope.createCarousel = function(nrOfQperSlide){

@@ -1,5 +1,16 @@
 <div id="start">
 	<ng-include src="'partials/header.html'" ng-controller ="headerCtrl" ></ng-include>
 	<ng-include src="'partials/carousel.html'" ng-controller="CarouselCtrl"></ng-include>
+
+	<div class="row" id="start buttons" style="margin-top:50px">
+
+		<button class="col-md-3 btn-primary" ng-click="showForm()">Create new Quiz</button>
+	</div>
+	<div id="form" style="">
+		<input type="text" ng-model="title" placeholder="Your Quiztitle!"/>
+		<input type="text" ng-model="creator" placeholder="Your Quizmaker name!"/>
+		<button type="submit" ng-click="createNew(title,creator)"> Start making your quiz!</button>
+	</div>
+
 	
 </div>

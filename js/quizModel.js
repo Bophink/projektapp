@@ -3,7 +3,7 @@
 // dependency on any service you need. Angular will insure that the
 // service is created first time it is needed and then just reuse it
 // the next time.
-quizApp.factory('quizModel',function ($resource, $cookieStore) { 
+quizApp.factory('quizModel',function ($resource, $cookieStore, $firebaseObject) { 
   
 // var Quiz = {
 // 	quizId : 1,
@@ -38,11 +38,26 @@ this.song = $resource('https://api.spotify.com/v1/tracks/:id');
 this.biography = $resource('http://developer.echonest.com/api/v4/artist/biographies',{"api_key":echonestApiKey,"license":'cc-by-sa'});
 
 this.createQuiz = function(title, creator){
+	console.log("new created");
+
 	// generera quizID
-	Quiz['quizId'] = 1;
+	//Quiz['quizId'] = 1;
 	Quiz['title'] = title;
 	Quiz['creator'] = creator;
 	Quiz['questions'] = [];
+
+	//add to Firebase
+
+	var ref = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes");
+
+	//pushen genrerar en id i Firebase.
+	Quiz['quizId'] = ref.push({'quizId':'1',
+			'title':title,
+			'creator':creator,
+			'questions':''
+		}).path.o[1];
+
+	console.log(Quiz['quizId']);
 }
 
 this.renameQuiz = function(quizID, newTitle){
@@ -59,8 +74,19 @@ this.createQuestion = function(question,a,b,c,d,songId, albumImgUrl){
 }
 
 this.setQuestion = function(questionObj,index){
+	//Byta index till en FireBase index? eller båda?!
 	index = typeof index !== 'undefined' ? index : Quiz.questions.length;
 	Quiz.questions[index] = questionObj;
+
+	//tar ej hänsyn till ordning!
+	if(index == 'undefined'){
+		var quizRef = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+Quiz['quizId']+"/questions");
+		console.log(quizRef);
+		var firebaseIndex = quizRef.push(questionObj);
+	}
+	
+
+
 }
 
 this.getQuestion = function(index){
@@ -88,7 +114,7 @@ this.setQuizResult = function(num){
 //logOut() {loggedin = false}
 
 
-	this.createQuiz ('testquizet','testarn');
+	//this.createQuiz ('testquizet','testarn');
 
   return this;
 
