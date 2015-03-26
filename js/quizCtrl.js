@@ -1,22 +1,26 @@
-quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$sce) {
+quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$firebaseObject) {
+
 
 
 	$scope.currentQPos = 0; //ÄNDRA SEN SÅ ATT DET INTE HETER QUZIID
 	$scope.qAnswered = false;
 	quizModel.setQuizResult(0);
 	quizModel.userAnswers = [];
-
-	$scope.Quiz = quizModel.Quiz;
 	$scope.answers = [];
 	$scope.points = 10;
 	$scope.song = $('#songQ');
 
+
+
+	
+
 	$scope.getNewAnswers = function() {
 		$scope.answers = [];
-		for (var i in $scope.Quiz.questions[$scope.currentQPos].answers) { //ÄNDRA SÅ ATT DEN INCREMENTAR QUESTIONS NÄR MAN KLICKAR PÅ NÄSTA FRÅGA! DEN SKA VARA POSITION
-		$scope.answers.push($scope.Quiz.questions[$scope.currentQPos].answers[i]);
+		
+		for (var i in $scope.questions[$scope.currentQPos].answers) { //ÄNDRA SÅ ATT DEN INCREMENTAR QUESTIONS NÄR MAN KLICKAR PÅ NÄSTA FRÅGA! DEN SKA VARA POSITION
+		$scope.answers.push($scope.questions[$scope.currentQPos].answers[i]);
 		}
-		quizModel.song.get({id:quizModel.Quiz.questions[$scope.currentQPos].songId}, function(data){
+		quizModel.song.get({id:$scope.questions[$scope.currentQPos].songId}, function(data){
 			$scope.track = data;
 			$scope.waitingForInput = false;
 		});
@@ -42,15 +46,15 @@ quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$sce) {
 
 	$scope.checkAnswer = function(answer) {
 		if ($scope.qAnswered != true){
-			if (answer === $scope.Quiz.questions[$scope.currentQPos].answers['a']){
+			if (answer === $scope.questions[$scope.currentQPos].answers['a']){
 				quizModel.setQuizResult(quizModel.getQuizResult() + $scope.points);
 				//add points, routea till nästa question med en increment i position eller dyl.
 			}
 			quizModel.userAnswers.push(answer);
 		}
 
-		$scope.correctAnswer = $scope.Quiz.questions[$scope.currentQPos].answers['a'];
-		$scope.falseAnswers = [$scope.Quiz.questions[$scope.currentQPos].answers['b'], $scope.Quiz.questions[$scope.currentQPos].answers['c'], $scope.Quiz.questions[$scope.currentQPos].answers['d']];
+		$scope.correctAnswer = $scope.questions[$scope.currentQPos].answers['a'];
+		$scope.falseAnswers = [$scope.questions[$scope.currentQPos].answers['b'], $scope.questions[$scope.currentQPos].answers['c'], $scope.questions[$scope.currentQPos].answers['d']];
 		$scope.qAnswered = true;
 	}
 
@@ -63,7 +67,7 @@ quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$sce) {
 		if (quizModel.userAnswers[$scope.currentQPos] === undefined) {
 			quizModel.userAnswers.push("no answer");
 		}
-		if (($scope.Quiz.questions[$scope.currentQPos + 1]) != undefined) {
+		if (($scope.questions[$scope.currentQPos + 1]) != undefined) {
 			$scope.currentQPos += 1;
 			$scope.qAnswered = false;
 			$scope.getNewAnswers();
@@ -92,8 +96,53 @@ quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$sce) {
 		console.log("click");
 	}
 
-	$scope.getNewAnswers();
-	$scope.shuffledArray = $scope.shuffle($scope.answers);
+
+
+
+
+	if($routeParams['quizId']){
+		$scope.local = false;
+		console.log("Laddar in quiz");
+		    // Get a reference to our posts
+	    var quizRef = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+$routeParams['quizId']);
+	    // Attach an asynchronous callback to read the data at our posts reference
+	    quizRef.on("value", function(snapshot) {
+	    	//$scope.key = snapshot.key()
+	    	$scope.Quiz = snapshot.val();
+	    	//console.log(key);
+	    	
+	    	//console.log($scope.Quiz.questions);
+	    	
+	    }, function (errorObject) {
+	    	console.log("The read failed: " + errorObject.code);
+	    });
+
+
+	    var questionRef = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+$routeParams['quizId']+"/questions/");
+	    $scope.questions =[];
+	    questionRef.on("value", function(snap){
+	    	snap.forEach(function(childSnapshot) {
+	    		var key= childSnapshot.key();
+	    		$scope.questions.push(childSnapshot.val());
+	    		console.log(key + childSnapshot.val());
+	    	})
+	    	$scope.getNewAnswers();
+			$scope.shuffledArray = $scope.shuffle($scope.answers);
+	    },function (errorObject) {
+	    	console.log("The read failed: " + errorObject.code);
+	    });
+
+	    quizModel.Quiz = $scope.Quiz;
+	   	quizModel.Quiz.questions= $scope.questions;
+		//$scope.Quiz = quizModel.Quiz;
+	}else{
+		console.log("läs från modellen")
+		$scope.Quiz = quizModel.Quiz;
+		$scope.questions = $scope.Quiz.questions;
+		
+	}
+
+	
 });
 
 quizApp.directive("quizAudio", function(){

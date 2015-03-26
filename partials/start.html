@@ -12,5 +12,9 @@
 		<button type="submit" ng-click="createNew(title,creator)"> Start making your quiz!</button>
 	</div>
 
+	<div ng-repeat="quiz in quizzes">
+		<a ng-href="#/quiz/{{quiz.quizId}}"> {{quiz.title}} </a>
+	</div>
+
 	
 </div>

@@ -38,7 +38,6 @@ this.song = $resource('https://api.spotify.com/v1/tracks/:id');
 this.biography = $resource('http://developer.echonest.com/api/v4/artist/biographies',{"api_key":echonestApiKey,"license":'cc-by-sa'});
 
 this.createQuiz = function(title, creator){
-	console.log("new created");
 
 	// generera quizID
 	//Quiz['quizId'] = 1;
@@ -51,13 +50,13 @@ this.createQuiz = function(title, creator){
 	var ref = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes");
 
 	//pushen genrerar en id i Firebase.
-	Quiz['quizId'] = ref.push({'quizId':'1',
-			'title':title,
+	Quiz['quizId'] = ref.push({'title':title,
 			'creator':creator,
 			'questions':''
 		}).path.o[1];
+	quizRef= ref.child(Quiz.quizId);
+	quizRef.update({'quizId':Quiz['quizId']});
 
-	console.log(Quiz['quizId']);
 }
 
 this.renameQuiz = function(quizID, newTitle){
@@ -69,21 +68,33 @@ this.getQuiz = function(quizID){
 	return Quiz;
 }
 
-this.createQuestion = function(question,a,b,c,d,songId, albumImgUrl){
-	return {"question":question,"songId":songId,"answers":{"a":a,"b":b,"c":c,"d":d},"img": albumImgUrl};
+this.createQuestion = function(question,a,b,c,d,songId, albumImgUrl, fbId){
+	return {"question":question,"songId":songId,"answers":{"a":a,"b":b,"c":c,"d":d},"img": albumImgUrl,"fbId":fbId};
 }
 
 this.setQuestion = function(questionObj,index){
+	
 	//Byta index till en FireBase index? eller båda?!
-	index = typeof index !== 'undefined' ? index : Quiz.questions.length;
-	Quiz.questions[index] = questionObj;
-
-	//tar ej hänsyn till ordning!
-	if(index == 'undefined'){
-		var quizRef = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+Quiz['quizId']+"/questions");
-		console.log(quizRef);
-		var firebaseIndex = quizRef.push(questionObj);
+	var quizRef = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+Quiz['quizId']+"/questions");
+	//index = typeof index !== 'undefined' ? index : Quiz.questions.length;
+	
+	if(typeof index !== 'undefined'){//if the question should be modified
+		console.log("i edit fbId: "+questionObj.fbId);
+		questionRef= quizRef.child(Quiz.questions[index].fbId);
+		questionRef.update(questionObj);
+		Quiz.questions[index] = questionObj;
+	}else{// add new question
+		var fbId = quizRef.push(questionObj).path.o[3];
+		questionObj['fbId'] = fbId;
+		console.log("i new"+questionObj.fbId);
+		Quiz.questions.push(questionObj);
 	}
+
+	//Vid förändring så skrivs hela question över på firbase.
+	
+	// console.log(quizRef);
+	// var firebaseIndex = quizRef.remove();
+	// var firebaseIndex = quizRef.set(Quiz.questions);
 	
 
 
@@ -91,10 +102,16 @@ this.setQuestion = function(questionObj,index){
 
 this.getQuestion = function(index){
 	return Quiz.questions[index];
+
 }
 
 this.removeQuestion = function(index){
+	var quizRef = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+Quiz['quizId']+"/questions");
+	//console.log(quizRef);
+	questionRef= quizRef.child(Quiz.questions[index].fbId);
+	questionRef.remove();
 	Quiz.questions.splice(index,1);
+	
 }
 
 this.shiftPosition = function(currentPosition, newPosition){

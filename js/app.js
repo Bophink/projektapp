@@ -48,7 +48,7 @@ quizApp.config(['$routeProvider',
         templateUrl: 'partials/track.html',
         controller: 'trackCtrl'
       }).
-      when('/quiz', {
+      when('/quiz/:quizId?', {
         templateUrl: 'partials/quiz.html',
         controller: 'quizCtrl'
       }).
