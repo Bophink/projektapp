@@ -18,24 +18,24 @@
 		<table class="table table-hover" style="margin-bottom:100px;text-align:center">
 			<thead>
 				<tr ng-if="results.length > 0">
-					<td width="20%">Listen</td>
-					<td width="20%"><a href ng-click="sort(['name'])">Track <span class="glyphicon glyphicon-chevron-down" ng-if="sorted == 'name'"></span><span class="glyphicon glyphicon-chevron-up" ng-if="sorted == 'nameR'"></span></a></td>
-					<td width="20%"><a href ng-click="sort(['artists','0','name'])">Artist <span class="glyphicon glyphicon-chevron-down" ng-if="sorted == 'artists'"></span><span class="glyphicon glyphicon-chevron-up" ng-if="sorted == 'artistsR'"></span></a></td>
-					<td width="20%"><a href ng-click="sort(['album','name'])">Album <span class="glyphicon glyphicon-chevron-down" ng-if="sorted == 'album'"></span><span class="glyphicon glyphicon-chevron-up" ng-if="sorted == 'albumR'"></span></a></td>
-					<td width="20%"></td>
+					<td class="col-lg-2">Listen</td>
+					<td class="col-lg-3"><a href ng-click="sort(['name'])">Track <span class="glyphicon glyphicon-chevron-down" ng-if="sorted == 'name'"></span><span class="glyphicon glyphicon-chevron-up" ng-if="sorted == 'nameR'"></span></a></td>
+					<td class="col-lg-2"><a href ng-click="sort(['artists','0','name'])">Artist <span class="glyphicon glyphicon-chevron-down" ng-if="sorted == 'artists'"></span><span class="glyphicon glyphicon-chevron-up" ng-if="sorted == 'artistsR'"></span></a></td>
+					<td class="col-lg-3"><a href ng-click="sort(['album','name'])">Album <span class="glyphicon glyphicon-chevron-down" ng-if="sorted == 'album'"></span><span class="glyphicon glyphicon-chevron-up" ng-if="sorted == 'albumR'"></span></a></td>
+					<td class="col-lg-2"></td>
+				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="track in results" style="height:70px" ng-click="" id="{{track.id}}">
-					<td style="width:20%">
-						<div ng-style="{'background-image':'url(' + track.album.images[2].url + ')', 'height':'64px', 'width':'64px', 'margin':'auto','background-size':'64px 64px',
-   'background-repeat':'no-repeat'}" ng-mouseover="playIt(track.preview_url,track.id)" ng-mouseout="stopIt()">
-						<img ng-src="img/play_button.png" ng-mouseover="playIt(track.preview_url,traCK.id)" ng-mouseout="stopIt()" style="height:64xpx;width:64px" ng-if="playing != track.id"/>
+				<tr ng-repeat="track in results" style="height:70px;" ng-click="" id="{{track.id}}">
+					<td class="col-lg-2">
+						<div ng-style="{'background-image':'url(' + track.album.images[2].url + ')', 'height':'64px', 'width':'64px', 'margin':'auto','background-size':'64px 64px','background-repeat':'no-repeat'}" ng-mouseover="playIt(track.preview_url,track.id)" ng-mouseout="stopIt()">
+						<img ng-src="img/play_button.png" ng-mouseover="playIt(track.preview_url,traCK.id)" ng-mouseout="stopIt()" style="height:64xpx;width:64px;" ng-if="playing != track.id"/>
 						</div>
 					</td>
-					<td style="width:20%"><h4><a href ng-click="newSearch(track.name)">{{track.name}}</a></h4></td>
-					<td style="width:20%"><h4><a href ng-click="newSearch(track.artists[0].name, 'artist')">{{track.artists[0].name}}</a></h4></td>
-					<td style="width:20%"><h4><a href ng-click="newSearch(track.album.name, 'album')">{{track.album.name}}</a></h4></td>
-					<td style="width:20%"><h4><a href="#/track/{{track.id}}" class="btn btn-success">Add question</a></h4></td>
+					<td class="col-lg-3"><h4><a href ng-click="newSearch(track.name)">{{track.name}}</a></h4></td>
+					<td class="col-lg-2"><h4><a href ng-click="newSearch(track.artists[0].name, 'artist')">{{track.artists[0].name}}</a></h4></td>
+					<td class="col-lg-3"><h4><a href ng-click="newSearch(track.album.name, 'album')">{{track.album.name}}</a></h4></td>
+					<td class="col-lg-2"><h4><a href="#/track/{{track.id}}" class="btn btn-success">Add question</a></h4></td>
 				</tr>
 			</tbody>
 			<tfoot>
