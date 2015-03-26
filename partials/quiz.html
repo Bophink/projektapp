@@ -1,31 +1,3 @@
-<style>
-.animatePoints {
-    -webkit-animation : pulse 1s 1;
-    -moz-animation    : pulse 1s 1;
-    -o-animation      : pulse 1s 1;
-    animation         : pulse 1s 1;
-}
-@-webkit-keyframes pulse {
-   0%   { -webkit-transform: scale(1)   ; opacity: 1;    }
-   50%  { -webkit-transform: scale(1.2); opacity: 1; }
-   100% { -webkit-transform: scale(1)   ; opacity: 1;    }
-}
-@-moz-keyframes pulse {
-   0%   { -webkit-transform: scale(1)   ; opacity: 1;    }
-   50%  { -webkit-transform: scale(1.2); opacity: 1; }
-   100% { -webkit-transform: scale(1)   ; opacity: 1;    }
-}
-@-o-keyframes pulse {
-   0%   { -webkit-transform: scale(1)   ; opacity: 1;    }
-   50%  { -webkit-transform: scale(1.2); opacity: 1; }
-   100% { -webkit-transform: scale(1)   ; opacity: 1;    }
-}
-@keyframes pulse {
-   0%   { -webkit-transform: scale(1)   ; opacity: 1;    }
-   50%  { -webkit-transform: scale(1.2); opacity: 1; }
-   100% { -webkit-transform: scale(1)   ; opacity: 1;    }
-}
-</style>
 <div id="quiz">
 	<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 	<script src="js/jquery.progressTimer.js"></script>
@@ -72,7 +44,7 @@
 			<div class="row row-centered">
 
 				<div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-8" style="margin-top:50px">
-						<button class="btnQuestion btn btn-primary col-lg-6 col-md-6 col-sm-6 col-xs-6" type="button" ng-click="checkAnswer(shuffledArray[0]);this.border = 5;" ng-class="{'btn-success':shuffledArray[0] == correctAnswer, 'btn-warning':falseAnswers.indexOf(shuffledArray[0]) > -1}" ng-disabled="qAnswered" style="margin:5px 0 0 -5px">{{shuffledArray[0]}}</button>
+						<button class="btnQuestion btn btn-primary col-lg-6 col-md-6 col-sm-6 col-xs-6" type="button" ng-click="checkAnswer(shuffledArray[0]);this.border = 5;" ng-class="{'btn-success':shuffledArray[0] == correctAnswer, 'btn-warning':falseAnswers.indexOf(shuffledArray[0]) > -1}" ng-disabled="qAnswered" style="margin:5px 0 0 -5px;">{{shuffledArray[0]}}</button>
 						
 						<button class="pull-right btnQuestion btn btn-primary col-lg-6 col-md-6 col-sm-6 col-xs-6" type="button" ng-click="checkAnswer(shuffledArray[1]);this.border = 5;" ng-class="{'btn-success':shuffledArray[1] == correctAnswer, 'btn-warning':falseAnswers.indexOf(shuffledArray[1]) > -1}" ng-disabled="qAnswered" style="margin:5px -5px 0 0">{{shuffledArray[1]}}</button>
 						
@@ -82,22 +54,6 @@
 				</div>
 			</div>
 		</div>
-
-		<!--div class="container-fluid">
-			<div class="row row-centered">
-				<button ng-show="Quiz.questions.length != currentQPos+1 && qAnswered" class="btn btn-primary col-lg-3 col-md-3 col-sm-4 col-xs-4 col-centered" ng-click="moveOn()">Next question!</button>
-				<button ng-show="Quiz.questions.length == currentQPos+1 && qAnswered" class="btn btn-success col-lg-3 col-md-3 col-sm-4 col-xs-4 col-centered" ng-click="moveOn()">To Result!</button>
-			</div>
-		</div-->
-
-
-		<script>
-			// $('nextQ').on('click', function(e){
-			//     $('quizAudio').currentTime = 0; /*reset timer*/
-			// });
-			// var song = $('#quizAudio')
-			// setTimeout(function() {song.animate({volume: 0}, 2000)},28000);
-		</script>
 
 	</div>
 </div>
