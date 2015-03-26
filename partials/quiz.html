@@ -8,6 +8,7 @@
 
 		<audio id="songQ" quiz-audio autoplay ng-src="{{track.preview_url}}" type="audio/mpeg"/>
 
+		<!-- Contains title of quiz, creator and total points -->
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-9">
@@ -16,33 +17,36 @@
 				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-3">
 					<h1 class="pull-right" style="color:white">{{getPoints()}} p</h1>
 				</div>
-			</div>
-		</div>
+			</div><!-- .row -->
+		</div><!-- .container-fluid -->
 
+		<!-- Contains the current question, progresstimer and buttons that appear when an answer is given -->
 		<div class="container-fluid">
 			<div class="row" style="margin-bottom:20px;height:215px;">
 				<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12">
 					<h1 style="color:white;display:inline">{{currentQPos+1}}) </h1><h3 style="color:white;display:inline;white-space:pre-wrap;text-align:justify;">{{Quiz.questions[currentQPos].question}}</h3>
 				</div>
+
 				<div class="col-lg-2 col-lg-offset-1 col-md-3 col-sm-3 col-xs-2" style="text-align:center">
 					<div><h1 style="color:white;font-size:100px;" ng-class="{'animatePoints': qAnswered}">{{points}}p</h1></div>
-					<div class="progress">
+					
+					<!-- The width/points of the timer is depending on the time of the audio. 'timeElapsed' refers to the current time of the song. -->
+					<div class="progress"> 
 						<div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" ng-style="{'width': (30-timeElapsed)/0.3 + '%'}"></div>
 					</div>
 					<div class="progressbar progress-striped active" animate="true" value="{{(30-timeElapsed)/0.3}}" type="success"></div>
 					
-					
+					<!-- These buttons appear when a question is answered. -->
 					<button id="nextQ" ng-show="Quiz.questions.length != currentQPos+1 && qAnswered" class="btn btn-primary col-lg-10 col-md-12 col-sm-12 col-xs-12" ng-click="moveOn()" style="margin-top:5px">Next question!</button>
-					
 					<button ng-show="Quiz.questions.length == currentQPos+1 && qAnswered" class="btn btn-success col-lg-10 col-md-12 col-sm-12 col-xs-12" ng-click="moveOn()" style="margin-top:5px">To Result!</button>
-
 				</div>
-			</div>
-		</div>
+			</div><!-- .row -->
+		</div><!-- .container-fluid -->
 
+		<!-- Contains the answers of the current question. -->
 		<div class="container-fluid">
 			<div class="row row-centered">
-
+			<!-- When a button is clicked, ng-class will change to show what was the correct answer and what was false. ng-disabled will also be triggered. -->
 				<div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-8" style="margin-top:50px">
 						<button class="btnQuestion btn btn-primary col-lg-6 col-md-6 col-sm-6 col-xs-6" type="button" ng-click="checkAnswer(shuffledArray[0]);this.border = 5;" ng-class="{'btn-success':shuffledArray[0] == correctAnswer, 'btn-warning':falseAnswers.indexOf(shuffledArray[0]) > -1}" ng-disabled="qAnswered" style="margin:5px 0 0 -5px;">{{shuffledArray[0]}}</button>
 						
@@ -52,8 +56,8 @@
 						
 						<button class="pull-right btnQuestion btn btn-primary col-lg-6 col-md-6 col-sm-6 col-xs-6" type="button" ng-click="checkAnswer(shuffledArray[3]);this.border = 5;" ng-class="{'btn-success':shuffledArray[3] == correctAnswer, 'btn-warning':falseAnswers.indexOf(shuffledArray[3]) > -1}" ng-disabled="qAnswered" style="margin:5px -5px 0 0">{{shuffledArray[3]}}</button>
 				</div>
-			</div>
-		</div>
+			</div><!-- .row -->
+		</div><!-- .container-fluid -->
 
 	</div>
 </div>
