@@ -42,9 +42,9 @@ quizApp.controller('trackCtrl', function ($scope,quizModel,$routeParams,$sce) {
 			return
 		}
 		var answers = [a,b,c,d];
-		for(var c = 0; c < answers.length-1; c++){
-			for(var i = c+1; i <= answers.length-1; i++){
-				if (answers[c] == answers[i]){
+		for(var j = 0; j < answers.length-1; j++){
+			for(var i = j+1; i <= answers.length-1; i++){
+				if (answers[j] == answers[i]){
 					$scope.alert.push({'type':'Duplicate answers!','text':'Please make sure that not 2 answers are the same.'});
 					return
 				}
