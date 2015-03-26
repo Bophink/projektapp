@@ -47,6 +47,16 @@
   margin-top:20px;
 }
 
+.table-search >tbody>tr>td{
+  vertical-align: middle;
+  text-align: center;
+}
+
+.table-search >thead>tr>th{
+  vertical-align: middle;
+  text-align: center;
+}
+
 .table-score >tbody>tr>td{
   vertical-align:middle;
 }

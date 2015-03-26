@@ -15,14 +15,14 @@
 
 	<div class="row">
 		<audio id="preview" type="audio/mpeg"/>
-		<table class="table table-hover" style="margin-bottom:100px;text-align:center">
+		<table class="table table-hover table-search" style="margin-bottom:100px;">
 			<thead>
 				<tr ng-if="results.length > 0">
-					<td class="col-lg-2">Listen</td>
-					<td class="col-lg-3"><a href ng-click="sort(['name'])">Track <span class="glyphicon glyphicon-chevron-down" ng-if="sorted == 'name'"></span><span class="glyphicon glyphicon-chevron-up" ng-if="sorted == 'nameR'"></span></a></td>
-					<td class="col-lg-2"><a href ng-click="sort(['artists','0','name'])">Artist <span class="glyphicon glyphicon-chevron-down" ng-if="sorted == 'artists'"></span><span class="glyphicon glyphicon-chevron-up" ng-if="sorted == 'artistsR'"></span></a></td>
-					<td class="col-lg-3"><a href ng-click="sort(['album','name'])">Album <span class="glyphicon glyphicon-chevron-down" ng-if="sorted == 'album'"></span><span class="glyphicon glyphicon-chevron-up" ng-if="sorted == 'albumR'"></span></a></td>
-					<td class="col-lg-2"></td>
+					<th class="col-lg-2">Listen</th>
+					<th class="col-lg-3"><a href ng-click="sort(['name'])">Track <span class="glyphicon glyphicon-chevron-down" ng-if="sorted == 'name'"></span><span class="glyphicon glyphicon-chevron-up" ng-if="sorted == 'nameR'"></span></a></th>
+					<th class="col-lg-2"><a href ng-click="sort(['artists','0','name'])">Artist <span class="glyphicon glyphicon-chevron-down" ng-if="sorted == 'artists'"></span><span class="glyphicon glyphicon-chevron-up" ng-if="sorted == 'artistsR'"></span></a></th>
+					<th class="col-lg-3"><a href ng-click="sort(['album','name'])">Album <span class="glyphicon glyphicon-chevron-down" ng-if="sorted == 'album'"></span><span class="glyphicon glyphicon-chevron-up" ng-if="sorted == 'albumR'"></span></a></th>
+					<th class="col-lg-2"></th>
 				</tr>
 			</thead>
 			<tbody>
