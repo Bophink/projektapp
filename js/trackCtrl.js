@@ -41,12 +41,18 @@ quizApp.controller('trackCtrl', function ($scope,quizModel,$routeParams,$sce) {
 			$scope.alert.push({'type':'Error!','text':'Please make sure that you have filled out all the text fields.'});
 			return
 		}
+		var answers = [a,b,c,d];
+		for(var c = 0; c < answers.length-1; c++){
+			for(var i = c+1; i <= answers.length-1; i++){
+				if (answers[c] == answers[i]){
+					$scope.alert.push({'type':'Duplicate answers!','text':'Please make sure that not 2 answers are the same.'});
+					return
+				}
+			}
+		}
 		quizModel.setQuestion(quizModel.createQuestion(q,a,b,c,d,$scope.track.id,$scope.track.album.images[1].url),quizPosition);
 		quizModel.results = {};
 		window.location = "#/search/";
 	}
-
-	
-
 
 });
