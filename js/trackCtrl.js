@@ -48,7 +48,7 @@ quizApp.controller('trackCtrl', function ($scope,quizModel,$routeParams,$sce) {
 			return
 		}
 		quizModel.setQuestion(quizModel.createQuestion(q,a,b,c,d,$scope.track.id,$scope.track.album.images[1].url),quizPosition);
-		console.log(quizModel.Quiz);
+		quizModel.results = {};
 		window.location = "#/search/";
 	}
 

@@ -29,6 +29,7 @@ quizApp.factory('quizModel',function ($resource, $cookieStore) {
 var points = 0;
 
 var Quiz = this.Quiz = {};
+this.searchResults = {}
 var userAnswers = this.userAnswers = [];
 
 var echonestApiKey = "6WKAD9UOX8AQCCF9O";

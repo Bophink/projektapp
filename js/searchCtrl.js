@@ -3,6 +3,7 @@ quizApp.controller('searchCtrl', function ($scope,$sce,quizModel) {
 $scope.waitingForInput = false;
 $scope.status = "";
 
+$scope.results = quizModel.searchResults;
 
 typingTimer = null;	// initierar en timer.
 doneTypingInterval = 300; //tid i ms som användaren får vänta efter att han skrivit till API-anrop.
@@ -69,6 +70,7 @@ $scope.songs = function(searchParams) {
 					$scope.results.push(data.tracks.items[track]);
 				}
 			}
+		quizModel.searchResults = $scope.results;
 		}
 
 		$scope.waitingForInput = false;
