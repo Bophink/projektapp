@@ -48,9 +48,22 @@
 		</div>
 
 		<div class="container-fluid">
-			<div class="row" style="margin-bottom:20px">
-				<div class="col-centered col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12">
+			<div class="row" style="margin-bottom:20px;height:215px;">
+				<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12">
 					<h1 style="color:white;display:inline">{{currentQPos+1}}) </h1><h3 style="color:white;display:inline;white-space:pre-wrap;text-align:justify;">{{Quiz.questions[currentQPos].question}}</h3>
+				</div>
+				<div class="col-lg-2 col-lg-offset-1 col-md-3 col-sm-3 col-xs-2" style="text-align:center">
+					<div><h1 style="color:white;font-size:100px;" ng-class="{'animatePoints': qAnswered}">{{points}}p</h1></div>
+					<div class="progress">
+						<div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" ng-style="{'width': (30-timeElapsed)/0.3 + '%'}"></div>
+					</div>
+					<div class="progressbar progress-striped active" animate="true" value="{{(30-timeElapsed)/0.3}}" type="success"></div>
+					
+					
+					<button id="nextQ" ng-show="Quiz.questions.length != currentQPos+1 && qAnswered" class="btn btn-primary col-lg-10 col-md-12 col-sm-12 col-xs-12" ng-click="moveOn()" style="margin-top:5px">Next question!</button>
+					
+					<button ng-show="Quiz.questions.length == currentQPos+1 && qAnswered" class="btn btn-success col-lg-10 col-md-12 col-sm-12 col-xs-12" ng-click="moveOn()" style="margin-top:5px">To Result!</button>
+
 				</div>
 			</div>
 		</div>
@@ -67,26 +80,6 @@
 						
 						<button class="pull-right btnQuestion btn btn-primary col-lg-6 col-md-6 col-sm-6 col-xs-6" type="button" ng-click="checkAnswer(shuffledArray[3]);this.border = 5;" ng-class="{'btn-success':shuffledArray[3] == correctAnswer, 'btn-warning':falseAnswers.indexOf(shuffledArray[3]) > -1}" ng-disabled="qAnswered" style="margin:5px -5px 0 0">{{shuffledArray[3]}}</button>
 				</div>
-
-				<div class="col-lg-3 col-lg-offset-1 col-md-3 col-sm-3 col-xs-2">
-					<div><h1 style="color:white;font-size:100px" ng-class="{'animatePoints': qAnswered}">{{points}}p</h1></div>
-					<div class="progress">
-						<div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" ng-style="{'width': (30-timeElapsed)/0.3 + '%'}"></div>
-					</div>
-					<div class="progressbar progress-striped active" animate="true" value="{{(30-timeElapsed)/0.3}}" type="success"></div>
-					
-					
-					<button id="nextQ" ng-show="Quiz.questions.length != currentQPos+1 && qAnswered" class="btn btn-primary col-lg-10 col-md-12 col-sm-12 col-xs-12" ng-click="moveOn()" style="margin-top:5px">Next question!</button>
-					
-					<button ng-show="Quiz.questions.length == currentQPos+1 && qAnswered" class="btn btn-success col-lg-10 col-md-12 col-sm-12 col-xs-12" ng-click="moveOn()" style="margin-top:5px">To Result!</button>
-
-				</div>
-
-					
-				</div>
-
-
-
 			</div>
 		</div>
 

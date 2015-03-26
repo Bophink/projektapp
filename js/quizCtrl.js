@@ -45,6 +45,8 @@ quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$sce) {
 			if (answer === $scope.Quiz.questions[$scope.currentQPos].answers['a']){
 				quizModel.setQuizResult(quizModel.getQuizResult() + $scope.points);
 				//add points, routea till nästa question med en increment i position eller dyl.
+			}else{
+				$scope.points = 0;
 			}
 			quizModel.userAnswers.push(answer);
 		}

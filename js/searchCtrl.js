@@ -1,10 +1,9 @@
-quizApp.controller('searchCtrl', function ($scope,$sce,quizModel,$anchorScroll) {
+quizApp.controller('searchCtrl', function ($scope,$sce,quizModel) {
 
 $scope.waitingForInput = false;
 $scope.status = "";
 
 if ( quizModel.searchResults != {}){
-	console.log(quizModel.searchResults)
 	$scope.results = quizModel.searchResults.results;
 	$scope.query = quizModel.searchResults.query;
 	$scope.type = quizModel.searchResults.type;
