@@ -84,9 +84,9 @@ h1, h2, h3 {
 }
 
 .carousel-control {
-  font-size:100px;
-  width:5%;
-  padding-top: 50px;
+  font-size: 100px;
+  width: 5%;
+  color: rgba(0,0,0,1);
 }
 
 .track-search-field{
