@@ -1,8 +1,6 @@
 quizApp.controller('trackCtrl', function ($scope,quizModel,$routeParams,$sce) {
 
 	//$scope.trackId = $routeParams.trackId
-	console.log("param1: "+$routeParams.trackId);
-	console.log($routeParams.trackId.substring(0,5));
 	var trackId = $routeParams.trackId;
 	$scope.alert = [];
 	// quiz-position
@@ -29,9 +27,6 @@ quizApp.controller('trackCtrl', function ($scope,quizModel,$routeParams,$sce) {
 					$scope.bio = data.response.biographies[bio];
 				}
 			}
-			
-			
-			console.log($scope.bio);
 		});
 		
 	});
@@ -42,7 +37,6 @@ quizApp.controller('trackCtrl', function ($scope,quizModel,$routeParams,$sce) {
 	
 
 	$scope.done = function(q,a,b,c,d){
-		console.log(q);
 		if(q == undefined || a == undefined || b == undefined || c == undefined || d == undefined || q == "" || a == "" || b == "" || c == "" || d == ""){
 			$scope.alert.push({'type':'Error!','text':'Please make sure that you have filled out all the text fields.'});
 			return

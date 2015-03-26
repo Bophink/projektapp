@@ -1,9 +1,9 @@
 <div id="quizScore">
 	<ng-include src="'partials/header.html'" ></ng-include>
 	<div class="row" >
-		<h1 class="text-center" style="margin-top:150px">Bra jobbat!</h1> <!-- Användarnamn -->
+		<h1 class="text-center" style="margin-top:150px">{{praise()}}</h1> <!-- Användarnamn -->
 	</div>
-	<div class="row text-center"><h3>Du fick {{getPoints()}} poäng</h3></div>
+	<div class="row text-center"><h3>You got {{getPoints()}} points</h3></div>
 	<div class="row" style="padding:15px 0px 30px 0px">
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 			<button class="btnScore btn btn-primary col-lg-3 col-md-4 col-sm-5 col-xs-10 pull-right">Share</button>
@@ -18,10 +18,9 @@
 			<thead>
 				<tr>
 					<th class="col-lg-1 col-md-1"></th>
-					<th class="col-lg-4 col-md-4"><h4>Questions</h4></th>
-					<th class="col-lg-1 col-md-1"><h4>Right Answer</h4></th>
-					<th class="col-lg-1 col-md-1"><h4>Your Answer</h4></th>
-					<th class="col-lg-4 col-md-4"></th>
+					<th class="col-lg-4 col-md-4"><h4>Question</h4></th>
+					<th class="col-lg-2 col-md-2"><h4>Answer</h4></th>
+					<th class="col-lg-4 col-md-4"><h4>Track</h4></th>
 					<th class="col-lg-1 col-md-1"><h4>Listen</h4></th>
 				</tr>
 			</thead>
@@ -29,8 +28,8 @@
 				<tr ng-repeat="q in getQuestions()">
 					<td class="col-lg-1 col-md-1" style="text-align:center"><h1>{{q.position}}.</h1></td>
 					<td class="col-lg-4 col-md-4">{{q.question}}</td>
-					<td class="col-lg-1 col-md-1">{{q.answers['a']}}</td>
-					<td class="col-lg-1 col-md-1">{{userAnswers[q.position-1]}}</td>
+					<td class="col-lg-2 col-md-2"><b>Correct Answer: </b>{{q.answers['a']}}<br/><b>You answered: </b>{{userAnswers[q.position-1]}}
+						</td>
 					<td class="col-lg-4 col-md-4">
 							<h3>{{songList[q.position-1].name}}</h3>
 							<h4>{{songList[q.position-1].artists[0].name}}</h4>

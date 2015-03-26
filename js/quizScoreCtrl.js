@@ -1,5 +1,25 @@
 quizApp.controller('quizScoreCtrl', function ($scope,quizModel,$routeParams) {
 
+
+
+	$scope.praise = function(){
+		var praiseDict = {
+			'0':'Are you drunk?',
+			'0.1':'Are you even trying?',
+			'0.2':'Bruh...',
+			'0.3':'Practice makes perfect',
+			'0.4':'\"Good job\"',
+			'0.5':'Good job!',
+			'0.6':'Great!',
+			'0.7':'Awesome',
+			'0.8':'Wow!',
+			'0.9':'Amazeballs!',
+			'1.0':'Perfect score!'};
+		var maxScore = quizModel.Quiz.questions.length * 10;
+		console.log(($scope.getPoints()/maxScore).toString().substr(0,3));
+		return praiseDict[($scope.getPoints()/maxScore).toString().substr(0,3)];
+	}
+
 	$scope.songList = [];
 	for(var i = 0; i<quizModel.Quiz.questions.length; i++){
 		quizModel.song.get({id:quizModel.Quiz.questions[i].songId}, function(data){
