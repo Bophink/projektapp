@@ -100,19 +100,14 @@ quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$firebase
 
 
 
-	if($routeParams['quizId']){
-		$scope.local = false;
+	if($routeParams['quizId']){//Läs in quiz från Firebase
 		console.log("Laddar in quiz");
-		    // Get a reference to our posts
+
 	    var quizRef = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+$routeParams['quizId']);
-	    // Attach an asynchronous callback to read the data at our posts reference
+	    // AJAX anropp för att läsa in data
+	    //Dessa två AJAX anrop kankse kan läggas ihop?
 	    quizRef.on("value", function(snapshot) {
-	    	//$scope.key = snapshot.key()
 	    	$scope.Quiz = snapshot.val();
-	    	//console.log(key);
-	    	
-	    	//console.log($scope.Quiz.questions);
-	    	
 	    }, function (errorObject) {
 	    	console.log("The read failed: " + errorObject.code);
 	    });
@@ -120,10 +115,11 @@ quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$firebase
 
 	    var questionRef = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+$routeParams['quizId']+"/questions/");
 	    $scope.questions =[];
+	    //AJAX
 	    questionRef.on("value", function(snap){
 	    	snap.forEach(function(childSnapshot) {
 	    		var key= childSnapshot.key();
-	    		$scope.questions.push(childSnapshot.val());
+	    		$scope.questions.push(childSnapshot.val());//Lägger till frågorna i en lista.
 	    		console.log(key + childSnapshot.val());
 	    	})
 	    	$scope.getNewAnswers();
@@ -134,8 +130,8 @@ quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$firebase
 
 	    quizModel.Quiz = $scope.Quiz;
 	   	quizModel.Quiz.questions= $scope.questions;
-		//$scope.Quiz = quizModel.Quiz;
-	}else{
+	}else{//ingen routeParam
+	//Inläsning feån modellen
 		console.log("läs från modellen")
 		$scope.Quiz = quizModel.Quiz;
 		$scope.questions = $scope.Quiz.questions;

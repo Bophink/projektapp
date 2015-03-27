@@ -49,18 +49,21 @@ this.createQuiz = function(title, creator){
 
 	var ref = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes");
 
-	//pushen genrerar en id i Firebase.
+	//pushen returnerar sökvgen till objektet i Firebase.
 	Quiz['quizId'] = ref.push({'title':title,
 			'creator':creator,
 			'questions':''
 		}).path.o[1];
 	quizRef= ref.child(Quiz.quizId);
-	quizRef.update({'quizId':Quiz['quizId']});
+	quizRef.update({'quizId':Quiz['quizId']});//lägger in Id (huvudnoden i objectet så vi kan hitta den senare)
 
 }
 
 this.renameQuiz = function(quizID, newTitle){
+	//Gör så det fungerar med Firebase.
 	Quiz['title'] = newTitle;
+	var ref = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+quizID+"/");
+	ref.update({'title' : title}); // tror koden är rätt men ej testad
 }
 
 this.getQuiz = function(quizID){
@@ -79,22 +82,23 @@ this.setQuestion = function(questionObj,index){
 	//index = typeof index !== 'undefined' ? index : Quiz.questions.length;
 	
 	if(typeof index !== 'undefined'){//if the question should be modified
-		console.log("i edit fbId: "+questionObj.fbId);
+		//console.log("i edit fbId: "+questionObj.fbId);
+		//Firebase
 		questionRef= quizRef.child(Quiz.questions[index].fbId);
 		questionRef.update(questionObj);
+
+		//Modellen
 		Quiz.questions[index] = questionObj;
 	}else{// add new question
+		//Firebase
 		var fbId = quizRef.push(questionObj).path.o[3];
+		//pushar på frågan sist. Behöver kolla $add, $save etc för att flytta runt frågor
+
+		//Modellen
 		questionObj['fbId'] = fbId;
-		console.log("i new"+questionObj.fbId);
+		//console.log("i new"+questionObj.fbId);
 		Quiz.questions.push(questionObj);
 	}
-
-	//Vid förändring så skrivs hela question över på firbase.
-	
-	// console.log(quizRef);
-	// var firebaseIndex = quizRef.remove();
-	// var firebaseIndex = quizRef.set(Quiz.questions);
 	
 
 
@@ -106,15 +110,24 @@ this.getQuestion = function(index){
 }
 
 this.removeQuestion = function(index){
+	//Firebase
+	//Anton!!!! denna var dte som inte fungerade va?
 	var quizRef = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+Quiz['quizId']+"/questions");
-	//console.log(quizRef);
 	questionRef= quizRef.child(Quiz.questions[index].fbId);
 	questionRef.remove();
+
+	//Modellen
 	Quiz.questions.splice(index,1);
 	
 }
 
 this.shiftPosition = function(currentPosition, newPosition){
+	//Används denna?
+
+	//Firebase
+	//Ej implementerat
+
+	//Modellen
 	selectedQuestion = Quiz.questions.splice(currentPosition,1);
 	Quiz.questions.splice(newPosition,0,selectedQuestion);
 }
