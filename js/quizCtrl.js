@@ -135,7 +135,8 @@ quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$firebase
 		console.log("läs från modellen")
 		$scope.Quiz = quizModel.Quiz;
 		$scope.questions = $scope.Quiz.questions;
-		
+		$scope.getNewAnswers();
+		$scope.shuffledArray = $scope.shuffle($scope.answers);
 	}
 
 	

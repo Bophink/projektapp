@@ -30,6 +30,7 @@ var points = 0;
 
 var Quiz = this.Quiz = {};
 var userAnswers = this.userAnswers = [];
+//var currentQuizObj = ""; // the Quiz the user is currently creating/modifying.
 
 var echonestApiKey = "6WKAD9UOX8AQCCF9O";
 
@@ -81,7 +82,7 @@ this.setQuestion = function(questionObj,index){
 	var quizRef = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+Quiz['quizId']+"/questions");
 	//index = typeof index !== 'undefined' ? index : Quiz.questions.length;
 	
-	if(typeof index !== 'undefined'){//if the question should be modified
+	if(typeof index !== "undefined"){//if the question should be modified
 		//console.log("i edit fbId: "+questionObj.fbId);
 		//Firebase
 		questionRef= quizRef.child(Quiz.questions[index].fbId);

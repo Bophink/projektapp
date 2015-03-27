@@ -6,18 +6,26 @@ quizApp.controller('homeCtrl', function ($scope, quizModel,$firebaseObject) {
 	
 	
 	//Använd ng-show och ng-hide istället
+	$scope.isClicked = false;
 
-	$('#form').hide();
-	$scope.showForm= function(){
-		$('#form').show();
+	$scope.clicked = function() {
+		if ($scope.isClicked === true) {
+			$scope.isClicked = false;
+		}
+		else {
+			$scope.isClicked = true;
+		}
 	}
-
-	$scope.createNew = function(){
-		$('#form').hide();
-		console.log("dags att skapa en ny");
-		quizModel.createQuiz($scope.title, $scope.creator);
-		window.location = "#/search/";
+	$scope.createQuiz = function(title, creator) {
+		quizModel.createQuiz(title, creator);
+		//firebaseRefQuiz = firebaseURL och lägga in skit etc
+		console.log("Quiz skapas! " + title + creator);
+		console.log(quizModel.Quiz);
 	}
+	$scope.assignQuiz = function(quiz) {
+		quizModel.Quiz = quiz;
+		console.log(quizModel.Quiz);
+	}	
 
 	var quizzes = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes");
 	// download the data into a local object

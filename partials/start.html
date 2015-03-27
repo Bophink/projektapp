@@ -2,18 +2,17 @@
 	<ng-include src="'partials/header.html'" ng-controller ="headerCtrl" ></ng-include>
 	<ng-include src="'partials/carousel.html'" ng-controller="CarouselCtrl"></ng-include>
 
-	<div class="row" id="start buttons" style="margin-top:50px">
-
-		<button class="col-md-3 btn-primary" ng-click="showForm()">Create new Quiz</button>
+	<div class="row" style="margin-top:100px">
+		<button class="btn btn-primary" ng-click="clicked()">Create New Quiz</button>
 	</div>
-	<div id="form" style="">
-		<input type="text" ng-model="title" placeholder="Your Quiztitle!"/>
-		<input type="text" ng-model="creator" placeholder="Your Quizmaker name!"/>
-		<button type="submit" ng-click="createNew(title,creator)"> Start making your quiz!</button>
+	<div class="row" ng-show="isClicked" syle="position: fixed; top=25%; left:5%">
+		<input type="text" ng-model="title" placeholder="Name your Quiz"/>
+		<input type="text" ng-model="creator" placeholder="Your name"/>
+		<button class="btn btn-primary" ng-click="createQuiz(title, creator)">Create Quiz</button>
 	</div>
 
 	<div ng-repeat="quiz in quizzes">
-		<a ng-href="#/quiz/{{quiz.quizId}}"> {{quiz.title}} </a>
+		<button ng-click="assignQuiz(quiz)"> {{quiz.title}} </button>
 	</div>
 
 	

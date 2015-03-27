@@ -49,6 +49,7 @@ quizApp.controller('CarouselCtrl', function($scope,quizModel) {
   }
 
   $scope.createCarousel = function(nrOfQperSlide){
+    console.log("Carousel is happening");
     $scope.slides = [];
     var slide = [];
     var quiz = quizModel.getQuiz();
