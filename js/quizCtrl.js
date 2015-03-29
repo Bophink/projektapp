@@ -1,4 +1,4 @@
-quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$firebaseObject) {
+quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$firebaseObject, $firebaseArray) {
 
 
 
@@ -16,7 +16,7 @@ quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$firebase
 
 	$scope.getNewAnswers = function() {
 		$scope.answers = [];
-		
+		console.log($scope.questions[0]);
 		for (var i in $scope.questions[$scope.currentQPos].answers) { //ÄNDRA SÅ ATT DEN INCREMENTAR QUESTIONS NÄR MAN KLICKAR PÅ NÄSTA FRÅGA! DEN SKA VARA POSITION
 		$scope.answers.push($scope.questions[$scope.currentQPos].answers[i]);
 		}
@@ -96,49 +96,61 @@ quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$firebase
 		console.log("click");
 	}
 
-
-
-
-
 	if($routeParams['quizId']){//Läs in quiz från Firebase
-		console.log("Laddar in quiz");
+		
 
 	    var quizRef = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+$routeParams['quizId']);
 	    // AJAX anropp för att läsa in data
 	    //Dessa två AJAX anrop kankse kan läggas ihop?
 	    quizRef.on("value", function(snapshot) {
 	    	$scope.Quiz = snapshot.val();
+	    	console.log("Laddar in quiz "+$scope.Quiz.title);
 	    }, function (errorObject) {
 	    	console.log("The read failed: " + errorObject.code);
 	    });
 
 
 	    var questionRef = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+$routeParams['quizId']+"/questions/");
-	    $scope.questions =[];
+
+	    // $scope.questions = $firebaseArray(questionRef);
+	    // console.log($scope.questions);
+	    $scope.questions=[];
+
 	    //AJAX
 	    questionRef.on("value", function(snap){
 	    	snap.forEach(function(childSnapshot) {
 	    		var key= childSnapshot.key();
 	    		$scope.questions.push(childSnapshot.val());//Lägger till frågorna i en lista.
-	    		console.log(key + childSnapshot.val());
+	    		//console.log(key + childSnapshot.val());
 	    	})
-	    	$scope.getNewAnswers();
-			$scope.shuffledArray = $scope.shuffle($scope.answers);
 	    },function (errorObject) {
 	    	console.log("The read failed: " + errorObject.code);
 	    });
+		
+	  	$scope.getNewAnswers();
+		$scope.shuffledArray = $scope.shuffle($scope.answers);
 
 	    quizModel.Quiz = $scope.Quiz;
-	   	quizModel.Quiz.questions= $scope.questions;
+	   	quizModel.Quiz.questions = $scope.questions;
+
 	}else{//ingen routeParam
 	//Inläsning feån modellen
 		console.log("läs från modellen")
 		$scope.Quiz = quizModel.Quiz;
-		$scope.questions = $scope.Quiz.questions;
+		//console.log($scope.Quiz);
+		$scope.questions = quizModel.Quiz.questions;
+		//console.log($scope.questions);
 		$scope.getNewAnswers();
 		$scope.shuffledArray = $scope.shuffle($scope.answers);
+		//quizModel.Quiz = $scope.Quiz;
+	   	
 	}
 
+
+
+
+
+	
 	
 });
 
@@ -151,7 +163,7 @@ quizApp.directive("quizAudio", function(){
 	            	$scope.points = 10;
 	            }else if ($scope.timeElapsed > 3 && $scope.timeElapsed <= 6){
 	            	$scope.points = 9;
-	            	console.log("9");
+	            	//console.log("9");
 	            }else if ($scope.timeElapsed > 6  && $scope.timeElapsed <= 9){
 	            	$scope.points = 8;
 	            }else if ($scope.timeElapsed > 9  && $scope.timeElapsed <= 12){

@@ -8,8 +8,12 @@ quizApp.controller('trackCtrl', function ($scope,quizModel,$routeParams,$sce) {
 	$scope.fbId='';
 	// quiz-position
 	if($routeParams.trackId.substring(0,5) === "quiz-"){
-		var quizPosition = Number($routeParams.trackId.substring(5))-1;
-		$scope.question = quizModel.getQuestion(quizPosition);
+		$scope.quizPosition = Number($routeParams.trackId.substring(5))-1;
+		//console.log($scope.quizPosition);
+		//console.log(quizModel.Quiz.questions);
+		
+		$scope.question = quizModel.Quiz.questions[$scope.quizPosition];
+		console.log("in läst i track: "+$scope.question.question);
 		trackId = $scope.question.songId;
 		$scope.q = $scope.question.question;
 		$scope.a = $scope.question.answers['a'];
@@ -49,7 +53,7 @@ quizApp.controller('trackCtrl', function ($scope,quizModel,$routeParams,$sce) {
 			$scope.alert.push({'type':'Error!','text':'Please make sure that you have filled out all the text fields.'});
 			return
 		}
-		quizModel.setQuestion(quizModel.createQuestion(q,a,b,c,d,$scope.track.id,$scope.track.album.images[1].url, $scope.fbId ),quizPosition);
+		quizModel.setQuestion(quizModel.createQuestion(q,a,b,c,d,$scope.track.id,$scope.track.album.images[1].url, $scope.fbId ),$scope.quizPosition);
 		//console.log(quizModel.Quiz);
 		window.location = "#/search/";
 	}

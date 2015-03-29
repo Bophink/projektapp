@@ -11,8 +11,18 @@
 		<button class="btn btn-primary" ng-click="createQuiz(title, creator)">Create Quiz</button>
 	</div>
 
-	<div ng-repeat="quiz in quizzes">
-		<button ng-click="assignQuiz(quiz)"> {{quiz.title}} </button>
+	<div class = "row">
+		<div ng-repeat="quiz in quizzes" class="col-md-3" style="background:rgba(0,0,0,0.2)">
+			<button ng-click="goToQuiz(quiz.quizId)"> {{quiz.title}} </button>
+			<button ng-click="assignQuiz(quiz)"> edit </button>
+			<h1 style="color:red">{{quiz.creator}}</h1>
+			<h1 style="color:red">{{quiz.questions.length}}</h1>
+			<div class="row">
+				<div id="image" class="col-md-3" ng-repeat="question in quiz.questions" >
+					<img class="col-md-6 img-responsive" ng-src="{{question.img}}" style="display:inline"/>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	

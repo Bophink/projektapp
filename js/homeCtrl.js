@@ -1,4 +1,4 @@
-quizApp.controller('homeCtrl', function ($scope, quizModel,$firebaseObject) {
+quizApp.controller('homeCtrl', function ($scope, quizModel,$firebaseObject, $firebaseArray) {
 	var location = window.location.hash.split("/");
 	$scope.position = location[0]+"/"+location[1];
 	//tar ej hänsyn till sista paremtern i quiz och track
@@ -23,16 +23,24 @@ quizApp.controller('homeCtrl', function ($scope, quizModel,$firebaseObject) {
 		console.log(quizModel.Quiz);
 	}
 	$scope.assignQuiz = function(quiz) {
-		quizModel.Quiz = quiz;
-		console.log(quizModel.Quiz);
+		if(quizModel.Quiz.quizId != quiz.quizId){
+			quizModel.getQuiz(quiz);
+		}
+		
+		window.location ="#/search";
+	}
+	$scope.goToQuiz = function(quizId){
+		window.location ="#/quiz/"+quizId;
 	}	
 
 	var quizzes = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes");
 	// download the data into a local object
-	var syncObject = $firebaseObject(quizzes);
+	$scope.quizzes = $firebaseArray(quizzes);
 	// synchronize the object with a three-way data binding
 	// click on `index.html` above to see it used in the DOM!
-	syncObject.$bindTo($scope, "quizzes");
+	
+
+	
 
 
 

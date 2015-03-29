@@ -11,13 +11,16 @@ quizApp.controller('CarouselCtrl', function($scope,quizModel) {
   }else{
     $scope.nrOfQperSlide=4;
   }
+
+  $scope.questions = quizModel.Quiz.questions;
   
   
 
   $scope.update = function(oldWidth){
     var newWidth = $(window).width();
 
-    if(quizModel.getQuiz().questions){
+    if(quizModel.Quiz.questions){
+      //console.log("updates Carousel"+ quizModel.Quiz.questions.length);
 
       //Kontrollerar om man nått en brytpunkt vid window.resize eller om man lagt till/ tagit bort fråga
       if(oldWidth >= 992 && newWidth < 992){
@@ -40,7 +43,7 @@ quizApp.controller('CarouselCtrl', function($scope,quizModel) {
           $scope.nrOfQperSlide=4;
           $scope.createCarousel(4);
         });
-      }else if(quizModel.getQuiz().questions.length != $scope.quisLen){
+      }else if(quizModel.Quiz.questions.length != $scope.quisLen){
         $scope.createCarousel($scope.nrOfQperSlide);
       }
 
@@ -49,18 +52,17 @@ quizApp.controller('CarouselCtrl', function($scope,quizModel) {
   }
 
   $scope.createCarousel = function(nrOfQperSlide){
-    console.log("Carousel is happening");
+    //console.log("Carousel is happening");
     $scope.slides = [];
     var slide = [];
-    var quiz = quizModel.getQuiz();
-    $scope.quisLen = quizModel.getQuiz().questions.length;
+    $scope.quisLen = quizModel.Quiz.questions.length;
 
-    for(var k = 0; k<quiz.questions.length; k++){
-      var localQ = quiz.questions[k];
+    for(var k = 0; k<quizModel.Quiz.questions.length; k++){
+      var localQ = quizModel.Quiz.questions[k];
       localQ.position = k+1;
       slide.push(localQ);
 
-        if((k+1)%nrOfQperSlide === 0 || (k+1) === quiz.questions.length){
+        if((k+1)%nrOfQperSlide === 0 || (k+1) === quizModel.Quiz.questions.length){
           $scope.slides.push(slide);
           slide = [];
         }
