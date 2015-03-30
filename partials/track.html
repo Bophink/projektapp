@@ -1,27 +1,21 @@
-<style>
-.inputQuestion{
-	height:174px;
-}
-.biography{
-	max-height:320px;
-}
-.alert{
-	z-index:1;
-}
-</style>
-
 <ng-include src="'partials/header.html'" ng-controller ="headerCtrl"></ng-include>
 <ng-include src="'partials/carousel.html'" ng-controller="CarouselCtrl"></ng-include>
+
 <div style="margin-top:60px;background:rgba(150,150,150,0.5);padding:20px;">
+	<!-- Contains the alert banner that will trigger and be visible if a question is incomplete.  -->
 	<div class="alert alert-warning" ng-repeat="msg in alert">
         <a href class="close" ng-click="closeAlert($index)">&times;</a>
         <strong>{{msg.type}}</strong> {{msg.text}}
     </div>
-	<h4><a href="#search"><span class="glyphicon glyphicon-chevron-left"></span><b>Back</b></h4></a>
+
+	<h4><a href="#search#{{track.id}}"><span class="glyphicon glyphicon-chevron-left"></span><b>Back</b></h4></a>
+
 	<span>
 		<h1 style="display:inline">{{track.name}}</h1>
 		<h4 style="display:inline"> by {{track.artists[0].name}}</h4>
 	</span>
+
+	<!-- Contains all of the different input options for a question, including cover-image, inspiration text and confirm button. -->
 	<div class="row">
 		<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
 			<img ng-src="{{track.album.images[1].url}}" style="margin-top:10px;width:300px;height:300px">
@@ -29,17 +23,18 @@
 		</div>
 		<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
 			<h4>What's the question?</h4>
-			<textarea id ="questionInput" class="inputQuestion" ng-model="q" placeholder="Who did let the dogs out?" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Who did let the dogs out?'" maxlength="600"/>
+			<textarea id ="questionInput" class="inputQuestion" ng-model="q" placeholder="Who did let the dogs out?" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Who did let the dogs out?'" maxlength="400"/>
 			<h4>... and the answers?</h4>
-			<input id ="answerAInput" class="inputAnswer" style="margin-right:4%;color:green"type="text" ng-model="a"  placeholder="Correct answer" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Correct answer'" maxlength="50"/>
-			<input id ="answerBInput" class="inputAnswer" style="margin-left:4%;color:red" type="text" ng-model="b"  placeholder="Almost right.." onfocus="this.placeholder = ''" onblur="this.placeholder = 'Almost right..'" maxlength="50"/>
-			<input id ="answerCInput" class="inputAnswer" style="margin-right:4%;color:red" type="text" ng-model="c"  placeholder="Not even close!" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Not even close!'" maxlength="50"/>
-			<input id ="answerDInput" class="inputAnswer" style="margin-left:4%;color:red" type="text" ng-model="d"  placeholder="This is a bicycle" onfocus="this.placeholder = ''" onblur="this.placeholder = 'This is a bicycle'" maxlength="50"/>
+			<input id ="answerAInput" class="inputAnswer" style="margin-right:4%;color:green"type="text" ng-model="a"  placeholder="Correct answer" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Correct answer'" maxlength="90"/>
+			<input id ="answerBInput" class="inputAnswer" style="margin-left:4%;color:red" type="text" ng-model="b"  placeholder="Almost right.." onfocus="this.placeholder = ''" onblur="this.placeholder = 'Almost right..'" maxlength="90"/>
+			<input id ="answerCInput" class="inputAnswer" style="margin-right:4%;color:red" type="text" ng-model="c"  placeholder="Not even close!" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Not even close!'" maxlength="90"/>
+			<input id ="answerDInput" class="inputAnswer" style="margin-left:4%;color:red" type="text" ng-model="d"  placeholder="This is a bicycle" onfocus="this.placeholder = ''" onblur="this.placeholder = 'This is a bicycle'" maxlength="90"/>
 			<button type="button" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 btnConfirm" ng-click="done(q,a,b,c,d)">Confirm question</button>
 		</div>
+		<!-- Inspiration text which is collected from last.fm  -->
 		<div class="col-lg-5 col-md-4 col-sm-12 col-xs-12" ng-if="bio != undefined">
 			<h4>Need inspiration?</h4>
 			<div class="biography" readonly>{{bio.text}}<br/><p align="right" class="bioProvider">provided by <a href="{{bio.url}}">{{bio.site}}</a></p></div>
 		</div>
-	</div>
+	</div><!-- .row -->
 </div>

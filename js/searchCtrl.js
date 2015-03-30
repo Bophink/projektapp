@@ -3,6 +3,11 @@ quizApp.controller('searchCtrl', function ($scope,$sce,quizModel) {
 $scope.waitingForInput = false;
 $scope.status = "";
 
+if ( quizModel.searchResults != {}){
+	$scope.results = quizModel.searchResults.results;
+	$scope.query = quizModel.searchResults.query;
+	$scope.type = quizModel.searchResults.type;
+}
 
 typingTimer = null;	// initierar en timer.
 doneTypingInterval = 300; //tid i ms som användaren får vänta efter att han skrivit till API-anrop.
@@ -15,7 +20,6 @@ $scope.sort = function(attr){
 		var order = 1;
 		$scope.sorted = attr[0];
 	}
-	console.log($scope.sorted);
 	$scope.results.sort(function(a,b){ 
 		var attrA = a;
 		var attrB = b;
@@ -69,6 +73,7 @@ $scope.songs = function(searchParams) {
 					$scope.results.push(data.tracks.items[track]);
 				}
 			}
+		quizModel.searchResults = {'results':$scope.results,'query':$scope.query,'type':$scope.type};
 		}
 
 		$scope.waitingForInput = false;
@@ -120,6 +125,5 @@ $('.track-search-field').keydown(function(){
 //user is "finished typing," do something
 $scope.doneTyping = function() {
 	$scope.newSearch($scope.query);
-	console.log("gör sök på: "+$scope.query);
 }
 });

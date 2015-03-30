@@ -1,8 +1,11 @@
 quizApp.controller('trackCtrl', function ($scope,quizModel,$routeParams,$sce) {
 
 	//$scope.trackId = $routeParams.trackId
+<<<<<<< HEAD
 	//console.log("param1: "+$routeParams.trackId);
 	//console.log($routeParams.trackId.substring(0,5));
+=======
+>>>>>>> origin/master
 	var trackId = $routeParams.trackId;
 	$scope.alert = [];
 	$scope.fbId='';
@@ -35,9 +38,12 @@ quizApp.controller('trackCtrl', function ($scope,quizModel,$routeParams,$sce) {
 					$scope.bio = data.response.biographies[bio];
 				}
 			}
+<<<<<<< HEAD
 			
 			
 			//console.log($scope.bio);
+=======
+>>>>>>> origin/master
 		});
 		
 	});
@@ -48,17 +54,31 @@ quizApp.controller('trackCtrl', function ($scope,quizModel,$routeParams,$sce) {
 	
 
 	$scope.done = function(q,a,b,c,d){
+<<<<<<< HEAD
 		//console.log(q);
+=======
+>>>>>>> origin/master
 		if(q == undefined || a == undefined || b == undefined || c == undefined || d == undefined || q == "" || a == "" || b == "" || c == "" || d == ""){
 			$scope.alert.push({'type':'Error!','text':'Please make sure that you have filled out all the text fields.'});
 			return
 		}
+<<<<<<< HEAD
 		quizModel.setQuestion(quizModel.createQuestion(q,a,b,c,d,$scope.track.id,$scope.track.album.images[1].url, $scope.fbId ),$scope.quizPosition);
 		//console.log(quizModel.Quiz);
+=======
+		var answers = [a,b,c,d];
+		for(var j = 0; j < answers.length-1; j++){
+			for(var i = j+1; i <= answers.length-1; i++){
+				if (answers[j] == answers[i]){
+					$scope.alert.push({'type':'Duplicate answers!','text':'Please make sure that not 2 answers are the same.'});
+					return
+				}
+			}
+		}
+		quizModel.setQuestion(quizModel.createQuestion(q,a,b,c,d,$scope.track.id,$scope.track.album.images[1].url),quizPosition);
+		quizModel.results = {};
+>>>>>>> origin/master
 		window.location = "#/search/";
 	}
-
-	
-
 
 });
