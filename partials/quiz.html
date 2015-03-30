@@ -50,14 +50,11 @@
 
 		<!-- Contains the step-indicators, current question, progresstimer and buttons that appear when an answer is given -->
 		<div class="container-fluid">
-<<<<<<< HEAD
 			<div class="row" style="margin-bottom:20px">
 				<div class="col-centered col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12">
 					<h1 style="color:white;display:inline">{{currentQPos+1}}) </h1><h3 style="color:white;display:inline;white-space:pre-wrap;text-align:justify;">{{questions[currentQPos].question}}</h3>
-=======
 			<div class="row row-centered" style="height:30px">
 				<div ng-repeat="question in Quiz.questions" ng-class="{'currentStepColor':$index==currentQPos,'otherStepColor':$index!=currentQPos,'closeStepColor':$index == currentQPos+1 || $index == currentQPos-1}">
->>>>>>> origin/master
 				</div>
 			</div><!-- .row -->
 
@@ -82,7 +79,6 @@
 			</div><!-- .row -->
 		</div><!-- .container-fluid -->
 
-<<<<<<< HEAD
 					
 				</div>
 
@@ -94,11 +90,8 @@
 			{{a.question}}
 		</div>
 
-		<!--div class="container-fluid">
-=======
 		<!-- Contains the answers of the current question. -->
 		<div class="container-fluid">
->>>>>>> origin/master
 			<div class="row row-centered">
 			<!-- When a button is clicked, ng-class will change to show what was the correct answer and what was false. ng-disabled will also be triggered. -->
 				<div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2" style="margin-top:10px">

@@ -29,11 +29,11 @@ quizApp.factory('quizModel',function ($resource, $cookieStore, $firebaseObject, 
 var points = 0;
 
 var Quiz = this.Quiz = {};
-<<<<<<< HEAD
+
 this.Quiz.questions=[];
-=======
+
 this.searchResults = {}
->>>>>>> origin/master
+
 var userAnswers = this.userAnswers = [];
 //var currentQuizObj = ""; // the Quiz the user is currently creating/modifying.
 
