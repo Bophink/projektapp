@@ -130,8 +130,11 @@ quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$firebase
 	  	$scope.getNewAnswers();
 		$scope.shuffledArray = $scope.shuffle($scope.answers);
 
+		quizModel.Quiz = {};
 	    quizModel.Quiz = $scope.Quiz;
-	   	quizModel.Quiz.questions = $scope.questions;
+	    if(quizModel.Quiz.quizId != $scope.Quiz.quizId){
+	   		quizModel.Quiz.questions = $scope.questions;
+	    }
 
 	}else{//ingen routeParam
 	//Inläsning feån modellen

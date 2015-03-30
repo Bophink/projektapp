@@ -115,7 +115,7 @@ this.setQuestion = function(questionObj,index){
 	
 	if(typeof index !== "undefined"){//if the question should be modified
 		
-		
+		console.log(this.Quiz.questions);
 		//Firebase
 		//console.log("Vill ändra index: "+index);
 		//questions[index]= questionObj;
@@ -146,13 +146,14 @@ this.setQuestion = function(questionObj,index){
 		//Modellen
 		questionObj['fbId'] = fbId;
 		questionObj['position'] = index+1;
-		this.Quiz.questions.push(questionObj);
+		this.Quiz.questions[index]=questionObj;
 		//console.log("i new"+questionObj.fbId);
 
 		
 		questionsRef.child(fbId).update({'fbId':fbId});
 		//console.log("Modellen");
 		//console.log(this.Quiz.questions);
+		console.log(this.Quiz.questions);
 	}
 	
 
