@@ -17,14 +17,11 @@ quizApp.controller('homeCtrl', function ($scope, quizModel,$firebaseObject, $fir
 		}
 	}
 	$scope.createQuiz = function(title, creator) {
-		quizModel.createQuiz(title, creator);
-		//firebaseRefQuiz = firebaseURL och lägga in skit etc
-		console.log("Quiz skapas! " + title + creator);
-		console.log(quizModel.Quiz);
+		quizModel.createQuiz(title, creator);	
 	}
-	$scope.assignQuiz = function(quiz) {
-		if(quizModel.Quiz.quizId != quiz.quizId){
-			quizModel.getQuiz(quiz);
+	$scope.assignQuiz = function(quizId) {
+		if(quizModel.Quiz.quizId != quizId){
+			quizModel.getQuiz(quizId);
 		}
 		
 		window.location ="#/search";

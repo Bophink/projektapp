@@ -44,16 +44,11 @@ this.song = $resource('https://api.spotify.com/v1/tracks/:id');
 this.biography = $resource('http://developer.echonest.com/api/v4/artist/biographies',{"api_key":echonestApiKey,"license":'cc-by-sa'});
 
 this.createQuiz = function(title, creator){
-	console.log("create new quiz");
-
-	// generera quizID
-	//Quiz['quizId'] = 1;
 	this.Quiz['title'] = title;
 	this.Quiz['creator'] = creator;
 	this.Quiz['questions'] = [];
 
 	//add to Firebase
-
 	var ref = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes");
 
 	//pushen returnerar sökvgen till objektet i Firebase.
@@ -62,45 +57,32 @@ this.createQuiz = function(title, creator){
 			'questions':''
 		}).path.o[1];
 	quizRef= ref.child(this.Quiz.quizId);
-	//console.log(this.Quiz.quizId);
 	quizRef.update({'quizId':this.Quiz['quizId']});//lägger in Id (huvudnoden i objectet så vi kan hitta den senare)
 
+	this.Quiz.questions = $firebaseArray(quizRef.child("questions"));
+	//$firebaseArray är en array som alltid är synkad!
+	console.log("Har skapat quizzet: "+this.Quiz.title);
 }
 
 this.renameQuiz = function(quizID, newTitle){
 	//Gör så det fungerar med Firebase.
 	this.Quiz['title'] = newTitle;
 	var ref = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+this.Quiz.quizID+"/");
-	ref.update({'title' : title}); // tror koden är rätt men ej testad
+	ref.update({'title' : newTitle}); // tror koden är rätt men ej testad
+	console.log("reamed quiz to: "+newTitle);
 }
 
-this.getQuiz = function(sentQuiz){
+this.getQuiz = function(quizId){
+
+	var quiz = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+quizId);
 	// vi fixar denna när vi har implementerat inloggning
-	console.log("Hämtar quiz: "+sentQuiz.quizId+" Till modellen");
-	this.Quiz.title = sentQuiz.title;
-	this.Quiz.creator = sentQuiz.creator;
-	this.Quiz.quizId = sentQuiz.quizId;
+	console.log("Hämtar quiz till modellen");
+	this.Quiz.title = quiz.title;
+	this.Quiz.creator = quiz.creator;
+	this.Quiz.quizId = quiz.quizId;
 
-	this.Quiz.questions = [];
-	var questionsRef = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+sentQuiz.quizId+"/questions/");
-	console.log("https://radiant-inferno-6844.firebaseio.com/quizzes/"+sentQuiz.quizId+"/questions/");
-	//this.Quiz.questions = [];
-	 //AJAX
-
-
-    questionsRef.on("value", function(snap){
-    	snap.forEach(function(childSnapshot) {
-    		var key= childSnapshot.key();
-    		Quiz.questions.push(childSnapshot.val());//Lägger till frågorna i en lista.
-    		//console.log(key + childSnapshot.val());
-    	})
-    },function (errorObject) {
-    	console.log("The read failed: " + errorObject.code);
-    })
-
-	
-	//this.Quiz.questions = $firebaseArray(questionsRef);
-	//console.log(this.Quiz);
+	var questionsRef = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+quizId+"/questions/");
+	this.Quiz.questions = $firebaseArray(questionsRef);//alltid synkad
 }
 	
 
@@ -111,53 +93,30 @@ this.createQuestion = function(question,a,b,c,d,songId, albumImgUrl, fbId){
 this.setQuestion = function(questionObj,index){
 	//Firebase referens till questions i det specifika quizet.
 	var questionsRef = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+this.Quiz.quizId+"/questions/");
-
-	//console.log(questionObj);
-	//Byta index till en FireBase index? eller båda?!
-	
-	//index = typeof index !== 'undefined' ? index : Quiz.questions.length;
 	
 	if(typeof index !== "undefined"){//if the question should be modified
 		
-		console.log(this.Quiz.questions);
-		//Firebase
-		//console.log("Vill ändra index: "+index);
-		//questions[index]= questionObj;
-		//console.log("newObj");
-		//console.log(questions[index]);
-		//console.log("index är: "+index);
-		//console.log(questionObj);
-		var qRef = questionsRef.child(questionObj.fbId);
 		questionObj.position = index+1;
+		var fbId = this.Quiz.questions[index].fbId;
+		questionObj.fbId = fbId;
+		this.Quiz.questions[index] = questionObj;
+
+		var qRef = questionsRef.child(questionObj.fbId);
 		qRef.update(questionObj);
-		console.log("edit question fbId: "+questionObj.fbId+" . "+questionObj.position+" . "+index);
-		//Modellen
-		//console.log("alla frågor");
-		//console.log(this.Quiz.questions);
-
 		Quiz.questions[index]= questionObj;
-		console.log(this.Quiz.questions);
+
+		console.log("Har edterat frågan: "+questionObj.question);
 	}else{// add new question
-		console.log("add new Question"+questionObj.question);
-		//Firebase
-		//var fbId = questionRef.push(questionObj).path.o[3];
-		//pushar på frågan sist. Behöver kolla $add, $save etc för att flytta runt frågor
-		fbId = questionsRef.push(questionObj).path.o[3];
+		var index = this.Quiz.questions.length; //nya indexet
+		questionObj.fbId = null;
+		questionObj.position = index+1;
 
-		//console.log(fbId);
-		
-		
-		//Modellen
-		questionObj['fbId'] = fbId;
-		questionObj['position'] = index+1;
-		this.Quiz.questions[index]=questionObj;
-		//console.log("i new"+questionObj.fbId);
-
-		
-		questionsRef.child(fbId).update({'fbId':fbId});
-		//console.log("Modellen");
-		//console.log(this.Quiz.questions);
-		console.log(this.Quiz.questions);
+		this.Quiz.questions.$add(questionObj).then(function(questionsRef) {
+		  var id = questionsRef.key();
+		  var qRef = questionsRef;
+		  qRef.update({'fbId' : id});//Lägger till fbId i objektet
+		  console.log("Har lagt till frågan: "+questionObj.question);
+		});
 	}
 	
 
@@ -170,13 +129,16 @@ this.getQuestion = function(index){
 }
 
 this.removeQuestion = function(index){
+	//Kanske skulle kunna göras med att enbart ändra i this.Quiz.questions och sen synka det. men då får man synka hela arrayen?
+
 	//Firebase
-	//Anton!!!! denna var dte som inte fungerade va?
 	var quizRef = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+this.Quiz['quizId']+"/questions");
 	questionRef= quizRef.child(this.Quiz.questions[index].fbId);
 	questionRef.remove();
 
 	//Modellen
+
+	console.log("Har tagit bort frågan: "+ this.Quiz.questions[index].question);
 	this.Quiz.questions.splice(index,1);
 	
 }
@@ -200,11 +162,6 @@ this.getQuizResult = function(){
 this.setQuizResult = function(num){
 	points = num;
 }
-
-//logOut() {loggedin = false}
-
-
-	//this.createQuiz ('testquizet','testarn');
 
   return this;
 

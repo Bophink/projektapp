@@ -14,7 +14,7 @@
 	<div class = "row">
 		<div ng-repeat="quiz in quizzes" class="col-md-3" style="background:rgba(0,0,0,0.2)">
 			<button ng-click="goToQuiz(quiz.quizId)"> {{quiz.title}} </button>
-			<button ng-click="assignQuiz(quiz)"> edit </button>
+			<button ng-click="assignQuiz(quiz.quizId)"> edit </button>
 			<h1 style="color:red">{{quiz.creator}}</h1>
 			<h1 style="color:red">{{quiz.questions.length}}</h1>
 			<div class="row">
