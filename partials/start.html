@@ -5,7 +5,7 @@
 	<div class="row" style="margin-top:100px">
 		<button class="btn btn-primary" ng-click="clicked()">Create New Quiz</button>
 	</div>
-	<div class="row" ng-show="isClicked" syle="position: fixed; top=25%; left:5%">
+	<div class="row" ng-show="isClicked">
 		<input type="text" ng-model="title" placeholder="Name your Quiz"/>
 		<input type="text" ng-model="creator" placeholder="Your name"/>
 		<button class="btn btn-primary" ng-click="createQuiz(title, creator)">Create Quiz</button>
@@ -24,6 +24,4 @@
 			</div>
 		</div>
 	</div>
-
-	
 </div>

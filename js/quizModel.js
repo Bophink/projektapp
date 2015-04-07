@@ -69,7 +69,7 @@ this.renameQuiz = function(quizID, newTitle){
 	this.Quiz['title'] = newTitle;
 	var ref = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+this.Quiz.quizID+"/");
 	ref.update({'title' : newTitle}); // tror koden är rätt men ej testad
-	console.log("reamed quiz to: "+newTitle);
+	console.log("renamed quiz to: "+newTitle);
 }
 
 this.getQuiz = function(quizId){
@@ -118,14 +118,10 @@ this.setQuestion = function(questionObj,index){
 		  console.log("Har lagt till frågan: "+questionObj.question);
 		});
 	}
-	
-
-
 }
 
 this.getQuestion = function(index){
 	return this.Quiz.questions[index];
-
 }
 
 this.removeQuestion = function(index){
@@ -163,6 +159,5 @@ this.setQuizResult = function(num){
 	points = num;
 }
 
-  return this;
-
+ return this;
 });
