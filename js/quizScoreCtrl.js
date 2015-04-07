@@ -1,7 +1,5 @@
 quizApp.controller('quizScoreCtrl', function ($scope,quizModel,$routeParams) {
 
-
-
 	$scope.praise = function(){
 		var praiseDict = {
 			'0':'Are you drunk?',
@@ -27,7 +25,6 @@ quizApp.controller('quizScoreCtrl', function ($scope,quizModel,$routeParams) {
 			var track = data;
 			$scope.songList.push(track);
 		});
-		//console.log($scope.songList);
 	}
 	console.log($scope.songList);
 
@@ -63,6 +60,4 @@ quizApp.controller('quizScoreCtrl', function ($scope,quizModel,$routeParams) {
 	}
 
 	$scope.userAnswers = $scope.getUserAnswers();
-
-
 });
