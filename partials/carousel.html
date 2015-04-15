@@ -1,24 +1,76 @@
-<div ng-controller="CarouselCtrl">
-	<nav class="navbar navbar-default navbar-fixed-bottom" id="carousel">
-		<carousel interval="myInterval">
-		    <slide ng-repeat="slide in slides" active="slide.active">
-		      	<div class="col-md-2 col-sm-3 col-xs-4" ng-repeat="q in slide" style="padding:0px 15px;">
-		      		<div class="img-wrap">
-		      			<span class="close" ng-click="removeTrack(q.position)">X</span>
-				       	<img ng-src="{{q.img}}" style="margin:0 auto;max-height:150px" class="img-responsive"/>
-				        <div class="carousel-caption" ng-click="selectTrack(q.position)">
-				        	<h1 style="color:white">{{q.position}}</h1>
-				        </div>
-			    	</div>
-			    </div>   
-		    </slide>
+<style>
+.as-sortable-item,
+.as-sortable-placeholder {
+  display: inline-block;
+  width: 124px;
+  height: 110px;
+  float: left;
+  }
+.as-sortable-placeholder:not(.as-sortable-item){
+  border: dashed;
+  border-color: #999;
+  border-width: 5px;
+}
 
-		    <slide ng-if="slides.length == 0" active="slide.active">
-		      	<div class="row" style="padding:0px 30px; text-align:center;height:150px">
-		      		<h1>Search for a song, to start add in questions!</h1>	
-		      	</div>
-		    </slide>	    
-		</carousel>  
-	</nav>
+.gradient-left{
+  background: -webkit-linear-gradient(left, rgba(255,255,255,1), rgba(255,255,255,0)); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(right, rgba(255,255,255,1), rgba(255,255,255,0)); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(right, rgba(255,255,255,1), rgba(255,255,255,0)); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0)); /* Standard syntax */
+  position:fixed;
+  bottom:0;
+  left:0;
+  height:150px;
+  width:12%;
+  z-index:5;
+}
+
+.gradient-right{
+  background: -webkit-linear-gradient(right, rgba(255,255,255,1), rgba(255,255,255,0)); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(left, rgba(255,255,255,1), rgba(255,255,255,0)); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(left, rgba(255,255,255,1), rgba(255,255,255,0)); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to left, rgba(255,255,255,1), rgba(255,255,255,0)); /* Standard syntax */
+  position:fixed;
+  bottom:0;
+  right:0;
+  height:150px;
+  width:12%;
+  z-index:5;
+}
+
+/*.sortable-row:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}*/
+
+#sortable-container {
+    display: inline-block;
+    padding-left:100px;
+}
+</style>
+
+<div ng-controller="CarouselCtrl"></div>
+	<div class="gradient-left"></div>
+	<div ng-repeat="zone in scrollZones" ng-mouseover="slide(zone.speed)" ng-mouseout="stopSlide()" style="position:fixed;bottom:0;left:{{zone.margin}}};height:160px;width:{{zone.width}};z-index:10;"></div>
+	<div class="gradient-right"></div>
+	<div ng-repeat="zone in scrollZones" ng-mouseover="slide(-zone.speed)" ng-mouseout="stopSlide()" style="position:fixed;bottom:0;right:{{zone.margin}}};height:160px;width:{{zone.width}};z-index:10;"></div>
+	<div style="bottom:0;background:#FFFFFF;position:fixed;bottom:0;width:100%;overflow:hidden;height:150px;left:0">
+   <h1 ng-if="C2.length == 0" style="text-align:center;font-size:3vw;color:rgb(70,70,70),margin-top:0;width:100%">Start creating your quiz by searching for a track!</h1>
+  	<div id="sortable-container" style="overflow-x:visible">
+  	    <div class="sortable-row" as-sortable="sortableOptions" ng-model="C2">
+  	            <div as-sortable-item as-sortable-placeholder style="float:left; width:170px;height:150px;margin-left:50px" ng-repeat="q in C2">
+                  <div  as-sortable-item-handle ng-click="selectTrack(q.position)">
+    	            		<span class="close" ng-click="removeTrack(q.position)">X</span>
+    				       	<img ng-src="{{q.img}}" style="margin:0 auto;height:150px;width:150px"/>
+    				        <h1 style="color:white;margin-top:-105px;margin-left:60px">{{$index+1}}</h1>
+                  </div>
+  	            </div>
+                <div id="endOfCarousel" style="float:left;height:150px;width:50px"></div>
+  	        </div>
+  	    </div>
+      </div>
+  </div>
 </div>
-

@@ -1,73 +1,11 @@
 quizApp.controller('CarouselCtrl', function($scope,quizModel) {
-  
-  // '-10' due to angular restrictions to pausing the carousel
-  $scope.myInterval = -10;
+  $scope.C2 = [];
 
-  //Sets number of questions/page When page loads
-  if($(window).width() > 992){
-    $scope.nrOfQperSlide=6; 
-  }else if($(window).width() < 768){
-    $scope.nrOfQperSlide=3;
-  }else{
-    $scope.nrOfQperSlide=4;
+  for(var k = 0; k<quizModel.Quiz.questions.length; k++){
+    var localQ = quizModel.Quiz.questions[k];
+    localQ.position = k+1;
+    $scope.C2.push(localQ);
   }
-
-  $scope.questions = quizModel.Quiz.questions;
-  
-  
-
-  $scope.update = function(oldWidth){
-    var newWidth = $(window).width();
-
-    if(quizModel.Quiz.questions){
-      //console.log("updates Carousel"+ quizModel.Quiz.questions.length);
-
-      //Kontrollerar om man nått en brytpunkt vid window.resize eller om man lagt till/ tagit bort fråga
-      if(oldWidth >= 992 && newWidth < 992){
-        $scope.$apply(function(){
-          $scope.nrOfQperSlide=4;
-          $scope.createCarousel(4);
-        });
-      }else if(oldWidth < 992 && newWidth >= 992){
-        $scope.$apply(function(){
-          $scope.nrOfQperSlide=6;
-          $scope.createCarousel(6);
-        });
-      }else if((oldWidth < 992 && oldWidth >= 768) && (newWidth < 768)){
-        $scope.$apply(function(){
-          $scope.nrOfQperSlide = 3;
-          $scope.createCarousel(3);
-        });
-      }else if((oldWidth < 768) && (newWidth >= 768)){
-        $scope.$apply(function(){
-          $scope.nrOfQperSlide=4;
-          $scope.createCarousel(4);
-        });
-      }else if(quizModel.Quiz.questions.length != $scope.quisLen){
-        $scope.createCarousel($scope.nrOfQperSlide);
-      }
-
-      ow = newWidth;
-    }
-  }
-
-  $scope.createCarousel = function(nrOfQperSlide){
-    //console.log("Carousel is happening");
-    $scope.slides = [];
-    var slide = [];
-    $scope.quisLen = quizModel.Quiz.questions.length;
-
-    for(var k = 0; k<quizModel.Quiz.questions.length; k++){
-      var localQ = quizModel.Quiz.questions[k];
-      localQ.position = k+1;
-      slide.push(localQ);
-
-        if((k+1)%nrOfQperSlide === 0 || (k+1) === quizModel.Quiz.questions.length){
-          $scope.slides.push(slide);
-          slide = [];
-        }
-    }
-  }  
 
   $scope.selectTrack = function(pos){
     window.location = "#/track/quiz-" + pos;
@@ -75,18 +13,48 @@ quizApp.controller('CarouselCtrl', function($scope,quizModel) {
 
   $scope.removeTrack = function(pos){
     quizModel.removeQuestion(pos-1);
-    $scope.update();
+  }
+  //Carousel 2
+  //Definiera scrollzoner
+  $("#sortable-container").css('marginLeft',quizModel.carouselPosition);
+  $scope.scrollZones = [
+    {'speed':110,'margin':'0','width':'2%'},
+    {'speed':70,'margin':'2%','width':'2%'},
+    {'speed':45,'margin':'4%','width':'2%'},
+    {'speed':30,'margin':'6%','width':'2%'},
+    {'speed':20,'margin':'8%','width':'2%'},
+    {'speed':10,'margin':'10%','width':'2%'},
+    ];
+
+  $scope.sortableOptions = {
+    containment: '#sortable-container',
+    //restrict move across columns. move only within column.
+    orderChanged: function(obj){
+      console.log(obj);
+      quizModel.shiftPosition(obj.source.index,obj.dest.index)
+    },
+    accept: function (sourceItemHandleScope, destSortableScope) {
+      return sourceItemHandleScope.itemScope.sortableScope.$id === destSortableScope.$id;
+    }
+  };
+  $scope.slide = function(distance){
+    $scope.sliding = setInterval(function(){
+      //fixa stoppvillkor
+      var carousel = $("#sortable-container");
+      margin = parseInt(carousel.css("margin-left")) + distance;
+      if(margin >= 0 && distance > 0){
+        margin = 0;
+      }
+      console.log($(window).width() - carousel[0].scrollWidth - parseInt(carousel.css("margin-left")));
+      if ($(window).width() - carousel[0].scrollWidth - parseInt(carousel.css("margin-left"))  < 2 || distance > 0){
+        carousel.animate({marginLeft: margin + 'px'}, 100, 'linear');
+      }
+      quizModel.carouselPosition = margin;
+    }, 100);
   }
 
-  ow = $(window).width();
-  $(window).on("resize.doResize", function(){
-        $scope.update(ow);
-      
-  });
-
-  $scope.$on("$destroy", function(){
-    $(window).off("resize.doResize");
-  });
-
-  $scope.update();
+  $scope.stopSlide = function(distance){
+   clearInterval($scope.sliding);
+  }
 });
+//
