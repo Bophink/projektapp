@@ -27,7 +27,7 @@ quizApp.factory('quizModel',function ($resource, $cookieStore, $firebaseObject, 
 // };
 
 var points = 0;
-var crouselPosition = 0;
+var crouselPosition = 200;
 
 var Quiz = this.Quiz = {};
 
@@ -108,7 +108,7 @@ this.createQuestion = function(question,a,b,c,d,songId, albumImgUrl, fbId){
 	return {"question":question,"songId":songId,"answers":{"a":a,"b":b,"c":c,"d":d},"img": albumImgUrl,"fbId":fbId};
 }
 
-this.setQuestion = function(questionObj,index){
+this.setQuestion = function(questionObj,index,callback){
 	//Firebase referens till questions i det specifika quizet.
 	var questionsRef = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+this.Quiz.quizId+"/questions/");
 	
@@ -122,8 +122,9 @@ this.setQuestion = function(questionObj,index){
 		var qRef = questionsRef.child(questionObj.fbId);
 		qRef.update(questionObj);
 		Quiz.questions[index]= questionObj;
+		callback();
 
-		console.log("Har edterat frågan: "+questionObj.question);
+		console.log("Har editerat frågan: "+questionObj.question);
 	}else{// add new question
 		var index = this.Quiz.questions.length; //nya indexet
 		questionObj.fbId = null;
@@ -134,6 +135,7 @@ this.setQuestion = function(questionObj,index){
 		  var qRef = questionsRef;
 		  qRef.update({'fbId' : id});//Lägger till fbId i objektet
 		  console.log("Har lagt till frågan: "+questionObj.question);
+		  callback();
 		});
 	}
 }
@@ -158,14 +160,19 @@ this.removeQuestion = function(index){
 }
 
 this.shiftPosition = function(currentPosition, newPosition){
+	var ref = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+this.Quiz.quizId+"/questions/");
+	var localQ = [];
+ 	ref.on('value', function(snap) { list = snap.val(); });
 	//Används denna?
 
 	//Firebase
 	//Ej implementerat
 
 	//Modellen
-	selectedQuestion = this.Quiz.questions.splice(currentPosition,1);
-	this.Quiz.questions.splice(newPosition,0,selectedQuestion);
+	console.log(localQ);
+	var selectedQuestion = localQ.splice(currentPosition,1);
+	localQ.splice(newPosition,0,selectedQuestion);
+
 }
 
 
