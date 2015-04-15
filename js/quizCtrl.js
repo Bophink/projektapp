@@ -12,7 +12,7 @@ quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$firebase
 		$scope.answers = [];
 		console.log($scope.questions[0]);
 		for (var i in $scope.questions[$scope.currentQPos].answers) {
-		$scope.answers.push($scope.questions[$scope.currentQPos].answers[i]);
+			$scope.answers.push($scope.questions[$scope.currentQPos].answers[i]);
 		}
 		quizModel.song.get({id:$scope.questions[$scope.currentQPos].songId}, function(data){
 			$scope.track = data;
@@ -78,25 +78,26 @@ quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$firebase
 	}
 
 	if($routeParams['quizId']){//Läs in quiz från Firebase
+		quizModel.getQuiz($routeParams['quizId']);
 		
-	    var quizRef = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+$routeParams['quizId']);
+	    //var quizRef = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+$routeParams['quizId']);
 	    // AJAX anropp för att läsa in data
 	    //Dessa två AJAX anrop kankse kan läggas ihop?
-	    quizRef.on("value", function(snapshot) {
+	  /*  quizRef.on("value", function(snapshot) {
 	    	$scope.Quiz = snapshot.val();
 	    	console.log("Laddar in quiz "+$scope.Quiz.title);
 	    }, function (errorObject) {
 	    	console.log("The read failed: " + errorObject.code);
-	    });
+	    });*/
 
 
-	    var questionRef = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+$routeParams['quizId']+"/questions/");
+	    //var questionRef = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+$routeParams['quizId']+"/questions/");
 
 	    // $scope.questions = $firebaseArray(questionRef);
 	    // console.log($scope.questions);
-	    $scope.questions=[];
+	    
 
-	    //AJAX
+	    /*//AJAX
 	    questionRef.on("value", function(snap){
 	    	snap.forEach(function(childSnapshot) {
 	    		var key= childSnapshot.key();
@@ -106,15 +107,20 @@ quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$firebase
 	    },function (errorObject) {
 	    	console.log("The read failed: " + errorObject.code);
 	    });
-		
-	  	$scope.getNewAnswers();
-		$scope.shuffledArray = $scope.shuffle($scope.answers);
+	    */
 
-		quizModel.Quiz = {};
-	    quizModel.Quiz = $scope.Quiz;
-	    if(quizModel.Quiz.quizId != $scope.Quiz.quizId){
-	   		quizModel.Quiz.questions = $scope.questions;
-	    }
+	    quizModel.Quiz.questions.$loaded().then(function(x){
+	    	$scope.questions=quizModel.Quiz.questions;
+	    	$scope.getNewAnswers();
+			$scope.shuffledArray = $scope.shuffle($scope.answers);
+
+			$scope.Quiz = quizModel.Quiz;
+				
+
+	    	
+	    })
+		
+	  	
 
 	}else{//ingen routeParam
 	//Inläsning feån modellen

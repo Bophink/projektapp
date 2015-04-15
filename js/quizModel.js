@@ -73,13 +73,21 @@ this.renameQuiz = function(quizID, newTitle){
 }
 
 this.getQuiz = function(quizId){
-
-	var quiz = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+quizId);
-	// vi fixar denna när vi har implementerat inloggning
 	console.log("Hämtar quiz till modellen");
-	this.Quiz.title = quiz.title;
-	this.Quiz.creator = quiz.creator;
-	this.Quiz.quizId = quiz.quizId;
+	var quizRef = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+quizId);
+	// vi fixar denna när vi har implementerat inloggning
+	var quiz = $firebaseObject(quizRef);
+	
+	quiz.$loaded().then(function(x){
+		console.log(quiz);
+		Quiz.title = quiz.title;
+		console.log(Quiz.title);
+		Quiz.creator = quiz.creator;
+		Quiz.quizId = quiz.quizId;
+
+		console.log(quiz.creator);
+
+	})
 
 	var questionsRef = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+quizId+"/questions/");
 	this.Quiz.questions = $firebaseArray(questionsRef);//alltid synkad
