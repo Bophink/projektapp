@@ -15,7 +15,6 @@ quizApp.controller('CarouselCtrl', function($scope,quizModel) {
 
   $scope.removeTrack = function(pos){
     quizModel.removeQuestion(pos-1);
-    $scope.update();
   }
   //Carousel 2
   //Definiera scrollzoner
