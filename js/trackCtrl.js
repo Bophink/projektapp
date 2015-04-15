@@ -1,27 +1,33 @@
 quizApp.controller('trackCtrl', function ($scope,quizModel,$routeParams,$sce) {
 
-	//$scope.trackId = $routeParams.trackId
+
 	var trackId = $routeParams.trackId;
 	$scope.alert = [];
+	$scope.fbId='';
 	// quiz-position
 	if($routeParams.trackId.substring(0,5) === "quiz-"){
-		var quizPosition = Number($routeParams.trackId.substring(5))-1;
-		$scope.question = quizModel.getQuestion(quizPosition);
+		$scope.quizPosition = Number($routeParams.trackId.substring(5))-1;
+		//console.log($scope.quizPosition);
+		//console.log(quizModel.Quiz.questions);
+		
+		$scope.question = quizModel.Quiz.questions[$scope.quizPosition];
+		console.log("in läst i track: "+$scope.question.question);
 		trackId = $scope.question.songId;
 		$scope.q = $scope.question.question;
 		$scope.a = $scope.question.answers['a'];
 		$scope.b = $scope.question.answers['b'];
 		$scope.c = $scope.question.answers['c'];
 		$scope.d = $scope.question.answers['d'];
+		$scope.fbId = $scope.question.fbId;
 	}
 
 	$scope.waitingForInput = true;
 	quizModel.song.get({id:trackId}, function(data){
-		console.log(data);
+		//console.log(data);
 		$scope.track = data;
 		$scope.waitingForInput = false;
 		quizModel.biography.get({id:'spotify:artist:' + $scope.track.artists[0].id}, function(data){
-			console.log(data);
+			//console.log(data);
 			for (bio in data.response.biographies){
 				if (data.response.biographies[bio].site == 'last.fm' && data.response.biographies[bio].text.length > 200){
 					$scope.bio = data.response.biographies[bio];
@@ -41,6 +47,7 @@ quizApp.controller('trackCtrl', function ($scope,quizModel,$routeParams,$sce) {
 			$scope.alert.push({'type':'Error!','text':'Please make sure that you have filled out all the text fields.'});
 			return
 		}
+
 		var answers = [a,b,c,d];
 		for(var j = 0; j < answers.length-1; j++){
 			for(var i = j+1; i <= answers.length-1; i++){
@@ -50,7 +57,7 @@ quizApp.controller('trackCtrl', function ($scope,quizModel,$routeParams,$sce) {
 				}
 			}
 		}
-		quizModel.setQuestion(quizModel.createQuestion(q,a,b,c,d,$scope.track.id,$scope.track.album.images[1].url),quizPosition);
+		quizModel.setQuestion(quizModel.createQuestion(q,a,b,c,d,$scope.track.id,$scope.track.album.images[1].url),$scope.quizPosition);
 		quizModel.results = {};
 		window.location = "#/search/";
 	}

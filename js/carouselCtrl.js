@@ -1,10 +1,8 @@
 quizApp.controller('CarouselCtrl', function($scope,quizModel) {
-
   $scope.C2 = [];
-  var quiz = quizModel.getQuiz();
 
-  for(var k = 0; k<quiz.questions.length; k++){
-    var localQ = quiz.questions[k];
+  for(var k = 0; k<quizModel.Quiz.questions.length; k++){
+    var localQ = quizModel.Quiz.questions[k];
     localQ.position = k+1;
     $scope.C2.push(localQ);
   }

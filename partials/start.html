@@ -1,5 +1,27 @@
 <div id="start">
 	<ng-include src="'partials/header.html'" ng-controller ="headerCtrl" ></ng-include>
 	<ng-include src="'partials/carousel.html'" ng-controller="CarouselCtrl"></ng-include>
-	
+
+	<div class="row" style="margin-top:100px">
+		<button class="btn btn-primary" ng-click="clicked()">Create New Quiz</button>
+	</div>
+	<div class="row" ng-show="isClicked">
+		<input type="text" ng-model="title" placeholder="Name your Quiz"/>
+		<input type="text" ng-model="creator" placeholder="Your name"/>
+		<button class="btn btn-primary" ng-click="createQuiz(title, creator)">Create Quiz</button>
+	</div>
+
+	<div class = "row">
+		<div ng-repeat="quiz in quizzes" class="col-md-3" style="background:rgba(0,0,0,0.2)">
+			<button ng-click="goToQuiz(quiz.quizId)"> {{quiz.title}} </button>
+			<button ng-click="assignQuiz(quiz.quizId)"> edit </button>
+			<h1 style="color:red">{{quiz.creator}}</h1>
+			<h1 style="color:red">{{quiz.questions.length}}</h1>
+			<div class="row">
+				<div id="image" class="col-md-3" ng-repeat="question in quiz.questions" >
+					<img class="col-md-6 img-responsive" ng-src="{{question.img}}" style="display:inline"/>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
