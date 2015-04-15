@@ -27,7 +27,7 @@ quizApp.factory('quizModel',function ($resource, $cookieStore, $firebaseObject, 
 // };
 
 var points = 0;
-var crouselPosition = 200;
+var carouselPosition = 200;
 
 var Quiz = this.Quiz = {};
 
@@ -163,15 +163,12 @@ this.shiftPosition = function(currentPosition, newPosition){
 	var ref = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+this.Quiz.quizId+"/questions/");
 	var localQ = [];
  	ref.on('value', function(snap) { list = snap.val(); });
-	//Används denna?
-
-	//Firebase
-	//Ej implementerat
-
-	//Modellen
-	console.log(localQ);
+ 	for( var q in list){
+ 		localQ.push(list[q]);
+ 	}
 	var selectedQuestion = localQ.splice(currentPosition,1);
-	localQ.splice(newPosition,0,selectedQuestion);
+	localQ.splice(newPosition,0,selectedQuestion[0]);
+	ref.set(localQ);
 
 }
 

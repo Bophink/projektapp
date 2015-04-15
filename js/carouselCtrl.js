@@ -31,7 +31,14 @@ quizApp.controller('CarouselCtrl', function($scope,quizModel) {
     //restrict move across columns. move only within column.
     orderChanged: function(obj){
       console.log(obj);
-      quizModel.shiftPosition(obj.source.index,obj.dest.index)
+      quizModel.shiftPosition(obj.source.index,obj.dest.index);
+        $scope.C2 = [];
+
+  for(var k = 0; k<quizModel.Quiz.questions.length; k++){
+    var localQ = quizModel.Quiz.questions[k];
+    localQ.position = k+1;
+    $scope.C2.push(localQ);
+  }
     },
     accept: function (sourceItemHandleScope, destSortableScope) {
       return sourceItemHandleScope.itemScope.sortableScope.$id === destSortableScope.$id;
