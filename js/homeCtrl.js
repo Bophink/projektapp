@@ -20,11 +20,14 @@ quizApp.controller('homeCtrl', function ($scope, quizModel,$firebaseObject, $fir
 		quizModel.createQuiz(title, creator);	
 	}
 	$scope.assignQuiz = function(quizId) {
+		var callback = function(){
+			window.location ="#/search";
+		}
 		if(quizModel.Quiz.quizId != quizId){
-			quizModel.getQuiz(quizId);
+			quizModel.getQuiz(quizId,callback);
 		}
 		
-		window.location ="#/search";
+		
 	}
 	$scope.goToQuiz = function(quizId){
 		window.location ="#/quiz/"+quizId;
