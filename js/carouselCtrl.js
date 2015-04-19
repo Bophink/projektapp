@@ -1,18 +1,25 @@
 quizApp.controller('CarouselCtrl', function($scope,quizModel) {
-  $scope.C2 = [];
+ //$scope.C2 = [];
 
+$scope.initialize = function(){
+  console.log(quizModel.Quiz.questions);
+  $scope.C2 = [];
   for(var k = 0; k<quizModel.Quiz.questions.length; k++){
     var localQ = quizModel.Quiz.questions[k];
     localQ.position = k+1;
     $scope.C2.push(localQ);
   }
+}
+
 
   $scope.selectTrack = function(pos){
     window.location = "#/track/quiz-" + pos;
   }
 
   $scope.removeTrack = function(pos){
-    quizModel.removeQuestion(pos-1);
+    quizModel.removeQuestion(pos-1,$scope.initialize);
+
+    
   }
   //Carousel 2
   //Definiera scrollzoner
@@ -32,18 +39,13 @@ quizApp.controller('CarouselCtrl', function($scope,quizModel) {
     orderChanged: function(obj){
       console.log(obj);
       quizModel.shiftPosition(obj.source.index,obj.dest.index);
-        $scope.C2 = [];
-
-  for(var k = 0; k<quizModel.Quiz.questions.length; k++){
-    var localQ = quizModel.Quiz.questions[k];
-    localQ.position = k+1;
-    $scope.C2.push(localQ);
-  }
+      $scope.initialize();
     },
     accept: function (sourceItemHandleScope, destSortableScope) {
       return sourceItemHandleScope.itemScope.sortableScope.$id === destSortableScope.$id;
     }
   };
+
   $scope.slide = function(distance){
     $scope.sliding = setInterval(function(){
       //fixa stoppvillkor
@@ -63,5 +65,7 @@ quizApp.controller('CarouselCtrl', function($scope,quizModel) {
   $scope.stopSlide = function(distance){
    clearInterval($scope.sliding);
   }
+
+  $scope.initialize();
 });
 //

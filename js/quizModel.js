@@ -144,19 +144,17 @@ this.getQuestion = function(index){
 	return this.Quiz.questions[index];
 }
 
-this.removeQuestion = function(index){
-	//Kanske skulle kunna göras med att enbart ändra i this.Quiz.questions och sen synka det. men då får man synka hela arrayen?
-
-	//Firebase
-	var quizRef = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+this.Quiz['quizId']+"/questions");
-	questionRef= quizRef.child(this.Quiz.questions[index].fbId);
-	questionRef.remove();
-
-	//Modellen
-
-	console.log("Har tagit bort frågan: "+ this.Quiz.questions[index].question);
-	this.Quiz.questions.splice(index,1);
-	
+this.removeQuestion = function(index,callback){
+	console.log(callback());
+	var ref = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+this.Quiz.quizId+"/questions/");
+	var localQ = [];
+ 	ref.on('value', function(snap) { list = snap.val(); });
+ 	for( var q in list){
+ 		localQ.push(list[q]);
+ 	}
+	localQ.splice(index,1);
+	ref.set(localQ);
+	$firebaseObject(ref).$loaded().then(function(x){callback();});
 }
 
 this.shiftPosition = function(currentPosition, newPosition){
