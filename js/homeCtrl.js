@@ -38,6 +38,7 @@ quizApp.controller('homeCtrl', function ($scope, quizModel,$firebaseObject, $fir
 	$scope.quizzes = $firebaseArray(quizzes);
 	// synchronize the object with a three-way data binding
 	// click on `index.html` above to see it used in the DOM!
+	console.log($scope.quizzes);
 	
 
 	

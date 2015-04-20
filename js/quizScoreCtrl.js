@@ -12,7 +12,7 @@ quizApp.controller('quizScoreCtrl', function ($scope,quizModel,$routeParams) {
 			'0.7':'Awesome',
 			'0.8':'Wow!',
 			'0.9':'Amazeballs!',
-			'1.0':'Perfect score!'};
+			'1':'Perfect score!'};
 		var maxScore = quizModel.Quiz.questions.length * 10;
 		console.log(($scope.getPoints()/maxScore).toString().substr(0,3));
 		return praiseDict[($scope.getPoints()/maxScore).toString().substr(0,3)];
