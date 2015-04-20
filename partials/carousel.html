@@ -63,7 +63,7 @@
   	    <div class="sortable-row" as-sortable="sortableOptions" ng-model="C2">
   	            <div as-sortable-item as-sortable-placeholder style="float:left; width:170px;height:150px;margin-left:50px" ng-repeat="q in C2">
                   <div  as-sortable-item-handle>
-    	            		<span class="close" ng-click="removeTrack(q.position)">X</span>
+    	            		<span class="close" ng-click="removeTrack($index)">X</span>
     				       	<img ng-src="{{q.img}}" style="margin:0 auto;height:150px;width:150px" ng-click="selectTrack(q.position)"/>
     				        <h1 style="color:white;margin-top:-105px;margin-left:60px" ng-click="selectTrack(q.position)">{{$index+1}}</h1>
                   </div>

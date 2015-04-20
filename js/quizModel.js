@@ -1,30 +1,4 @@
-// Here we create an Angular service that we will use for our 
-// model. In your controllers (or other services) you can include the
-// dependency on any service you need. Angular will insure that the
-// service is created first time it is needed and then just reuse it
-// the next time.
 quizApp.factory('quizModel',function ($resource, $cookieStore, $firebaseObject, $firebaseArray) { 
-  
-// var Quiz = {
-// 	quizId : 1,
-// 	title: 'My rock quiz', 
-// 	creator : UserName/Id,
-//	questions : [{
-// 		question:'What is the name of the song?',
-// 	    position:1,
-// 	    songId:xxxxxxxxxx,
-// 		correctAnswer: “2”, 
-// 		answers: {
-// 			1:”Austria”,
-// 			2:”Australia!!”,
-// 			3:”Estrella”,
-// 			4:”Oyster Jaah!”
-//			}
-// 		},
-//		{question:'Who is the artist that sings?',
-//		etc...}
-//	]
-// };
 
 var points = 0;
 var carouselPosition = 200;
@@ -32,7 +6,6 @@ var carouselPosition = 200;
 var Quiz = this.Quiz = {};
 
 this.Quiz.questions=[];
-
 this.searchResults = {}
 
 var userAnswers = this.userAnswers = [];
@@ -88,19 +61,14 @@ this.getQuiz = function(quizId, callback){
 	quiz.$loaded().then(function(x){
 		console.log(quiz);
 		Quiz.title = quiz.title;
-		console.log(Quiz.title);
+		console.log('Title: ' + Quiz.title);
 		Quiz.creator = quiz.creator;
 		Quiz.quizId = quiz.quizId;
 
-		console.log(quiz.creator);
+		console.log('Creator: ' + quiz.creator);
 
 		callback();
-
-	})
-
-
-
-
+	});
 }
 	
 
@@ -133,7 +101,10 @@ this.setQuestion = function(questionObj,index,callback){
 		this.Quiz.questions.$add(questionObj).then(function(questionsRef) {
 		  var id = questionsRef.key();
 		  var qRef = questionsRef;
-		  qRef.update({'fbId' : id});//Lägger till fbId i objektet
+		  //Lägger till fbId i objektet
+		  qRef.update({'fbId' : id});
+		  //sätter prioritet på objektet i firebase
+		  qRef.setPriority(questionObj.position);
 		  console.log("Har lagt till frågan: "+questionObj.question);
 		  callback();
 		});
@@ -144,32 +115,28 @@ this.getQuestion = function(index){
 	return this.Quiz.questions[index];
 }
 
-this.removeQuestion = function(index,callback){
-	console.log(callback());
-	var ref = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+this.Quiz.quizId+"/questions/");
-	var localQ = [];
- 	ref.on('value', function(snap) { list = snap.val(); });
- 	for( var q in list){
- 		localQ.push(list[q]);
- 	}
-	localQ.splice(index,1);
-	ref.set(localQ);
-	$firebaseObject(ref).$loaded().then(function(x){callback();});
+this.removeQuestion = function(question, callback){
+	var qRef = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+this.Quiz['quizId']+"/questions/"+question.fbId);
+	qRef.remove();
+
+	var quizRef = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+this.Quiz.quizId);
+	var troll = $firebaseObject(quizRef);
+	
+	troll.$loaded().then(function(x){
+		callback();
+	});
 }
 
-this.shiftPosition = function(currentPosition, newPosition){
-	var ref = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+this.Quiz.quizId+"/questions/");
-	var localQ = [];
- 	ref.on('value', function(snap) { list = snap.val(); });
- 	for( var q in list){
- 		localQ.push(list[q]);
- 	}
-	var selectedQuestion = localQ.splice(currentPosition,1);
-	localQ.splice(newPosition,0,selectedQuestion[0]);
-	ref.set(localQ);
-
+this.shiftPosition = function(C2, callback){
+	for(var i=0; i<C2.length; i++){
+	    C2[i].position = i+1;
+	    var fbId = C2[i].fbId;
+	    var qRef = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+this.Quiz.quizId+"/questions/"+fbId);
+	    qRef.update({'position' : C2[i].position});
+	    qRef.setPriority(C2[i].position);
+	  }
+	  callback();
 }
-
 
 this.getQuizResult = function(){
 	return points;

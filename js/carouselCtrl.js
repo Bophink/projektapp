@@ -1,26 +1,21 @@
 quizApp.controller('CarouselCtrl', function($scope,quizModel) {
- //$scope.C2 = [];
 
-$scope.initialize = function(){
-  console.log(quizModel.Quiz.questions);
-  $scope.C2 = [];
-  for(var k = 0; k<quizModel.Quiz.questions.length; k++){
-    var localQ = quizModel.Quiz.questions[k];
-    localQ.position = k+1;
-    $scope.C2.push(localQ);
+  $scope.initialize = function(){
+    $scope.C2 = quizModel.Quiz.questions;  
   }
-}
-
 
   $scope.selectTrack = function(pos){
     window.location = "#/track/quiz-" + pos;
   }
 
-  $scope.removeTrack = function(pos){
-    quizModel.removeQuestion(pos-1,$scope.initialize);
-
-    
+  $scope.removeTrack = function(index){
+    // skickar in frågan som ska tas bort samt en funktion som fungerar som callback-funktion i modellen
+    quizModel.removeQuestion($scope.C2[index], function(){
+      $scope.initialize; 
+      quizModel.shiftPosition($scope.C2, $scope.initialize);
+    });
   }
+
   //Carousel 2
   //Definiera scrollzoner
   $("#sortable-container").css('marginLeft',quizModel.carouselPosition);
@@ -37,9 +32,8 @@ $scope.initialize = function(){
     containment: '#sortable-container',
     //restrict move across columns. move only within column.
     orderChanged: function(obj){
-      console.log(obj);
-      quizModel.shiftPosition(obj.source.index,obj.dest.index);
-      $scope.initialize();
+      // skickar in karusellobjektet med frågor, samt intialize() som callback-funktion
+      quizModel.shiftPosition($scope.C2,$scope.initialize);
     },
     accept: function (sourceItemHandleScope, destSortableScope) {
       return sourceItemHandleScope.itemScope.sortableScope.$id === destSortableScope.$id;
@@ -68,4 +62,3 @@ $scope.initialize = function(){
 
   $scope.initialize();
 });
-//
