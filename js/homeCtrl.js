@@ -25,6 +25,8 @@ quizApp.controller('homeCtrl', function ($scope, quizModel,$firebaseObject, $fir
 		}
 		if(quizModel.Quiz.quizId != quizId){
 			quizModel.getQuiz(quizId,callback);
+		}else{
+			callback();
 		}
 		
 		
