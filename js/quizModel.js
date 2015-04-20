@@ -27,7 +27,8 @@ quizApp.factory('quizModel',function ($resource, $cookieStore, $firebaseObject, 
 // };
 
 var points = 0;
-var carouselPosition = 200;
+this.carouselPosition = 200;
+this.carouselSlideTo = null;
 
 var Quiz = this.Quiz = {};
 
@@ -97,10 +98,6 @@ this.getQuiz = function(quizId, callback){
 		callback();
 
 	})
-
-
-
-
 }
 	
 

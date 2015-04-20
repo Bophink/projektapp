@@ -2,14 +2,17 @@
 .as-sortable-item,
 .as-sortable-placeholder {
   display: inline-block;
+  float:none;
   width: 124px;
   height: 110px;
-  float: left;
   }
 .as-sortable-placeholder:not(.as-sortable-item){
   border: dashed;
   border-color: #999;
   border-width: 5px;
+  float:none;
+  display:inline-block;
+  margin-left: 50px
 }
 
 .gradient-left{
@@ -37,6 +40,32 @@
   width:12%;
   z-index:5;
 }
+.number{
+  /*background:rgba(180,180,180,0.5);*/
+  height:150px;
+  width:150px;
+  padding-left: 0;
+  font-size: 130px;
+  line-height: 150px;
+  font-weight: bold;
+  margin-top:-150px;
+  margin-left:10px;
+  text-align: center;
+  color:rgba(255,255,255,0.6);
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: rgb(150,150,150);
+  /*mix-blend-mode: difference;*/
+}
+
+.number:hover{
+  color:rgba(180,0,0,0);
+  -webkit-text-stroke-width: 0;
+}
+/*.number:after{
+  color:rgb(255,255,255);
+  mix-blend-mode: screen;
+}*/
+
 
 /*.sortable-row:after {
     content: ".";
@@ -48,6 +77,7 @@
 
 #sortable-container {
     display: inline-block;
+    float:none;
     padding-left:100px;
 }
 </style>
@@ -59,16 +89,21 @@
 	<div ng-repeat="zone in scrollZones" ng-mouseover="slide(-zone.speed)" ng-mouseout="stopSlide()" style="position:fixed;bottom:0;right:{{zone.margin}}};height:160px;width:{{zone.width}};z-index:10;"></div>
 	<div style="bottom:0;background:#FFFFFF;position:fixed;bottom:0;width:100%;overflow:hidden;height:150px;left:0">
    <h1 ng-if="C2.length == 0" style="text-align:center;font-size:3vw;color:rgb(70,70,70),margin-top:0;width:100%">Start creating your quiz by searching for a track!</h1>
-  	<div id="sortable-container" style="overflow-x:visible">
-  	    <div class="sortable-row" as-sortable="sortableOptions" ng-model="C2">
-  	            <div as-sortable-item as-sortable-placeholder style="float:left; width:170px;height:150px;margin-left:50px" ng-repeat="q in C2">
-                  <div  as-sortable-item-handle>
-    	            		<span class="close" ng-click="removeTrack(q.position)">X</span>
-    				       	<img ng-src="{{q.img}}" style="margin:0 auto;height:150px;width:150px" ng-click="selectTrack(q.position)"/>
-    				        <h1 style="color:white;margin-top:-105px;margin-left:60px" ng-click="selectTrack(q.position)">{{$index+1}}</h1>
+  	<div overview-carousel style="overflow-x:visible;white-space: nowrap;">
+  	    <div class="sortable-row" as-sortable="sortableOptions" ng-model="C2" style="overflow-x: visible;white-space: nowrap;">
+  	            <div as-sortable-item as-sortable-placeholder style="vertical-align:top;float:none;display:inline-block; width:170px;height:150px;margin-left:50px" ng-repeat="q in C2">
+
+                  <div as-sortable-item-handle>
+                    <span class="close" ng-click="removeTrack(q.position)">X</span>
+    				       	<div ng-style="{'background-image':'url(' + q.img + ')'}" style="background-size: 150px 150px;margin:0 auto;height:150px;width:150px;text-align:center" ng-click="selectTrack(q.position)"/>
+
+    				          <p class="number" ng-click="selectTrack(q.position)">{{$index+1}}</h1>
+
+                    </div>
+
                   </div>
+
   	            </div>
-                <div id="endOfCarousel" style="float:left;height:150px;width:50px"></div>
   	        </div>
   	    </div>
       </div>

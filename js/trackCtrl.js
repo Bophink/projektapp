@@ -57,9 +57,10 @@ quizApp.controller('trackCtrl', function ($scope,quizModel,$routeParams,$sce) {
 				}
 			}
 		}
+		//get lendth of questions!?
+		quizModel.carouselSlideTo = ((quizModel.Quiz.questions.length+2)*-220)+$(window).width(); 
 		quizModel.setQuestion(quizModel.createQuestion(q,a,b,c,d,$scope.track.id,$scope.track.album.images[1].url),$scope.quizPosition,function(){window.location = "#/search/"});
 		quizModel.results = {};
-		;
 	}
 
 });

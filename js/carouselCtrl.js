@@ -23,7 +23,7 @@ $scope.initialize = function(){
   }
   //Carousel 2
   //Definiera scrollzoner
-  $("#sortable-container").css('marginLeft',quizModel.carouselPosition);
+ 
   $scope.scrollZones = [
     {'speed':110,'margin':'0','width':'2%'},
     {'speed':70,'margin':'2%','width':'2%'},
@@ -46,26 +46,68 @@ $scope.initialize = function(){
     }
   };
 
-  $scope.slide = function(distance){
-    $scope.sliding = setInterval(function(){
-      //fixa stoppvillkor
-      var carousel = $("#sortable-container");
-      margin = parseInt(carousel.css("margin-left")) + distance;
-      if(margin >= 0 && distance > 0){
-        margin = 0;
-      }
-      console.log($(window).width() - carousel[0].scrollWidth - parseInt(carousel.css("margin-left")));
-      if ($(window).width() - carousel[0].scrollWidth - parseInt(carousel.css("margin-left"))  < 2 || distance > 0){
-        carousel.animate({marginLeft: margin + 'px'}, 100, 'linear');
-      }
-      quizModel.carouselPosition = margin;
-    }, 100);
-  }
+ // $("#sortable-container").css('marginLeft',quizModel.carouselPosition);
+ //  $scope.slide = function(distance){
+ //    $scope.sliding = setInterval(function(){
+ //      //fixa stoppvillkor
+ //      var carousel = $("#sortable-container");
+ //      margin = parseInt(carousel.css("margin-left"));
+ //      if(margin >= 0 && distance > 0){
+ //        margin = 0;
+ //        $scope.stopSlide()
+ //      }else if ($(window).width() - carousel[0].scrollWidth - parseInt(carousel.css("margin-left"))  < 2 || distance > 0){
+ //        margin = parseInt(carousel.css("margin-left")) + distance;
+ //        console.log(margin);
+ //        carousel.animate({marginLeft: margin + 'px'}, 50, 'linear');
+ //      }else{
+ //        $scope.stopSlide(); 
+ //      }
+ //      quizModel.carouselPosition = margin;
+ //    }, 100);
+ //  }
 
-  $scope.stopSlide = function(distance){
-   clearInterval($scope.sliding);
-  }
-
+  //$scope.slideToEnd();
   $scope.initialize();
-});
+})
+
+
+quizApp.directive("overviewCarousel", function(quizModel){
+    return function($scope, element, attrs){
+      element.css("margin-left",quizModel.carouselPosition);
+      console.log(quizModel.carouselSlideTo)
+      if(quizModel.carouselSlideTo != null){
+        element.animate({marginLeft: quizModel.carouselSlideTo + 'px'}, 300, 'linear');
+        quizModel.carouselSlideTo = null;
+      }
+
+      $scope.stopSlide = function(distance){
+       clearInterval($scope.sliding);
+      }
+
+      $scope.slide = function(distance){
+        $scope.sliding = setInterval(function(){
+        //fixa stoppvillkor
+        //var carousel = element;
+        margin = parseInt(element.css("margin-left"));
+        if(margin >= 0 && distance > 0){
+          margin = 0;
+          $scope.stopSlide()
+        }else if ($(window).width() - element[0].scrollWidth - element[0].offsetLeft  < 0 || distance > 0){
+          // console.log("window: " + $(window).width());
+          // console.log("element :" + element.width());
+          // console.log("element :" + element[0].scrollWidth);
+          // console.log("overflow left: " + parseInt(element.css("margin-left")));
+          // console.log($(window).width() - element[0].scrollWidth - parseInt(element.css("margin-left")));
+          console.log(element);
+          margin = parseInt(element.css("margin-left")) + distance;
+          element.animate({marginLeft: margin + 'px'}, 50, 'linear');
+        }else{
+          $scope.stopSlide(); 
+        }
+        quizModel.carouselPosition = margin;
+      }, 100);
+    }
+  }
+})
+
 //
