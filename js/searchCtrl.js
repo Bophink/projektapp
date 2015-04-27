@@ -111,13 +111,13 @@ $("#preview")[0].addEventListener('ended', function(){
 	$scope.stopIt();
 });
 
-$('.track-search-field').keyup(function(){
+$('.search-trackField').keyup(function(){
     clearTimeout(typingTimer);
     typingTimer = setTimeout($scope.doneTyping, doneTypingInterval);//$scope.doneTypingInterval);
     //console.log(typingTimer);
 });
 //on keydown, clear the countdown 
-$('.track-search-field').keydown(function(){
+$('.search-trackField').keydown(function(){
     clearTimeout(typingTimer);
     //console.log("nollställd "+typingTimer);
 });

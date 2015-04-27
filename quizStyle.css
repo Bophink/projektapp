@@ -1,71 +1,4 @@
-
-.container {
-  height: 100%;
-  padding:0px 25px;
-}
-.jumbotron {
-  background-color: rgba(100,100,100);
-  border-style: solid;
-  border-width: 5px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  border-radius: 2px;
-}
-.btn{
-  /*background-color: rgb(242, 171, 71);*/
-  /*border: 3px solid;*/
-}
-.background{
-  background: url('img/mouse.jpg');
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
-}
-.answerback  {
-  background-color: rgb(120, 20, 71);
-}
-.answers {
-  /*background-color: rgb(67, 171, 34);*/
-  /*margin: 20px;*/
-  /*padding: 10px;*/
-}
-
-.courseThumb{
-  border: 3px solid;
-  background-size:100% 100%;
-  position:relative; 
-  padding-top: 70%; 
-  padding-left: 0px; 
-  padding-right: 0px;
-}
-.table {
-  background: rgba(150,150,150,0.5);
-  overflow: auto;
-}
-
-.table h4{
-  margin-top:20px;
-}
-
-.table-search >tbody>tr>td{
-  vertical-align: middle;
-  text-align: center;
-}
-
-.table-search >thead>tr>th{
-  vertical-align: middle;
-  text-align: center;
-}
-
-.table-score >tbody>tr>td{
-  vertical-align:middle;
-}
-
-.table-score >thead>tr>th{
-  vertical-align:middle;
-}
-
-html, body, .container{
+html, body{
   height: 100%;
 }
 
@@ -75,37 +8,193 @@ h1, h2, h3 {
   color: #2A2B40;
 }
 
-.Cpointer *{
+.alert{
+  z-index:1;
+}
+
+.as-sortable-item, .as-sortable-placeholder {
+  display: inline-block;
+  float:none;
+  width: 124px;
+  height: 110px;
+}
+
+.as-sortable-placeholder:not(.as-sortable-item){
+  border: dashed;
+  border-color: #999;
+  border-width: 5px;
+  float:none;
+  display:inline-block;
+  margin-left: 50px
+}
+
+.background{
+  background: url('img/mouse.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+.col-centered {
+    display:inline-block;
+    float:none;
+}
+
+.container {
+  height: 100%;
+  padding:0px 25px;
+}
+
+/* ANVÄNDS DESSA ?!?!?!?!?! */
+/*.Cpointer *{
   cursor: pointer;
 }
 
 .Cprogress *{
   cursor: progress;
+}*/
+
+#sortable-container{
+    display: inline-block;
+    float:none;
+    /*padding-left:100px;*/
 }
 
-.carousel-control {
-  font-size: 100px;
-  width: 5%;
-  color: rgba(0,0,0,1);
+.row-centered {
+    text-align:center;
 }
 
-.track-search-field{
-  border-bottom-left-radius:25px;
-  border-top-left-radius:25px;
-  border:none;
-  height: 50px;
-  margin-right:0;
-  width:50%;
+.carousel-albumCover{
+	background-size: 150px 150px;
+	margin: 0 auto;
+	height: 150px;
+	width: 150px;
+	text-align: center;
+}
+
+.carousel-gradientLeft{
+  background: -webkit-linear-gradient(left, rgba(255,255,255,1), rgba(255,255,255,0)); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(right, rgba(255,255,255,1), rgba(255,255,255,0)); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(right, rgba(255,255,255,1), rgba(255,255,255,0)); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0)); /* Standard syntax */
+  position:fixed;
+  bottom:0;
+  left:0;
+  height:150px;
+  width:12%;
+  z-index:5;
+}
+
+.carousel-gradientRight{
+  background: -webkit-linear-gradient(right, rgba(255,255,255,1), rgba(255,255,255,0)); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(left, rgba(255,255,255,1), rgba(255,255,255,0)); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(left, rgba(255,255,255,1), rgba(255,255,255,0)); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to left, rgba(255,255,255,1), rgba(255,255,255,0)); /* Standard syntax */
+  position:fixed;
+  bottom:0;
+  right:0;
+  height:150px;
+  width:12%;
+  z-index:5;
+}
+
+.carousel-noQuestions{
+	text-align: center;
+	font-size: 3vw;
+	color: rgb(70,70,70);
+	margin-top: 0;
+	width: 100%;
+}
+
+.carousel-overview{
+	overflow-x: visible;
+	white-space: nowrap;
+}
+
+.carousel-sortableItem{
+	vertical-align: top;
+	float: none;
+	display: inline-block;
+	width: 170px;
+	height: 150px;
+	margin-left: 50px
+}
+
+.carousel-sortableRow{
+	overflow-x: visible;
+	white-space: nowrap;
+}
+
+.carousel-scrollLeft{
+	position: fixed;
+	bottom: 0;
+	height: 160px;
+	z-index: 10;
+}
+
+.carousel-scrollRight{
+	position: fixed;
+	bottom: 0;
+	height: 160px;
+	z-index: 10;
+}
+
+.carousel-questionNumber{
+  background:rgba(0,0,0,0.3);
+  height:150px;
+  width:150px;
+  padding-left: 0;
+  font-size: 130px;
+  line-height: 150px;
+  font-weight: bold;
+  margin-top:-150px;
+  margin-left:10px;
   text-align: center;
-  font-size: 20px;
-  vertical-align: middle;
-}:focus{
-  border:none;
-  outline:none;
-
+  color:rgba(255,255,255,0.6);
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: rgb(150,150,150);
+  /*mix-blend-mode: difference;*/
 }
 
-.track-search-btn{
+.carousel-questionNumber:hover{
+  background:rgba(0,0,0,0);
+  color:rgba(180,0,0,0);
+  -webkit-text-stroke-width: 0;
+}
+
+.carousel-questionRow{
+	bottom: 0;
+	left: 0;
+	background: #FFFFFF;
+	position: fixed;
+	overflow: hidden;
+	width: 100%;
+	height: 150px;
+}
+
+.score-buttonDiv{
+	padding:15px 0px 30px 0px
+}
+
+.score-btn{
+  height: 50px;
+  border-radius: 10px;
+  border: none;
+}
+
+.score-praise > h1{
+	margin-top:150px
+}
+
+.score-table >tbody>tr>td{
+  vertical-align:middle;
+}
+
+.score-table >thead>tr>th{
+  vertical-align:middle;
+}
+
+.search-searchBtn{
   background-color:#CCCCCC;
   border-bottom-right-radius:25px;
   border-top-right-radius:25px;
@@ -122,53 +211,77 @@ h1, h2, h3 {
   outline:none;
 }
 
-.track-search-btn:hover{
+.search-searchBtn:hover{
   background-color:#555555;
   color:#CCCCCC;
 }
 
-.inputAnswer {
-  width:45%;
-  border-radius:15px;
-  margin-top:10px;
-  text-align:center;
-  border: none;
-  outline:none;
+.search-searchDiv > form{
+	margin-top: 300px;
+	text-align: center;
+	margin-bottom: 50px;
 }
 
-.inputQuestion{
-  width:100%;
-  height:174px;
-  border-radius: 15px;
-  border: none;
-  outline:none;
-  padding:10px;
+.search-table{
+	margin-bottom: 100px;
 }
 
-.btnConfirm{
-  color: white;
-  background:green;
-  border-radius: 10px;
-  margin-top:15px;
-  border: none;
-  outline:none;
+.search-table >tbody>tr>td{
+  vertical-align: middle;
+  text-align: center;
 }
 
-.btnQuestion{
-  height:100px;
-  max-width:202px;
-  border-radius: 10px;
-  word-wrap:break-word;
-  white-space:normal !important;
+.search-table >thead>tr>th{
+  vertical-align: middle;
+  text-align: center;
 }
 
-.btnScore{
+.search-table img{
+	height: 64px;
+	width: 64px;
+}
+
+.search-trackField{
+  border-bottom-left-radius:25px;
+  border-top-left-radius:25px;
+  border:none;
   height: 50px;
-  border-radius: 10px;
-  border: none;
+  margin-right:0;
+  width:50%;
+  text-align: center;
+  font-size: 20px;
+  vertical-align: middle;
+}:focus{
+  border:none;
+  outline:none;
 }
 
-.biography{
+.table {
+  background: rgba(150,150,150,0.5);
+  overflow: auto;
+}
+
+.table h4{
+  margin-top:20px;
+}
+
+.track-albumCover{
+	margin-top: 10px;
+	width: 300px;
+	height: 300px;
+}
+
+.track-audio{
+	height:50px;
+}
+
+.track-background{
+	margin-top: 60px;
+	background: rgba(150,150,150,0.5);
+	padding: 20px;
+}
+
+.track-biography{
   width:100%;
   height:280px;
   max-height:320px;
@@ -180,51 +293,43 @@ h1, h2, h3 {
   background: #FFFFFF;
 }
 
-.bioProvider{
+.track-bioProvider{
   font-size: 10px;
   color: #DDDDDD;
 }
 
-};
-.img-wrap {
-    position: relative;
-    display: inline-block;
-    font-size: 0;
-}
-.img-wrap .close {
-    position: absolute;
-    top: 2px;
-    right: 2px;
-    z-index: 100;
-    background-color: #FFF;
-    padding: 5px 2px;
-    color: grey;
-    font-weight: bold;
-    cursor: pointer;
-    opacity: .8;
-    text-align: center;
-    font-size: 16px;
-    line-height: 16px;
-    width:16px;
-    border-radius: 100%;
-}
-.img-wrap:hover .close {
-    opacity: 1;
+.track-confirmBtn{
+  color: white;
+  background:green;
+  border-radius: 10px;
+  margin-top:15px;
+  border: none;
+  outline:none;
 }
 
-.row-centered {
-    text-align:center;
-}
-.col-centered {
-    display:inline-block;
-    float:none;
+.track-header * {
+	display: inline;
 }
 
-.alert{
-  z-index:1;
+.track-inputAnswer {
+  width:45%;
+  border-radius:15px;
+  margin-top:10px;
+  text-align:center;
+  border: none;
+  outline:none;
 }
 
-.animatePoints {
+.track-inputQuestion{
+  width:100%;
+  height:174px;
+  border-radius: 15px;
+  border: none;
+  outline:none;
+  padding:10px;
+}
+
+.quiz-animatePoints {
     -webkit-animation : pulse 1s 1;
     -moz-animation    : pulse 1s 1;
     -o-animation      : pulse 1s 1;
@@ -252,14 +357,44 @@ h1, h2, h3 {
    100% { -webkit-transform: scale(1)   ; opacity: 1;    }
 }
 
-.currentStepColor{
-  background-color: rgba(255,255,255,1);
-  width:8px;
-  height:30px;
-  display:inline-block;
-  margin:0 10px 0 10px;
+.quiz-answers{
+	margin-top: 10px
 }
-.otherStepColor{
+
+.quiz-background{
+	margin-top: 50px;
+	background: rgba(150,150,150,0.5);
+	padding: 5px 0px 0px 0px;
+	height: 605px
+}
+
+.quiz-creator{
+	font-size:15px
+}
+
+.quiz-currentPointsDiv{
+	text-align: center
+}
+
+.quiz-currentPoints > h1{
+	color: white;
+	font-size: 100px;
+}
+
+.quiz-indicatorRow{
+	height:30px
+}
+
+.quiz-title{
+	color:white
+}
+
+.quiz-totalPoints{
+	color:white
+}
+
+/* Step indicators. They have to be in this order to work. */
+.quiz-otherStep{
   background-color: rgba(255,255,255,0.5);
   width:8px;
   height:7px;
@@ -269,7 +404,7 @@ h1, h2, h3 {
   transition: height 1s ease-out;
 }
 
-.closeStepColor{
+.quiz-closeStep{
   background-color: rgba(255,255,255,0.5);
   width:8px;
   height:16px;
@@ -279,22 +414,47 @@ h1, h2, h3 {
   transition: height 1s ease-out;
 }
 
+.quiz-currentStep{
+  background-color: rgba(255,255,255,1);
+  width:8px;
+  height:30px;
+  display:inline-block;
+  margin:0 10px 0 10px;
+}
+
+.quiz-question > h3{
+	color: white;
+	display: block;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	text-align: center;
+}
+
+.quiz-questionBtn{
+  height:100px;
+  max-width:202px;
+  border-radius: 10px;
+  word-wrap:break-word;
+  white-space:normal !important;
+}
+
+.quiz-questionRow{
+	height:240px;
+}
+
 /* Changes font-size of question at different page widths*/
 @media all and (max-width: 1200px) {
-  .quizQuestion > h3{
+  .quiz-question > h3{
     font-size: 20px;
   }
 }
 @media all and (max-width: 992px) {
-  .quizQuestion > h3{
+  .quiz-question > h3{
     font-size: 18px;
   }
 }
 @media all and (max-width: 768px) {
-  .quizQuestion > h3{
+  .quiz-question > h3{
     font-size: 15px;
   }
 }
-
-
-

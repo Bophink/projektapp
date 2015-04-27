@@ -8,9 +8,9 @@ quizApp.controller('CarouselCtrl', function($scope,quizModel) {
     window.location = "#/track/quiz-" + pos;
   }
 
-  $scope.removeTrack = function(index){
+  $scope.removeTrack = function(pos){
     // skickar in frågan som ska tas bort samt en funktion som fungerar som callback-funktion i modellen
-    quizModel.removeQuestion($scope.C2[index], function(){
+    quizModel.removeQuestion($scope.C2[pos-1], function(){
       $scope.initialize; 
       quizModel.shiftPosition($scope.C2, $scope.initialize);
     });

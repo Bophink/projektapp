@@ -2,11 +2,11 @@
 <ng-include src="'partials/carousel.html'" ng-controller="CarouselCtrl"></ng-include>
 <div ng-class="{Cprogress: waitingForInput}">
 
-	<div class="row">
-		<form id="search" style="margin-top:300px;text-align:center;margin-bottom:50px;">
+	<div class="row search-searchDiv">
+		<form id="search">
 		  	<div>
-			    <input type="text" class="track-search-field" ng-model="query" placeholder="Search" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search'">
-			    <button class="track-search-btn" type="submit" ng-click="newSearch(query)">
+			    <input type="text" class="search-trackField" ng-model="query" placeholder="Search" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search'">
+			    <button class="search-searchBtn" type="submit" ng-click="newSearch(query)">
                     <span class="glyphicon glyphicon-search"></span>
                 </button>
 		  	</div>
@@ -16,7 +16,7 @@
 	<!-- Contains the results from search in a table. -->
 	<div class="row">
 		<audio id="preview" type="audio/mpeg"/>
-		<table class="table table-hover table-search" style="margin-bottom:100px;">
+		<table class="table table-hover search-table">
 			<thead>
 				<tr ng-if="results.length > 0">
 					<th class="col-lg-2"><h4>Listen</h4></th>
@@ -27,10 +27,10 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="track in results" style="height:70px;" ng-click="" id="{{track.id}}">
+				<tr ng-repeat="track in results" ng-click="" id="{{track.id}}">
 					<td class="col-lg-2">
 						<div ng-style="{'background-image':'url(' + track.album.images[2].url + ')', 'height':'64px', 'width':'64px', 'margin':'auto','background-size':'64px 64px','background-repeat':'no-repeat'}" ng-mouseover="playIt(track.preview_url,track.id)" ng-mouseout="stopIt()">
-						<img ng-src="img/play_button.png" ng-mouseover="playIt(track.preview_url,traCK.id)" ng-mouseout="stopIt()" style="height:64xpx;width:64px;" ng-if="playing != track.id"/>
+						<img ng-src="img/play_button.png" ng-mouseover="playIt(track.preview_url,traCK.id)" ng-mouseout="stopIt()" ng-if="playing != track.id"/>
 						</div>
 					</td>
 					<td class="col-lg-3"><h4><a href ng-click="newSearch(track.name)">{{track.name}}</a></h4></td>
