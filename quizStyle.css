@@ -45,14 +45,13 @@ h1, h2, h3 {
   padding:0px 25px;
 }
 
-/* ANVÄNDS DESSA ?!?!?!?!?! */
-/*.Cpointer *{
+.Cpointer *{
   cursor: pointer;
 }
 
 .Cprogress *{
   cursor: progress;
-}*/
+}
 
 #sortable-container{
     display: inline-block;
