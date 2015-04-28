@@ -61,30 +61,36 @@ quizApp.controller('CarouselCtrl', function($scope,quizModel) {
  //  }
 
   //$scope.slideToEnd();
+
   $scope.initialize();
 });
 
 
 quizApp.directive("overviewCarousel", function(quizModel){
     return function($scope, element, attrs){
+
+      $scope.evaluateOverflow = function(){
+        if(quizModel.carouselPosition < 100){
+          $scope.overFlowLeft = true;
+        }else{
+          $scope.overFlowLeft = false;
+        }
+
+
+        if($(window).width() - element[0].scrollWidth - element[0].offsetLeft  < -400){
+          $scope.overFlowRight = true;
+        }else{
+          $scope.overFlowRight = false;
+        }
+      }
+
       element.css("margin-left",quizModel.carouselPosition);
-      console.log(quizModel.carouselSlideTo)
       if(quizModel.carouselSlideTo != null){
         element.animate({marginLeft: quizModel.carouselSlideTo + 'px'}, 600, 'swing');
         quizModel.carouselPosition = quizModel.carouselSlideTo;
         quizModel.carouselSlideTo = null;
       }
-      if(quizModel.carouselPosition < 100){
-        $scope.overFlowLeft = true;
-      }else{
-        $scope.overFlowLeft = false;
-      }
 
-      if($(window).width() - element[0].scrollWidth - element[0].offsetLeft  < 0){
-        $scope.overFlowRight = true;
-      }else{
-        $scope.overFlowRight = false;
-      }
 
       $scope.stopSlide = function(distance){
        clearInterval($scope.sliding);
@@ -102,12 +108,7 @@ quizApp.directive("overviewCarousel", function(quizModel){
         }else if ($(window).width() - element[0].scrollWidth - element[0].offsetLeft  < 0 || distance > 0){
           $scope.overFlowLeft = true;
           $scope.overFlowRight = true;
-          console.log($(window).width() - element[0].scrollWidth - element[0].offsetLeft);
-          // console.log("window: " + $(window).width());
-          // console.log("element :" + element.width());
-          // console.log("element :" + element[0].scrollWidth);
-          // console.log("overflow left: " + parseInt(element.css("margin-left")));
-          // console.log($(window).width() - element[0].scrollWidth - parseInt(element.css("margin-left")));
+          $scope.$apply();
           margin = parseInt(element.css("margin-left")) + distance;
           element.animate({marginLeft: margin + 'px'}, 50, 'linear');
         }else{

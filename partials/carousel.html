@@ -25,11 +25,11 @@
   <h1 ng-if="C2.length == 0" class="carousel-noQuestions">Start creating your quiz by searching for a track!</h1>
   <div overview-carousel class="carousel-overview">
     <div class="sortable-row carousel-sortableRow" as-sortable="sortableOptions" ng-model="C2">
-      <div as-sortable-item as-sortable-placeholder class="carousel-sortableItem" ng-repeat="q in C2">
+      <div as-sortable-item as-sortable-placeholder class="carousel-sortableItem" ng-repeat="q in C2" ng-init="$last ? evaluateOverflow() : console.log($last)">
 
         <div as-sortable-item-handle>
           <span class="close" ng-click="removeTrack(q.position)">X</span>
-          <div ng-style="{'background-image':'url(' + q.img + ')'}" class="carousel-albumCover" ng-click="selectTrack(q.position)"/>
+          <div ng-style="{'background-image':'url(' + q.img + ')'}" class="carousel-albumCover" ng-click="selectTrack(q.position)"></div>
           <h1 class="carousel-questionNumber" ng-click="selectTrack(q.position)">{{$index+1}}</h1>
         </div>
       </div>
