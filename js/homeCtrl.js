@@ -21,6 +21,9 @@ quizApp.controller('homeCtrl', function ($scope, quizModel,$firebaseObject, $fir
 
 	$scope.assignQuiz = function(quizId) {
 		var callback = function(){
+			if (quizModel.carouselPosition > ((quizModel.Quiz.questions.length+1)*-220)+$(window).width()){
+				quizModel.carouselSlideTo = ((quizModel.Quiz.questions.length+1)*-220)+$(window).width(); 
+			}
 			window.location ="#/search";
 		}
 		if(quizModel.Quiz.quizId != quizId){

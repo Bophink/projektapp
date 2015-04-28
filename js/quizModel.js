@@ -1,7 +1,7 @@
 quizApp.factory('quizModel',function ($resource, $cookieStore, $firebaseObject, $firebaseArray) { 
 
 var points = 0;
-this.carouselPosition = 200;
+this.carouselPosition = 100;
 this.carouselSlideTo = null;
 
 var Quiz = this.Quiz = {};
@@ -50,6 +50,9 @@ this.renameQuiz = function(quizID, newTitle){
 this.getQuiz = function(quizId, callback){
 	var quiz = null;
 	this.Quiz.questions = null;
+	this.carouselPosition = 100;
+	this.carouselSlideTo = null;
+
 	console.log("Hämtar quiz till modellen");
 	var quizRef = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+quizId);
 	// vi fixar denna när vi har implementerat inloggning

@@ -15,10 +15,11 @@
 </style>
 
 <div ng-controller="CarouselCtrl"></div>
-<div class="carousel-gradientLeft"></div>
 <div ng-repeat="zone in scrollZones" ng-mouseover="slide(zone.speed)" ng-mouseout="stopSlide()" class="carousel-scrollLeft" ng-style="{'left':zone.margin, 'width':zone.width}"></div>
-<div class="carousel-gradientRight"></div>
+<div class="carousel-gradientLeft"><span class="glyphicon glyphicon-chevron-left" ng-if="overFlowLeft"></span></div>
 <div ng-repeat="zone in scrollZones" ng-mouseover="slide(-zone.speed)" ng-mouseout="stopSlide()" class="carousel-scrollRight" ng-style="{'right':zone.margin, 'width':zone.width}"></div>
+<div class="carousel-gradientRight"><span class="glyphicon glyphicon-chevron-right" ng-if="overFlowRight"></span></div>
+
 
 <div class="carousel-questionRow" id="sortable-container">
   <h1 ng-if="C2.length == 0" class="carousel-noQuestions">Start creating your quiz by searching for a track!</h1>
@@ -32,6 +33,7 @@
           <h1 class="carousel-questionNumber" ng-click="selectTrack(q.position)">{{$index+1}}</h1>
         </div>
       </div>
+      <div class="carousel-sortableItem"><!--End of carousel--></div>
     </div>
   </div>
 </div>
