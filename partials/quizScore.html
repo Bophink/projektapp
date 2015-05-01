@@ -2,7 +2,7 @@
 	<ng-include src="'partials/header.html'" ></ng-include>
 
 	<div class="row score-praise">
-		<h1 class="text-center">{{praise()}}</h1> <!-- Användarnamn -->
+		<h1 class="text-center">{{praise}}</h1> <!-- Användarnamn -->
 	</div>
 
 	<div class="row text-center"><h3>You got {{getPoints()}} points</h3></div>
@@ -28,19 +28,19 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="q in getQuestions()">
+				<tr ng-repeat="q in questions track by q.position">
 					<td class="col-lg-1 col-md-1 text-center"><h1>{{q.position}}.</h1></td>
 					<td class="col-lg-4 col-md-4">{{q.question}}</td>
 					<td class="col-lg-2 col-md-2"><b>Correct Answer: </b>{{q.answers['a']}}<br/><b>You answered: </b>{{userAnswers[q.position-1]}}
 						</td>
 					<td class="col-lg-4 col-md-4">
-							<h3>{{songList[q.position-1].name}}</h3>
-							<h4>{{songList[q.position-1].artists[0].name}}</h4>
-							<h5>{{songList[q.position-1].album.name}}</h5>
+							<h3>{{q.song}}</h3>
+							<h4>{{q.artist}}</h4>
+							<h5>{{q.album}}</h5>
 					</td>
 					<td class="col-lg-1 col-md-1">
-						<div ng-style="{'background-image':'url(' + songList[q.position-1].album.images[2].url + ')', 'height':'64px', 'width':'64px'}" ng-mouseover="playIt(songList[q.position-1].preview_url,songList[q.position-1].id)" ng-mouseout="stopIt()">
-						<img ng-src="img/play_button.png" ng-mouseover="playIt(songList[q.position-1].preview_url,songList[q.position-1].id)" ng-mouseout="stopIt()" style="height:64xpx;width:64px" ng-if="playing != songList[q.position-1].id"/>
+						<div ng-style="{'background-image':'url(' + q.songImg + ')', 'height':'64px', 'width':'64px', 'background-size':'64px 64px','background-repeat':'no-repeat'}" ng-mouseover="playIt(q.preview_url,q.songId)" ng-mouseout="stopIt()">
+						<img ng-src="img/play_button.png" ng-mouseover="playIt(q.preview_url,q.songId)" ng-mouseout="stopIt()" style="height:64xpx;width:64px" ng-if="playing != q.songId"/>
 						</div>
 					</td>
 				</tr>

@@ -10,7 +10,7 @@ quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$firebase
 
 	$scope.getNewAnswers = function() {
 		$scope.answers = [];
-		console.log($scope.questions[0]);
+		console.log($scope.questions[$scope.currentQPos]);
 		for (var i in $scope.questions[$scope.currentQPos].answers) {
 			$scope.answers.push($scope.questions[$scope.currentQPos].answers[i]);
 		}

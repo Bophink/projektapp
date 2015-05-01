@@ -42,6 +42,5 @@ quizApp.controller('homeCtrl', function ($scope, quizModel,$firebaseObject, $fir
 	$scope.quizzes = $firebaseArray(quizzes);
 	// synchronize the object with a three-way data binding
 	// click on `index.html` above to see it used in the DOM!
-	console.log($scope.quizzes);
 	//För de quiz som skall presenteras på förtsa sidan använd AngulatFire för att skapa en three-way binding!:)
 });

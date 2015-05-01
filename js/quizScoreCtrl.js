@@ -1,6 +1,6 @@
 quizApp.controller('quizScoreCtrl', function ($scope,quizModel,$routeParams) {
 
-	$scope.praise = function(){
+	$scope.calculatePraise = function(){
 		var praiseDict = {
 			'0':'Are you drunk?',
 			'0.1':'Are you even trying?',
@@ -14,33 +14,39 @@ quizApp.controller('quizScoreCtrl', function ($scope,quizModel,$routeParams) {
 			'0.9':'Amazeballs!',
 			'1':'Perfect score!'};
 		var maxScore = quizModel.Quiz.questions.length * 10;
-		console.log(($scope.getPoints()/maxScore).toString().substr(0,3));
+		console.log('Praise: ' + ($scope.getPoints()/maxScore).toString().substr(0,3));
 		return praiseDict[($scope.getPoints()/maxScore).toString().substr(0,3)];
 	}
 
-	$scope.songList = [];
-	for(var i = 0; i<quizModel.Quiz.questions.length; i++){
-		quizModel.song.get({id:quizModel.Quiz.questions[i].songId}, function(data){
-			console.log("track " + track)
-			var track = data;
-			$scope.songList.push(track);
+	$scope.getQuestions = function(){
+		$scope.questions = [];
+		//loops through all the questions in quiz and creates a temporary local question
+		for (var k=0; k < quizModel.Quiz.questions.length; k++){
+			var localQ = quizModel.Quiz.questions[k];
+	 		localQ['question'] = localQ['question'].slice(0,200);
+	 		// adds the local question to the scope
+	 		$scope.questions.push(localQ);
+	 		// calls function to recieve song from Spoitfy API and add it to the question
+	 		$scope.getSong(k, localQ);
+		}
+	}
+
+	$scope.getSong = function(k, question){
+		// retrieves track from Spotify
+		quizModel.song.get({id:question.songId}, function(track){
+			question.song = track.name;
+			question.artist = track.artists[0].name;
+			question.album = track.album.name;
+			question.songImg = track.album.images[2].url;
+			question.preview_url = track.preview_url;
+			question.songId = track.id;
+			// Overwrites the question in scope with the same question + track information
+			$scope.questions[k] = question;
 		});
 	}
-	console.log($scope.songList);
 
 	$scope.getUserAnswers = function(){
 		return quizModel.userAnswers;
-	}
-
-	$scope.getQuestions = function(){
-		$scope.localQuestions = [];
-		for (var k=0; k<quizModel.Quiz.questions.length; k++){
-			var localQ = quizModel.Quiz.questions[k];
-	 		localQ['position'] = k+1;
-	 		localQ['question'] = localQ['question'].slice(0,200);
-	 		$scope.localQuestions.push(localQ);
-		}
-		return $scope.localQuestions;
 	}
 
 	$scope.getPoints = function(){
@@ -58,6 +64,7 @@ quizApp.controller('quizScoreCtrl', function ($scope,quizModel,$routeParams) {
 		$("#preview")[0].pause();
 		$("#preview")[0].currentTime = 0;
 	}
-
+	$scope.praise = $scope.calculatePraise(); 
 	$scope.userAnswers = $scope.getUserAnswers();
+	$scope.getQuestions();
 });
