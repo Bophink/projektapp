@@ -87,22 +87,20 @@ this.setQuestion = function(questionObj,index,callback){
 	var questionsRef = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+this.Quiz.quizId+"/questions/");
 	
 	if(typeof index !== "undefined"){//if the question should be modified
-		
-		questionObj.position = index+1;
 		var fbId = this.Quiz.questions[index].fbId;
 		questionObj.fbId = fbId;
-		this.Quiz.questions[index] = questionObj;
 
-		var qRef = questionsRef.child(questionObj.fbId);
-		qRef.update(questionObj);
-		Quiz.questions[index]= questionObj;
-		callback();
+		var qRef = questionsRef.child(fbId);
+		qRef.update(questionObj, callback());
 
 		console.log("Har editerat frågan: "+questionObj.question);
 	}else{// add new question
+		console.log(questionObj);
 		var index = this.Quiz.questions.length; //nya indexet
 		questionObj.fbId = null;
 		questionObj.position = index+1;
+		questionObj.$priority = index+1;
+
 
 		this.Quiz.questions.$add(questionObj).then(function(questionsRef) {
 		  var id = questionsRef.key();
@@ -110,9 +108,8 @@ this.setQuestion = function(questionObj,index,callback){
 		  //Lägger till fbId i objektet
 		  qRef.update({'fbId' : id});
 		  //sätter prioritet på objektet i firebase
-		  qRef.setPriority(questionObj.position);
-		  console.log("Har lagt till frågan: "+questionObj.question);
-		  callback();
+		  qRef.setPriority(questionObj.position,callback());
+		  console.log("Har lagt till frågan: " + questionObj.question);
 		});
 	}
 }

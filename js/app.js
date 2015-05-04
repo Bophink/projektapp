@@ -1,5 +1,5 @@
 
-var quizApp = angular.module('quizApp', ['ui.bootstrap','ngRoute','ngResource','ngCookies','ui.sortable','firebase']);
+var quizApp = angular.module('quizApp', ['ngRoute','ngResource','ngCookies','ui.sortable','firebase']);
 
 quizApp.config(['$routeProvider',
   function($routeProvider) {
