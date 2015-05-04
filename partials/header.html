@@ -1,3 +1,33 @@
+<style type="text/css">
+.navbar-center{
+    position:absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    text-align: center;
+    margin: auto;
+    height:100%;
+    z-index:0;
+    font-size: 1.7vw;
+}
+
+.navbar-webName {
+	position:relative;
+	float: left;
+	padding: 15px;
+	font-size: 18px;
+	line-height: 20px;
+	height: 50px;
+	z-index:10000;
+	color:#999;
+}
+.navbar-webName:hover{
+	color:#FFF;
+	text-decoration: none;
+};
+</style>
+
+<div ng-controller="headerCtrl"></div>
 <div id="header">
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
@@ -7,7 +37,8 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-			  	<a class="navbar-brand" href="#/start/">inQuizitor</a>
+			  	<a class="navbar-webName" href="#/start/">inQuizitor</a>
+			  	<a class="navbar-brand navbar-center">{{title}}</a>  	
 			</div>
 			<div class="collapse navbar-collapse" id="myNavBar">
 			  	<ul class="nav navbar-nav">
