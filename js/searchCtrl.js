@@ -4,10 +4,11 @@ quizApp.controller('searchCtrl', function ($scope, $window, $document, $sce, qui
 	$scope.status = "";
 	var win = angular.element($window);
 
-	if ( quizModel.searchResults != {}){
+	if ( quizModel.searchResults != null){
 		$scope.results = quizModel.searchResults.results;
 		$scope.query = quizModel.searchResults.query;
 		$scope.type = quizModel.searchResults.type;
+		$scope.firstSearch = true;
 	}
 
 	$scope.sort = function(attr){
@@ -51,7 +52,8 @@ quizApp.controller('searchCtrl', function ($scope, $window, $document, $sce, qui
 			return
 		}
 		//this is fine...
-		document.getElementById("search").className = "search-animateSlideUp";
+		$scope.firstSearch = true;
+		//document.getElementById("search").className = "search-animateSlideUp";
 		$scope.results = [];
 		var searchParams = {"query":query,"type":"track","limit":50}
 		$scope.songs(searchParams,type,query);
@@ -79,6 +81,7 @@ quizApp.controller('searchCtrl', function ($scope, $window, $document, $sce, qui
 			}
 
 			$scope.waitingForInput = false;
+			console.log($scope.results)
 
 			if ($scope.results.length == 0){
 				$scope.status = "No results found, try again."
@@ -86,7 +89,6 @@ quizApp.controller('searchCtrl', function ($scope, $window, $document, $sce, qui
 			}
 			else if(data.tracks.next != null){
 				$scope.nextParams = JSON.parse("{\"" + data.tracks.next.substring(34).replace(/=/g,'":"').replace(/&/g,'","').replace(/\?/g,'') + "\"}");
-				console.log(data.tracks.next);
 			}else{
 				$scope.nextParams = null;
 				$scope.status = "No more results found, try again."

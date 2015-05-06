@@ -107,8 +107,8 @@ h1, h2, h3 {
 .carousel-noQuestions{
 	text-align: center;
 	font-size: 3vw;
-	color: rgb(70,70,70);
-	margin-top: 0;
+	color: #999;
+	margin-top: 50px;
 	width: 100%;
 }
 
@@ -123,7 +123,7 @@ h1, h2, h3 {
 	display: inline-block;
 	width: 170px;
 	height: 150px;
-	margin-left: 50px
+	margin-left: 50px;
 }
 
 .carousel-sortableRow{
@@ -151,6 +151,11 @@ h1, h2, h3 {
 
 .carousel-scrollRight:hover ~ .carousel-gradientRight{
   color: rgba(150,150,150,1);
+}
+
+.carousel-tooltip{
+  color:#999;
+  white-space:normal;
 }
 
 .carousel-questionNumber{
@@ -336,8 +341,7 @@ h1, h2, h3 {
 }
 
 .table {
-  background: rgba(150,150,150,0.5);
-  overflow: auto;
+  background: rgba(200,200,200,0.6);
 }
 
 .table h4{
@@ -356,7 +360,7 @@ h1, h2, h3 {
 
 .track-background{
 	margin-top: 60px;
-	background: rgba(150,150,150,0.5);
+	background: rgba(200,200,200,0.6);
 	padding: 20px;
 }
 

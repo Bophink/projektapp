@@ -1,7 +1,7 @@
 <div id="start">
 	<ng-include src="'partials/header.html'" ng-controller ="headerCtrl" ></ng-include>
 <!-- 	<ng-include src="'partials/carousel.html'" ng-controller="CarouselCtrl"></ng-include> -->
-	<h1 style="color:black; text-align:center;margin-top:100px">Welcome to InQuizitor!</h1>
+	<h1 style="color:black; text-align:center;margin-top:100px">Welcome to inQuizitor!</h1>
 	<h2 style="color:black; text-align:center">Make your own music quiz or play an awesome quiz below!</h2>
 	<div class="row" style="margin-bottom:50px; text-align:center">
 		<button class="btn btn-primary" style="height:80px;padding:0 60px 0 60px;font-size:20px" ng-click="clicked()">Create New Quiz</button>
@@ -16,7 +16,7 @@
 		</div><!-- .row -->
 	</div><!-- .row -->
 
-	<div class="row" style="margin:0px 0px 0px 0px;background:rgba(255,255,255,0.6);">
+	<div class="row" style="margin:0px 0px 0px 0px;background:rgba(200,200,200,0.6);">
 		<div ng-repeat="quiz in quizzes" class="col-md-3" style="margin-bottom:40px;">
 
 			<div style="text-align:center;">
@@ -33,7 +33,7 @@
 			</div>
 
 			<div class="row text-center">
-				<button class="btn" style="width:200px">Share it!</button>
+				<button class="btn btn-primary" style="width:200px">Share it!</button>
 			</div>
 		</div><!-- ng-repeat -->
 	</div><!-- .row -->

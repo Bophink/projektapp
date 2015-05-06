@@ -7,7 +7,7 @@ this.carouselSlideTo = null;
 var Quiz = this.Quiz = {};
 
 this.Quiz.questions=[];
-this.searchResults = {}
+this.searchResults = null;
 
 var userAnswers = this.userAnswers = [];
 //var currentQuizObj = ""; // the Quiz the user is currently creating/modifying.
@@ -48,6 +48,7 @@ this.renameQuiz = function(quizID, newTitle){
 }
 
 this.getQuiz = function(quizId, callback){
+	this.searchResults = null;
 	var quiz = null;
 	this.Quiz.questions = null;
 	this.carouselPosition = 100;

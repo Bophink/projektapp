@@ -40,28 +40,6 @@ quizApp.controller('CarouselCtrl', function($scope,quizModel) {
     }
   };
 
- // $("#sortable-container").css('marginLeft',quizModel.carouselPosition);
- //  $scope.slide = function(distance){
- //    $scope.sliding = setInterval(function(){
- //      //fixa stoppvillkor
- //      var carousel = $("#sortable-container");
- //      margin = parseInt(carousel.css("margin-left"));
- //      if(margin >= 0 && distance > 0){
- //        margin = 0;
- //        $scope.stopSlide()
- //      }else if ($(window).width() - carousel[0].scrollWidth - parseInt(carousel.css("margin-left"))  < 2 || distance > 0){
- //        margin = parseInt(carousel.css("margin-left")) + distance;
- //        console.log(margin);
- //        carousel.animate({marginLeft: margin + 'px'}, 50, 'linear');
- //      }else{
- //        $scope.stopSlide(); 
- //      }
- //      quizModel.carouselPosition = margin;
- //    }, 100);
- //  }
-
-  //$scope.slideToEnd();
-
   $scope.initialize();
 });
 
