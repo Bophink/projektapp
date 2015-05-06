@@ -1,32 +1,3 @@
-<style type="text/css">
-.navbar-center{
-    position:absolute;
-    width: 100%;
-    left: 0;
-    top: 0;
-    text-align: center;
-    margin: auto;
-    height:100%;
-    z-index:0;
-    font-size: 1.7vw;
-}
-
-.navbar-webName {
-	position:relative;
-	float: left;
-	padding: 15px;
-	font-size: 18px;
-	line-height: 20px;
-	height: 50px;
-	z-index:10000;
-	color:#999;
-}
-.navbar-webName:hover{
-	color:#FFF;
-	text-decoration: none;
-};
-</style>
-
 <div ng-controller="headerCtrl"></div>
 <div id="header">
 	<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -38,13 +9,13 @@
 					<span class="icon-bar"></span>
 				</button>
 			  	<a class="navbar-webName" href="#/start/">inQuizitor</a>
-			  	<a class="navbar-brand navbar-center">{{title}}</a>  	
+			  	<a class="navbar-brand navbar-center" ng-show="view != '#/start'">{{title}}</a>  	
 			</div>
 			<div class="collapse navbar-collapse" id="myNavBar">
 			  	<ul class="nav navbar-nav">
-				    <li ng-class="{'active': position == '#/start'}"><a href="#/start/">Home</a></li>
-				    <li ng-class="{'active': position == '#/search'}"><a href="#/search/" class="">Search</a></li>
-				    <li ng-class="{'active': position == '#/quiz'}"><a href="#/quiz">Preview</a></li>
+				    <li ng-class="{'active': view == '#/start'}"><a href="#/start/">Home</a></li>
+				    <li ng-class="{'active': view == '#/search'}"><a href="#/search/">Search</a></li>
+				    <li ng-class="{'active': view == '#/quiz'}"><a href="#/quiz">Preview</a></li>
 			  	</ul>
 			  	<ul class="nav navbar-nav navbar-right">
 			        <li><a href="#signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>

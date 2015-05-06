@@ -181,9 +181,14 @@ h1, h2, h3 {
 	left: 0;
 	background: #FFFFFF;
 	position: fixed;
+  z-index:9999;
 	overflow: hidden;
 	width: 100%;
 	height: 150px;
+}
+
+.dodgeCarousel{
+  margin-bottom: 160px;
 }
 
 #home-playQuiz:hover{
@@ -193,6 +198,34 @@ h1, h2, h3 {
 .glyphicon{
   top:0px;
 }
+
+.navbar-center{
+  position:absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  text-align: center;
+  margin: auto;
+  height:100%;
+  z-index:0;
+  font-size: 1.7vw;
+}
+
+.navbar-webName {
+  position:relative;
+  float: left;
+  padding: 15px;
+  font-size: 18px;
+  line-height: 20px;
+  height: 50px;
+  z-index:10000;
+  color:#999;
+}
+
+.navbar-webName:hover{
+  color:#FFF;
+  text-decoration: none;
+};
 
 .score-buttonDiv{
 	padding:15px 0px 30px 0px
@@ -214,6 +247,30 @@ h1, h2, h3 {
 
 .score-table >thead>tr>th{
   vertical-align:middle;
+}
+
+.search-animateSlideUp{
+    -webkit-animation : slideUp 1s 1;
+    -moz-animation    : slideUp 1s 1;
+    -o-animation      : slideUp 1s 1;
+    animation         : slideUp 1s 1;
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation-fill-mode: forwards;
+    -o-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes slideUp {
+   to {margin-top: 100px;}
+}
+@-moz-keyframes slideUp {
+   to {margin-top: 100px;}
+}
+@-o-keyframes slideUp {
+   to {margin-top: 100px;}
+}
+@keyframes slideUp {
+   to {margin-top: 100px;}
 }
 
 .search-searchBtn{
@@ -263,7 +320,7 @@ h1, h2, h3 {
 	width: 64px;
 }
 
-.search-trackField{
+#search-trackField{
   border-bottom-left-radius:25px;
   border-top-left-radius:25px;
   border:none;

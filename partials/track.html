@@ -1,7 +1,7 @@
 <ng-include src="'partials/header.html'" ng-controller ="headerCtrl"></ng-include>
 <ng-include src="'partials/carousel.html'" ng-controller="CarouselCtrl"></ng-include>
 
-<div class="track-background">
+<div class="track-background dodgeCarousel">
 	<!-- Contains the alert banner that will trigger and be visible if a question is incomplete.  -->
 	<div class="alert alert-warning" ng-repeat="msg in alert">
         <a href class="close" ng-click="closeAlert($index)">&times;</a>

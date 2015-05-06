@@ -66,60 +66,6 @@ quizApp.controller('CarouselCtrl', function($scope,quizModel) {
 });
 
 
-quizApp.directive("overviewCarousel", function(quizModel){
-    return function($scope, element, attrs){
-
-      $scope.evaluateOverflow = function(){
-        if(quizModel.carouselPosition < 100){
-          $scope.overFlowLeft = true;
-        }else{
-          $scope.overFlowLeft = false;
-        }
-
-
-        if($(window).width() - element[0].scrollWidth - element[0].offsetLeft  < -400){
-          $scope.overFlowRight = true;
-        }else{
-          $scope.overFlowRight = false;
-        }
-      }
-
-      element.css("margin-left",quizModel.carouselPosition);
-      if(quizModel.carouselSlideTo != null){
-        element.animate({marginLeft: quizModel.carouselSlideTo + 'px'}, 600, 'swing');
-        quizModel.carouselPosition = quizModel.carouselSlideTo;
-        quizModel.carouselSlideTo = null;
-      }
-
-
-      $scope.stopSlide = function(distance){
-       clearInterval($scope.sliding);
-      }
-
-      $scope.slide = function(distance){
-        $scope.sliding = setInterval(function(){
-        margin = parseInt(element.css("margin-left"));
-        //stoppvillkor vänster
-        if(margin + distance >= 100  && distance > 0){
-          margin = 100;
-          $scope.overFlowLeft = false;
-          element.animate({marginLeft: margin + 'px'}, 50, 'swing');
-          $scope.stopSlide()
-        }else if ($(window).width() - element[0].scrollWidth - element[0].offsetLeft  < 0 || distance > 0){
-          $scope.overFlowLeft = true;
-          $scope.overFlowRight = true;
-          $scope.$apply();
-          margin = parseInt(element.css("margin-left")) + distance;
-          element.animate({marginLeft: margin + 'px'}, 50, 'linear');
-        }else{
-          $scope.overFlowRight = false;
-          $scope.stopSlide(); 
-        }
-        quizModel.carouselPosition = margin;
-      }, 100);
-    }
-  }
-});
 
 
 

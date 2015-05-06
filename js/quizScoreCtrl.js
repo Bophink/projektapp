@@ -53,17 +53,6 @@ quizApp.controller('quizScoreCtrl', function ($scope,quizModel,$routeParams) {
 		return quizModel.getQuizResult();
 	}
 
-	$scope.playIt = function(url,id){
-		$("#preview")[0].setAttribute('src', url);
-		$("#preview")[0].play();
-		$scope.playing = id;
-	}
-
-	$scope.stopIt = function(url){
-		$scope.playing = "";
-		$("#preview")[0].pause();
-		$("#preview")[0].currentTime = 0;
-	}
 	$scope.praise = $scope.calculatePraise(); 
 	$scope.userAnswers = $scope.getUserAnswers();
 	$scope.getQuestions();

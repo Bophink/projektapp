@@ -1,4 +1,4 @@
-quizApp.controller('homeCtrl', function ($scope, quizModel,$firebaseObject, $firebaseArray) {
+quizApp.controller('homeCtrl', function ($scope, $window, quizModel,$firebaseObject, $firebaseArray) {
 	var location = window.location.hash.split("/");
 	$scope.position = location[0]+"/"+location[1];
 	//tar ej hänsyn till sista paremtern i quiz och track
@@ -23,8 +23,9 @@ quizApp.controller('homeCtrl', function ($scope, quizModel,$firebaseObject, $fir
 
 	$scope.assignQuiz = function(quizId) {
 		var callback = function(){
-			if (quizModel.carouselPosition > ((quizModel.Quiz.questions.length+1)*-220)+$(window).width()){
-				quizModel.carouselSlideTo = ((quizModel.Quiz.questions.length+1)*-220)+$(window).width(); 
+			var win = angular.element($window);
+			if (quizModel.carouselPosition > ((quizModel.Quiz.questions.length+1)*-220)+win.width()){
+				quizModel.carouselSlideTo = ((quizModel.Quiz.questions.length+1)*-220)+win.width(); 
 			}
 			window.location ="#/search";
 		}
@@ -43,7 +44,7 @@ quizApp.controller('homeCtrl', function ($scope, quizModel,$firebaseObject, $fir
 			if(quizModel.Quiz.questions.length < 1){
 				return
 			}else{
-				window.location ="#/quiz/"+quizId;
+				window.location ="#/quiz/";
 			}
 		});
 	}	
@@ -61,14 +62,17 @@ quizApp.controller('homeCtrl', function ($scope, quizModel,$firebaseObject, $fir
 			var limit = 0;
 			// checks if a quiz does not have any questions
 			if($scope.quizzes[quiz].questions === undefined){
+				break;
+			}else if($scope.quizzes[quiz].questions === ''){
 				// adds placeholder image
-				$scope.quizImgs.push('http://www.cs.odu.edu/~acm/img/portrait_placeholder.png')
-			}
-			// adds the first image in quiz to quizImgs.
-			for(var question in $scope.quizzes[quiz].questions){
-				if(limit != 1){
-					$scope.quizImgs.push($scope.quizzes[quiz].questions[question].img);
-					limit++;
+				$scope.quizImgs.push('img/quizPlaceholder.png');
+			}else{
+				// adds the first image in quiz to quizImgs.
+				for(var question in $scope.quizzes[quiz].questions){
+					if(limit != 1){
+						$scope.quizImgs.push($scope.quizzes[quiz].questions[question].img);
+						limit++;
+					}
 				}	
 			}
 		}
