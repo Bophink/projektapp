@@ -81,7 +81,7 @@ h1, h2, h3 {
   left:0;
   height:150px;
   width:24%;
-  z-index:5;
+  z-index: 9999;
   pointer-events: none;
   font-size: 120px;
   color: rgba(150,150,150,0.5);
@@ -97,7 +97,7 @@ h1, h2, h3 {
   right:0;
   height:150px;
   width:24%;
-  z-index:5;
+  z-index: 9999;
   pointer-events: none;
   text-align: right;
   font-size: 120px;
@@ -134,23 +134,23 @@ h1, h2, h3 {
 .carousel-scrollLeft{
 	position: fixed;
 	bottom: 0;
-	height: 160px;
-	z-index: 10;
+	height: 150px;
+	z-index: 9998;
 }
 
 .carousel-scrollLeft:hover ~ .carousel-gradientLeft{
-  color: rgba(150,150,150,1)
+  color: rgba(150,150,150,1);
 }
 
 .carousel-scrollRight{
 	position: fixed;
 	bottom: 0;
-	height: 160px;
-	z-index: 10;
+	height: 150px;
+	z-index: 9998;
 }
 
 .carousel-scrollRight:hover ~ .carousel-gradientRight{
-  color: rgba(150,150,150,1)
+  color: rgba(150,150,150,1);
 }
 
 .carousel-questionNumber{
@@ -181,7 +181,7 @@ h1, h2, h3 {
 	left: 0;
 	background: #FFFFFF;
 	position: fixed;
-  z-index:9999;
+  z-index:9997;
 	overflow: hidden;
 	width: 100%;
 	height: 150px;
