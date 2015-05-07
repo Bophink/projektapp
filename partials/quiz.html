@@ -42,7 +42,7 @@
 					<div class="progressbar progress-striped active" animate="true" value="{{(30-timeElapsed)/0.3}}" type="success"></div>
 					
 					<!-- These buttons appear when a question is answered. -->
-					<button id="nextQ" ng-show="Quiz.questions.length != currentQPos+1 && qAnswered" class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-click="moveOn()" style="margin-top:5px">Next question!</button>
+					<button id="nextQ" ng-show="Quiz.questions.length != currentQPos+1 && qAnswered" class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-click="moveOn(); resetAudio()" style="margin-top:5px">Next question!</button>
 					<button ng-show="Quiz.questions.length == currentQPos+1 && qAnswered" class="btn btn-success col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-click="moveOn()" style="margin-top:5px">To Result!</button>
 				</div>
 			</div><!-- .row -->

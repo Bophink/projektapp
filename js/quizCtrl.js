@@ -6,7 +6,6 @@ quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$firebase
 	quizModel.userAnswers = [];
 	$scope.answers = [];
 	$scope.points = 10;
-	$scope.song = $('#songQ');
 
 	$scope.getNewAnswers = function() {
 		$scope.answers = [];
@@ -64,9 +63,9 @@ quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$firebase
 			$scope.getNewAnswers();
 			$scope.shuffledArray = $scope.shuffle($scope.answers);
 
-			$scope.song.animate({volume: 1},500, function(){
-				$scope.song[0].play();	
-			});
+			// $scope.song.animate({volume: 1},500, function(){
+			// 	$scope.song[0].play();	
+			// });
 		}
 		else {
 			window.location = ('#/quizScore');
@@ -78,49 +77,17 @@ quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$firebase
 	}
 
 	if($routeParams['quizId']){//Läs in quiz från Firebase
+		
 		quizModel.getQuiz($routeParams['quizId']);
 		
-	    //var quizRef = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+$routeParams['quizId']);
-	    // AJAX anropp för att läsa in data
-	    //Dessa två AJAX anrop kankse kan läggas ihop?
-	  /*  quizRef.on("value", function(snapshot) {
-	    	$scope.Quiz = snapshot.val();
-	    	console.log("Laddar in quiz "+$scope.Quiz.title);
-	    }, function (errorObject) {
-	    	console.log("The read failed: " + errorObject.code);
-	    });*/
-
-
-	    //var questionRef = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+$routeParams['quizId']+"/questions/");
-
-	    // $scope.questions = $firebaseArray(questionRef);
-	    // console.log($scope.questions);
-	    
-
-	    /*//AJAX
-	    questionRef.on("value", function(snap){
-	    	snap.forEach(function(childSnapshot) {
-	    		var key= childSnapshot.key();
-	    		$scope.questions.push(childSnapshot.val());//Lägger till frågorna i en lista.
-	    		//console.log(key + childSnapshot.val());
-	    	})
-	    },function (errorObject) {
-	    	console.log("The read failed: " + errorObject.code);
-	    });
-	    */
-
 	    quizModel.Quiz.questions.$loaded().then(function(x){
 	    	$scope.questions=quizModel.Quiz.questions;
 	    	$scope.getNewAnswers();
 			$scope.shuffledArray = $scope.shuffle($scope.answers);
 
 			$scope.Quiz = quizModel.Quiz;
-				
-
-	    	
-	    })
-		
-	  	
+		   	
+		}); 	
 
 	}else{//ingen routeParam
 	//Inläsning feån modellen
@@ -135,35 +102,3 @@ quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$firebase
 	}	
 });
 
-quizApp.directive("quizAudio", function(){
-    return function($scope, element, attrs){
-        element.bind("timeupdate", function(){
-        	if(!$scope.qAnswered){
-	            $scope.timeElapsed = element[0].currentTime;
-	            if ($scope.timeElapsed < 3){
-	            	$scope.points = 10;
-	            }else if ($scope.timeElapsed > 3 && $scope.timeElapsed <= 6){
-	            	$scope.points = 9;
-	            }else if ($scope.timeElapsed > 6  && $scope.timeElapsed <= 9){
-	            	$scope.points = 8;
-	            }else if ($scope.timeElapsed > 9  && $scope.timeElapsed <= 12){
-	            	$scope.points = 7;
-	            }else if ($scope.timeElapsed > 12  && $scope.timeElapsed <= 15){
-	            	$scope.points = 6;
-	            }else if ($scope.timeElapsed > 15  && $scope.timeElapsed <= 19){
-	            	$scope.points = 5;
-	            }else if ($scope.timeElapsed > 19  && $scope.timeElapsed <= 23){
-	            	$scope.points = 4;
-	            }else if ($scope.timeElapsed > 23  && $scope.timeElapsed <= 26){
-	            	$scope.points = 3;
-	            }else if ($scope.timeElapsed > 26  && $scope.timeElapsed <= 29){
-	            	$scope.points = 2;
-	            }else if ($scope.timeElapsed > 29){
-	            	$scope.points = 1;
-	            	$scope.song.animate({volume: 0}, 500);
-	            }
-	        }
-            $scope.$apply();
-        });
-    }
-});

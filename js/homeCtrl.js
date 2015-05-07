@@ -1,4 +1,4 @@
-quizApp.controller('homeCtrl', function ($scope, quizModel,$firebaseObject, $firebaseArray) {
+quizApp.controller('homeCtrl', function ($scope, $window, quizModel,$firebaseObject, $firebaseArray) {
 	var location = window.location.hash.split("/");
 	$scope.position = location[0]+"/"+location[1];
 	//tar ej hänsyn till sista paremtern i quiz och track
@@ -16,13 +16,16 @@ quizApp.controller('homeCtrl', function ($scope, quizModel,$firebaseObject, $fir
 	}
 
 	$scope.createQuiz = function(title, creator) {
-		quizModel.createQuiz(title, creator);	
+		quizModel.createQuiz(title, creator);
+		$scope.assignQuiz(quizModel.Quiz.quizId);
+
 	}
 
 	$scope.assignQuiz = function(quizId) {
 		var callback = function(){
-			if (quizModel.carouselPosition > ((quizModel.Quiz.questions.length+1)*-220)+$(window).width()){
-				quizModel.carouselSlideTo = ((quizModel.Quiz.questions.length+1)*-220)+$(window).width(); 
+			var win = angular.element($window);
+			if (quizModel.carouselPosition > ((quizModel.Quiz.questions.length+1)*-220)+win.width()){
+				quizModel.carouselSlideTo = ((quizModel.Quiz.questions.length+1)*-220)+win.width(); 
 			}
 			window.location ="#/search";
 		}
@@ -34,13 +37,44 @@ quizApp.controller('homeCtrl', function ($scope, quizModel,$firebaseObject, $fir
 	}
 
 	$scope.goToQuiz = function(quizId){
-		window.location ="#/quiz/"+quizId;
+		// accesses the quiz
+		quizModel.getQuiz(quizId);
+		// when the quiz has loaded check if it has any questions. If not, return. Else go play the quiz!
+		quizModel.Quiz.questions.$loaded().then(function(x){
+			if(quizModel.Quiz.questions.length < 1){
+				return
+			}else{
+				window.location ="#/quiz/";
+			}
+		});
 	}	
 
 	var quizzes = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes");
 	// download the data into a local object
 	$scope.quizzes = $firebaseArray(quizzes);
-	// synchronize the object with a three-way data binding
-	// click on `index.html` above to see it used in the DOM!
-	//För de quiz som skall presenteras på förtsa sidan använd AngulatFire för att skapa en three-way binding!:)
+
+	// creates an array to store front image for quiz
+	$scope.quizImgs = [];
+	// when the quizzes are loaded:
+	$scope.quizzes.$loaded().then(function(x){
+		for(var quiz in $scope.quizzes){
+			// sets a variable for the limit of images
+			var limit = 0;
+			// checks if a quiz does not have any questions
+			if($scope.quizzes[quiz].questions === undefined){
+				break;
+			}else if($scope.quizzes[quiz].questions === ''){
+				// adds placeholder image
+				$scope.quizImgs.push('img/quizPlaceholder.png');
+			}else{
+				// adds the first image in quiz to quizImgs.
+				for(var question in $scope.quizzes[quiz].questions){
+					if(limit != 1){
+						$scope.quizImgs.push($scope.quizzes[quiz].questions[question].img);
+						limit++;
+					}
+				}	
+			}
+		}
+	});
 });
