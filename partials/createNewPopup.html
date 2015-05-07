@@ -1,0 +1,7 @@
+<div ng-hide="createNewPopup" class="popup-outer" ng-click="closeLink()">
+	<div class=" col-md-offset-2 col-md-8 popup-inner center-text" onclick="event.stopPropagation()">
+		<input type="text" ng-model="title" placeholder="Name your Quiz"/>
+		<input type="text" ng-model="creator" placeholder="Your name"/>
+		<button class="btn btn-primary" ng-click="createQuiz(title, creator)">Create Quiz</button>
+	</div>
+</div>
