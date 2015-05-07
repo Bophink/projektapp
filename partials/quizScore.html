@@ -9,10 +9,10 @@
 
 	<div class="row score-buttonDiv">
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-			<button class="score-btn btn btn-primary col-lg-3 col-md-4 col-sm-5 col-xs-10 pull-right">Share this quiz</button>
+			<button class="score-btn btn btn-primary col-lg-3 col-md-4 col-sm-5 col-xs-10 pull-right" ng-click="getShareLink()">Share this quiz</button>
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-			<button class="score-btn btn btn-primary col-lg-3 col-md-4 col-sm-5 col-xs-10">Create your own!</button>
+			<button class="score-btn btn btn-primary col-lg-3 col-md-4 col-sm-5 col-xs-10" ng-click="getCreateNew()">Create your own!</button>
 		</div>
 	</div>
 
@@ -48,5 +48,8 @@
 		</table>
 		<audio preview-audio type="audio/mpeg"/>
 	</div>
+
+	<ng-include src="'partials/shareLinkPopup.html'" ></ng-include>
+	<ng-include src="'partials/createNewPopup.html'" ></ng-include>
 
 </div>

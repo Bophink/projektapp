@@ -4,16 +4,7 @@
 	<h1 style="color:black; text-align:center;margin-top:100px">Welcome to inQuizitor!</h1>
 	<h2 style="color:black; text-align:center">Make your own music quiz or play an awesome quiz below!</h2>
 	<div class="row" style="margin-bottom:50px; text-align:center">
-		<button class="btn btn-primary" style="height:80px;padding:0 60px 0 60px;font-size:20px" ng-click="clicked()">Create New Quiz</button>
-		<div class="row col-md-12" ng-show="isClicked" style="text-align:center;margin-top:20px">
-			<form class="form-inline">
-				<div class="form-group">
-					<input class="form-control" type="text" maxlength="16" ng-model="title" placeholder="Quiz name (16 chars)"/>
-					<input class="form-control" type="text" maxlength="26" ng-model="creator" placeholder="Your name (26 chars)"/>
-					<button class="btn btn-primary" ng-click="createQuiz(title, creator)">Create Quiz</button>
-				</div>
-			</form>
-		</div><!-- .row -->
+		<button class="btn btn-primary" style="height:80px;padding:0 60px 0 60px;font-size:20px" ng-click="getCreateNew()">Create New Quiz</button>
 	</div><!-- .row -->
 
 	<div class="row" style="margin:0px 0px 0px 0px;background:rgba(200,200,200,0.6);">
@@ -33,8 +24,11 @@
 			</div>
 
 			<div class="row text-center">
-				<button class="btn btn-primary" style="width:200px">Share it!</button>
+				<button class="btn btn-primary" style="width:200px" ng-click="getShareLink(quiz.quizId)">Share it!</button>
 			</div>
 		</div><!-- ng-repeat -->
 	</div><!-- .row -->
+
+	<ng-include src="'partials/createNewPopup.html'"></ng-include>
+	<ng-include src="'partials/shareLinkPopup.html'" ></ng-include>
 </div>

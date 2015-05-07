@@ -81,7 +81,7 @@ h1, h2, h3 {
   left:0;
   height:150px;
   width:24%;
-  z-index:5;
+  z-index: 9999;
   pointer-events: none;
   font-size: 120px;
   color: rgba(150,150,150,0.5);
@@ -97,7 +97,7 @@ h1, h2, h3 {
   right:0;
   height:150px;
   width:24%;
-  z-index:5;
+  z-index: 9999;
   pointer-events: none;
   text-align: right;
   font-size: 120px;
@@ -107,8 +107,8 @@ h1, h2, h3 {
 .carousel-noQuestions{
 	text-align: center;
 	font-size: 3vw;
-	color: rgb(70,70,70);
-	margin-top: 0;
+	color: #999;
+	margin-top: 50px;
 	width: 100%;
 }
 
@@ -123,7 +123,7 @@ h1, h2, h3 {
 	display: inline-block;
 	width: 170px;
 	height: 150px;
-	margin-left: 50px
+	margin-left: 50px;
 }
 
 .carousel-sortableRow{
@@ -134,23 +134,28 @@ h1, h2, h3 {
 .carousel-scrollLeft{
 	position: fixed;
 	bottom: 0;
-	height: 160px;
-	z-index: 10;
+	height: 150px;
+	z-index: 9998;
 }
 
 .carousel-scrollLeft:hover ~ .carousel-gradientLeft{
-  color: rgba(150,150,150,1)
+  color: rgba(150,150,150,1);
 }
 
 .carousel-scrollRight{
 	position: fixed;
 	bottom: 0;
-	height: 160px;
-	z-index: 10;
+	height: 150px;
+	z-index: 9998;
 }
 
 .carousel-scrollRight:hover ~ .carousel-gradientRight{
-  color: rgba(150,150,150,1)
+  color: rgba(150,150,150,1);
+}
+
+.carousel-tooltip{
+  color:#999;
+  white-space:normal;
 }
 
 .carousel-questionNumber{
@@ -181,10 +186,51 @@ h1, h2, h3 {
 	left: 0;
 	background: #FFFFFF;
 	position: fixed;
+  z-index:9997;
 	overflow: hidden;
 	width: 100%;
 	height: 150px;
 }
+
+.dodgeCarousel{
+  margin-bottom: 160px;
+}
+
+#home-playQuiz:hover{
+  background-color: rgba(255,255,255,0.5)
+}
+
+.glyphicon{
+  top:0px;
+}
+
+.navbar-center{
+  position:absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  text-align: center;
+  margin: auto;
+  height:100%;
+  z-index:0;
+  font-size: 1.7vw;
+}
+
+.navbar-webName {
+  position:relative;
+  float: left;
+  padding: 15px;
+  font-size: 18px;
+  line-height: 20px;
+  height: 50px;
+  z-index:10000;
+  color:#999;
+}
+
+.navbar-webName:hover{
+  color:#FFF;
+  text-decoration: none;
+};
 
 .popup-inner{
   margin-top:100px; 
@@ -225,6 +271,30 @@ h1, h2, h3 {
 
 .score-table >thead>tr>th{
   vertical-align:middle;
+}
+
+.search-animateSlideUp{
+    -webkit-animation : slideUp 1s 1;
+    -moz-animation    : slideUp 1s 1;
+    -o-animation      : slideUp 1s 1;
+    animation         : slideUp 1s 1;
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation-fill-mode: forwards;
+    -o-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes slideUp {
+   to {margin-top: 100px;}
+}
+@-moz-keyframes slideUp {
+   to {margin-top: 100px;}
+}
+@-o-keyframes slideUp {
+   to {margin-top: 100px;}
+}
+@keyframes slideUp {
+   to {margin-top: 100px;}
 }
 
 .search-searchBtn{
@@ -274,7 +344,7 @@ h1, h2, h3 {
 	width: 64px;
 }
 
-.search-trackField{
+#search-trackField{
   border-bottom-left-radius:25px;
   border-top-left-radius:25px;
   border:none;
@@ -290,8 +360,7 @@ h1, h2, h3 {
 }
 
 .table {
-  background: rgba(150,150,150,0.5);
-  overflow: auto;
+  background: rgba(200,200,200,0.6);
 }
 
 .table h4{
@@ -310,7 +379,7 @@ h1, h2, h3 {
 
 .track-background{
 	margin-top: 60px;
-	background: rgba(150,150,150,0.5);
+	background: rgba(200,200,200,0.6);
 	padding: 20px;
 }
 

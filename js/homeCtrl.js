@@ -4,15 +4,22 @@ quizApp.controller('homeCtrl', function ($scope, $window, quizModel,$firebaseObj
 	//tar ej hänsyn till sista paremtern i quiz och track
 
 	//Använd ng-show och ng-hide istället
-	$scope.isClicked = false;
+	$scope.createNewPopup =  true;
+	$scope.shareLinkPopup = true;
+	$scope.getCreateNew = function () {
+		$scope.createNewPopup = false;
+		console.log("create new");
+	}
 
-	$scope.clicked = function() {
-		if ($scope.isClicked === true) {
-			$scope.isClicked = false;
-		}
-		else {
-			$scope.isClicked = true;
-		}
+	$scope.closePopups = function (size) {
+		$scope.shareLinkPopup = true;
+		$scope.createNewPopup = true;
+	}
+
+	$scope.getShareLink = function (quizId) {
+		$scope.shareLinkPopup = false;
+		$scope.shareLink = "http://localhost:8000/#/quiz/"+quizId;
+		console.log($scope.shareLink);
 	}
 
 	$scope.createQuiz = function(title, creator) {

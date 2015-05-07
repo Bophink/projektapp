@@ -1,4 +1,4 @@
-quizApp.controller('quizScoreCtrl', function ($scope,quizModel,$routeParams) {
+quizApp.controller('quizScoreCtrl', function ($scope,quizModel,$routeParams,$window) {
 
 	$scope.calculatePraise = function(){
 		var praiseDict = {
@@ -53,7 +53,61 @@ quizApp.controller('quizScoreCtrl', function ($scope,quizModel,$routeParams) {
 		return quizModel.getQuizResult();
 	}
 
+	//vart kom dessa ifrån? de har väll tagits bortt tidigare?
+	/*$scope.playIt = function(url,id){
+		$("#preview")[0].setAttribute('src', url);
+		$("#preview")[0].play();
+		$scope.playing = id;
+	}
+
+	$scope.stopIt = function(url){
+		$scope.playing = "";
+		$("#preview")[0].pause();
+		$("#preview")[0].currentTime = 0;
+	}*/
+
+	$scope.getShareLink = function () {
+		$scope.shareLinkPopup = false;
+		$scope.shareLink = "http://localhost:8000/#/quiz/"+quizModel.Quiz.quizId;
+		console.log($scope.shareLink);
+	}
+
+	$scope.getCreateNew = function () {
+		$scope.createNewPopup = false;
+		console.log("create new");
+	}
+
+	$scope.closePopups = function (size) {
+		$scope.shareLinkPopup = true;
+		$scope.createNewPopup = true;
+	}
+
+	$scope.createQuiz = function(title, creator) {
+		quizModel.createQuiz(title, creator);
+		$scope.assignQuiz(quizModel.Quiz.quizId);
+
+	}
+
+	$scope.assignQuiz = function(quizId) {
+		var callback = function(){
+			var win = angular.element($window);
+			if (quizModel.carouselPosition > ((quizModel.Quiz.questions.length+1)*-220)+win.width()){
+				quizModel.carouselSlideTo = ((quizModel.Quiz.questions.length+1)*-220)+win.width(); 
+			}
+			window.location ="#/search";
+		}
+		if(quizModel.Quiz.quizId != quizId){
+			quizModel.getQuiz(quizId,callback);
+		}else{
+			callback();
+		}
+	}
+
+
+
 	$scope.praise = $scope.calculatePraise(); 
 	$scope.userAnswers = $scope.getUserAnswers();
 	$scope.getQuestions();
+	$scope.shareLinkPopup = true; //controlls if popup is shown or not.
+	$scope.createNewPopup = true;
 });
