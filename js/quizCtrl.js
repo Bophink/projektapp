@@ -77,8 +77,8 @@ quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$firebase
 	}
 
 	if($routeParams['quizId']){//Läs in quiz från Firebase
-		
-		quizModel.getQuiz($routeParams['quizId']);
+		console.log('läs från firebase!')
+		//quizModel.getQuiz($routeParams['quizId']);
 		
 	    quizModel.Quiz.questions.$loaded().then(function(x){
 	    	$scope.questions=quizModel.Quiz.questions;

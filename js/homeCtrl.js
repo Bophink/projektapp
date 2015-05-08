@@ -44,7 +44,11 @@ quizApp.controller('homeCtrl', function ($scope, $window, quizModel,$firebaseObj
 	}
 
 	$scope.goToQuiz = function(quizId){
-		window.location ="#/quiz/"+quizId;
+
+		var callback = function(){
+			window.location ="#/quiz/"+quizId;
+		}
+		quizModel.getQuiz(quizId,callback);
 	}	
 
 	var quizzes = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes");
