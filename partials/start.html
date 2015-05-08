@@ -1,33 +1,35 @@
 <div id="start">
 	<ng-include src="'partials/header.html'" ng-controller ="headerCtrl" ></ng-include>
-<!-- 	<ng-include src="'partials/carousel.html'" ng-controller="CarouselCtrl"></ng-include> -->
-	<h1 style="color:black; text-align:center;margin-top:100px">Welcome to inQuizitor!</h1>
-	<h2 style="color:black; text-align:center">Make your own music quiz or play an awesome quiz below!</h2>
-	<div class="row" style="margin-bottom:50px; text-align:center">
-		<button class="btn btn-primary" style="height:80px;padding:0 60px 0 60px;font-size:20px" ng-click="getCreateNew()">Create New Quiz</button>
-	</div><!-- .row -->
 
-	<div class="row" style="margin:0px 0px 0px 0px;background:rgba(200,200,200,0.6);">
-		<div ng-repeat="quiz in quizzes" class="col-md-3" style="margin-bottom:40px;">
+	<h1 class="home-welcomeText">Welcome to inQuizitor!</h1>
+	<h2 class="home-infoText">Make your own music quiz or play an awesome quiz below!</h2>
+	<div class="row home-createQuiz">
+		<button class="btn btn-primary home-createQuizBtn" ng-click="getCreateNew()">Create New Quiz</button>
+	</div><!-- .home-createQuiz -->
 
-			<div style="text-align:center;">
-				<h3 class="text-center" style="color:#000000;margin-bottom:-2px">{{quiz.title}}</h3>
-				<p class="text-center" style="color:#000000;font-size:10px;margin-bottom:3px">made by  <span style="font-size:14px">{{quiz.creator}}</span></p>
+	<!-- Contains all the existing quizzes. -->
+	<div class="row home-quizzesContainer">
+		<!-- Contains a single quiz. Inside this div the cover image, overlay and share button are made. -->
+		<div ng-repeat="quiz in quizzes" class="col-md-3 home-quizDiv">
+
+			<div>
+				<h3 class="text-center home-quizTitle">{{quiz.title}}</h3>
+				<p class="text-center home-quizCreator">made by  <span>{{quiz.creator}}</span></p>
 			</div>
 
-			<div style="height:200px">
-				<img class="center-block" style="max-height:200px;z-index:0;margin:auto" src="{{quizImgs[$index]}}"/>
-				<div class="center-block" style="height:70px; width:200px;background:rgba(0,0,0,0.7);z-index:1000;position:relative;bottom:70px">
-					<div ng-click="goToQuiz(quiz.quizId)" style="text-align:center;display:inline;height:70px"><span id="home-playQuiz" style="color:white;font-size:30px;cursor:pointer;height:70px;width:50%;padding-top:15px;border-right:1px solid #FFF;" class="glyphicon glyphicon-play"></span></div><div ng-click="assignQuiz(quiz.quizId)" style="text-align:center;display:inline"><span id="home-playQuiz" style="color:white;font-size:30px;cursor:pointer;height:70px;width:50%;padding-top:15px" class="glyphicon glyphicon-edit"></span>
+			<div class="home-quizAlbumDiv">
+				<img class="center-block home-quizCover" src="{{quizImgs[$index]}}"/>
+				<div class="center-block home-quizCoverOverlay">
+					<div ng-if="quiz.questions" ng-click="goToQuiz(quiz.quizId)" class="home-quizOverlayElement"><span class="glyphicon glyphicon-play home-playQuiz"></span></div><div ng-click="assignQuiz(quiz.quizId)" class="home-quizOverlayElement"><span ng-class="{'home-smallWidth' : quiz.questions, 'home-largeWidth':!quiz.questions}" class="glyphicon glyphicon-edit home-editQuiz"></span>
 					</div>
 				</div>
 			</div>
 
 			<div class="row text-center">
-				<button class="btn btn-primary" style="width:200px" ng-click="getShareLink(quiz.quizId)">Share it!</button>
+				<button class="btn home-shareQuizbtn" ng-click="getShareLink(quiz.quizId)">Share it!</button>
 			</div>
-		</div><!-- ng-repeat -->
-	</div><!-- .row -->
+		</div><!-- .home-quizDiv -->
+	</div><!-- .home-quizzesContainer -->
 
 	<ng-include src="'partials/createNewPopup.html'"></ng-include>
 	<ng-include src="'partials/shareLinkPopup.html'" ></ng-include>

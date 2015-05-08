@@ -44,16 +44,7 @@ quizApp.controller('homeCtrl', function ($scope, $window, quizModel,$firebaseObj
 	}
 
 	$scope.goToQuiz = function(quizId){
-		// accesses the quiz
-		quizModel.getQuiz(quizId);
-		// when the quiz has loaded check if it has any questions. If not, return. Else go play the quiz!
-		quizModel.Quiz.questions.$loaded().then(function(x){
-			if(quizModel.Quiz.questions.length < 1){
-				return
-			}else{
-				window.location ="#/quiz/";
-			}
-		});
+		window.location ="#/quiz/"+quizId;
 	}	
 
 	var quizzes = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes");
@@ -64,16 +55,15 @@ quizApp.controller('homeCtrl', function ($scope, $window, quizModel,$firebaseObj
 	$scope.quizImgs = [];
 	// when the quizzes are loaded:
 	$scope.quizzes.$loaded().then(function(x){
-		for(var quiz in $scope.quizzes){
+		for(var quiz= 0;  quiz<$scope.quizzes.length; quiz++){
 			// sets a variable for the limit of images
 			var limit = 0;
-			// checks if a quiz does not have any questions
+			// checks if a quiz does not have any questions and adds a placeholder image.
 			if($scope.quizzes[quiz].questions === undefined){
-				break;
-			}else if($scope.quizzes[quiz].questions === ''){
-				// adds placeholder image
+				console.log('break')
 				$scope.quizImgs.push('img/quizPlaceholder.png');
-			}else{
+			}
+			else{
 				// adds the first image in quiz to quizImgs.
 				for(var question in $scope.quizzes[quiz].questions){
 					if(limit != 1){

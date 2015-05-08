@@ -29,7 +29,6 @@ this.createQuiz = function(title, creator){
 	//pushen returnerar sökvgen till objektet i Firebase.
 	this.Quiz['quizId'] = ref.push({'title':title,
 			'creator':creator,
-			'questions':''
 		}).path.o[1];
 	quizRef= ref.child(this.Quiz.quizId);
 	quizRef.update({'quizId':this.Quiz['quizId']});//lägger in Id (huvudnoden i objectet så vi kan hitta den senare)

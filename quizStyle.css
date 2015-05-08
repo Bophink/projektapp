@@ -196,9 +196,115 @@ h1, h2, h3 {
   margin-bottom: 160px;
 }
 
-#home-playQuiz:hover{
+.home-createQuiz{
+  margin-bottom:50px;
+  text-align:center
+}
+
+.home-createQuizBtn{
+  height:80px;
+  padding:0 60px 0 60px;
+  font-size:20px;
+}
+
+.home-editQuiz{
+  color:white;
+  font-size:30px;
+  cursor:pointer;
+  height:70px;
+  padding-top:15px;
+}
+
+.home-editQuiz:hover{
   background-color: rgba(255,255,255,0.5)
 }
+
+.home-infoText{
+  color:black;
+  text-align:center
+}
+
+.home-smallWidth{
+  width: 50%;
+}
+
+.home-largeWidth{
+  width: 100%;
+}
+
+.home-playQuiz{
+  color:white;
+  font-size:30px;
+  cursor:pointer;
+  height:70px;
+  width:50%;
+  padding-top:15px;
+  border-right:1px solid #FFF;
+}
+
+.home-playQuiz:hover{
+  background-color: rgba(255,255,255,0.5)
+}
+
+.home-quizAlbumDiv{
+  height:200px
+}
+
+.home-quizzesContainer{
+  margin:0px 0px 0px 0px;
+  background:rgba(255,255,255,0.6);
+}
+
+.home-quizCover{
+  height:200px;
+  width:200px;
+  z-index:0;
+  margin:auto
+}
+
+.home-quizCoverOverlay{
+  height:70px;
+  width:200px;
+  background:rgba(0,0,0,0.7);
+  z-index:1000;
+  position:relative;
+  bottom:70px
+}
+
+.home-quizOverlayElement{
+  text-align:center;
+  display:inline
+}
+
+.home-quizCreator{
+  color:#000000;
+  font-size:10px;
+  margin-bottom:3px
+}
+
+.home-quizCreator span{
+  font-size:14px
+}
+
+.home-quizDiv{
+  margin-bottom:40px;
+}
+
+.home-quizTitle{
+  color:#000000;
+  margin-bottom:-2px
+}
+
+.home-shareQuizbtn{
+  width:200px;
+}
+
+.home-welcomeText{
+  color:black;
+  text-align:center;
+  margin-top:100px;
+}
+
 
 .glyphicon{
   top:0px;
