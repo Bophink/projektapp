@@ -78,9 +78,13 @@ quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$firebase
 
 	if($routeParams['quizId']){//Läs in quiz från Firebase
 		console.log('läs från firebase!')
-		//quizModel.getQuiz($routeParams['quizId']);
+		quizModel.getQuiz($routeParams['quizId']);
+		$scope.loading=true;
+		console.log($scope.loading);
 		
 	    quizModel.Quiz.questions.$loaded().then(function(x){
+	    	$scope.loading=false;
+	    	console.log($scope.loading);
 	    	$scope.questions=quizModel.Quiz.questions;
 	    	$scope.getNewAnswers();
 			$scope.shuffledArray = $scope.shuffle($scope.answers);
