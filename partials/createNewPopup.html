@@ -1,5 +1,6 @@
 <div ng-hide="createNewPopup" class="popup-outer" ng-click="closePopups()">
-	<div class="row col-md-12 popup-inner" onclick="event.stopPropagation()">
+	<div class="row col-xs-11 col-sm-10 col-md-8 popup-inner" onclick="event.stopPropagation()">
+		<h2> Create a new Quiz</h2>
 			<form class="form-inline">
 				<div class="form-group">
 					<input class="form-control" type="text" maxlength="16" ng-model="title" placeholder="Quiz name (16 chars)"/>
@@ -7,17 +8,5 @@
 					<button class="btn btn-primary" ng-click="createQuiz(title, creator)">Create Quiz</button>
 				</div>
 			</form>
-		</div><!-- .row -->
+		</div>
 </div>
-
-
-
-<!-- <div class="row col-md-12" ng-show="isClicked" style="text-align:center;margin-top:20px">
-			<form class="form-inline">
-				<div class="form-group">
-					<input class="form-control" type="text" maxlength="16" ng-model="title" placeholder="Quiz name (16 chars)"/>
-					<input class="form-control" type="text" maxlength="26" ng-model="creator" placeholder="Your name (26 chars)"/>
-					<button class="btn btn-primary" ng-click="createQuiz(title, creator)">Create Quiz</button>
-				</div>
-			</form>
-		</div><!-- .row --> -->

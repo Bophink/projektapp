@@ -336,28 +336,28 @@ h1, h2, h3 {
 .navbar-webName:hover{
   color:#FFF;
   text-decoration: none;
-};
-
-.popup-inner{
-  position: fixed; 
-  margin-top:100px; 
-  background-color: rgb(255,255,255); 
-  border-radius: 25px;
-  padding: 20px;
-  width: 80%;
-  height: 80%;
-  margin-left: auto;
-  margin-right: auto;
 }
 
+.popup-inner{ 
+  background-color: rgb(255,255,255);
+  border-radius: 25px;
+  padding: 20px;
+  margin-top:150px;
+  top:40%;
+  margin-left: auto;
+  margin-right: auto;
+  float:none;/*overriting current in bootstrap*/
+}
 
 .popup-outer{
+  z-index: 1001; /*fullösning?*/
   position: fixed; 
   left: 0px; 
   right:0px; 
-  top:50px; 
+  top:50px; /*heigth of header*/
   bottom:0px; 
   background-color: rgba(0,0,0,0.6);
+  text-align: center;
 }
 
 .score-buttonDiv{
