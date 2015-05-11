@@ -44,11 +44,7 @@ quizApp.controller('homeCtrl', function ($scope, $window, quizModel,$firebaseObj
 	}
 
 	$scope.goToQuiz = function(quizId){
-
-		var callback = function(){
-			window.location ="#/quiz/"+quizId;
-		}
-		quizModel.getQuiz(quizId,callback);
+		window.location ="#/quiz/"+quizId;
 	}	
 
 	var quizzes = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes");
@@ -64,7 +60,6 @@ quizApp.controller('homeCtrl', function ($scope, $window, quizModel,$firebaseObj
 			var limit = 0;
 			// checks if a quiz does not have any questions and adds a placeholder image.
 			if($scope.quizzes[quiz].questions === undefined){
-				console.log('break')
 				$scope.quizImgs.push('img/quizPlaceholder.png');
 			}
 			else{
