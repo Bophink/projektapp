@@ -14,6 +14,7 @@ quizApp.controller('homeCtrl', function ($scope, $window, quizModel,$firebaseObj
 	$scope.closePopups = function (size) {
 		$scope.shareLinkPopup = true;
 		$scope.createNewPopup = true;
+		$scope.checkInput = false;
 	}
 
 	$scope.getShareLink = function (quizId) {
@@ -23,11 +24,11 @@ quizApp.controller('homeCtrl', function ($scope, $window, quizModel,$firebaseObj
 	}
 
 	$scope.createQuiz = function(title, creator){
-		console.log(title);
 		if(title === undefined || title === '' || creator === undefined || creator === ''){
+			$scope.checkInput = true;
 			console.log('Invalid input');
-			return
 		}else{
+			$scope.checkInput = false;
 			quizModel.createQuiz(title, creator);
 			$scope.assignQuiz(quizModel.Quiz.quizId);
 		}
