@@ -22,10 +22,15 @@ quizApp.controller('homeCtrl', function ($scope, $window, quizModel,$firebaseObj
 		console.log($scope.shareLink);
 	}
 
-	$scope.createQuiz = function(title, creator) {
-		quizModel.createQuiz(title, creator);
-		$scope.assignQuiz(quizModel.Quiz.quizId);
-
+	$scope.createQuiz = function(title, creator){
+		console.log(title);
+		if(title === undefined || title === '' || creator === undefined || creator === ''){
+			console.log('Invalid input');
+			return
+		}else{
+			quizModel.createQuiz(title, creator);
+			$scope.assignQuiz(quizModel.Quiz.quizId);
+		}
 	}
 
 	$scope.assignQuiz = function(quizId) {
