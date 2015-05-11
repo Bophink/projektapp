@@ -15,7 +15,7 @@
 			  	<ul class="nav navbar-nav">
 				    <li ng-class="{'active': view == '#/start'}"><a href="#/start/">Home</a></li>
 				    <li ng-class="{'active': view == '#/search'}"><a href="#/search/" ng-show="view != '#/start'">Search</a></li>
-				    <li ng-class="{'active': view == '#/quiz'}"><a href="#/quiz" ng-show="view != '#/start'">Preview</a></li>
+				    <li ng-class="{'active': view == '#/quiz'}"><a href="#/quiz" ng-show="view != '#/start' && questions() > 0">Preview</a></li>
 			  	</ul>
 			  	<!-- <ul class="nav navbar-nav navbar-right">
 			        <li><a href="#signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>

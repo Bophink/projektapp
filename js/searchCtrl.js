@@ -60,7 +60,6 @@ quizApp.controller('searchCtrl', function ($scope, $window, $document, $sce, qui
 	}
 
 	$scope.songs = function(searchParams) {
-		console.log("start search");
 		$scope.waitingForInput = true;
 		$scope.status = "Loading ..."
 		quizModel.songSearch.get(searchParams, function(data){
@@ -81,7 +80,6 @@ quizApp.controller('searchCtrl', function ($scope, $window, $document, $sce, qui
 			}
 
 			$scope.waitingForInput = false;
-			console.log($scope.results)
 
 			if ($scope.results.length == 0){
 				$scope.status = "No results found, try again."

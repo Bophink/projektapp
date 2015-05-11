@@ -21,15 +21,15 @@
 			<thead>
 				<tr>
 					<th class="col-lg-1 col-md-1"></th>
-					<th class="col-lg-4 col-md-4"><h4>Question</h4></th>
-					<th class="col-lg-2 col-md-2"><h4>Answer</h4></th>
-					<th class="col-lg-4 col-md-4"><h4>Track</h4></th>
-					<th class="col-lg-1 col-md-1"><h4>Listen</h4></th>
+					<th class="col-lg-4 col-md-4"><h3>Question</h3></th>
+					<th class="col-lg-2 col-md-2"><h3>Answer</h3></th>
+					<th class="col-lg-4 col-md-4"><h3>Track</h3></th>
+					<th class="col-lg-1 col-md-1"><h3>Listen</h3></th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr ng-repeat="q in questions track by q.position">
-					<td class="col-lg-1 col-md-1 text-center"><h1>{{q.position}}.</h1></td>
+					<td class="col-lg-1 col-md-1 text-center"><h3>{{q.position}}.</h3></td>
 					<td class="col-lg-4 col-md-4">{{q.question}}</td>
 					<td class="col-lg-2 col-md-2"><b>Correct Answer: </b>{{q.answers['a']}}<br/><b>You answered: </b>{{userAnswers[q.position-1]}}
 						</td>

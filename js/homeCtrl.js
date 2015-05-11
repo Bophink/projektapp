@@ -8,7 +8,6 @@ quizApp.controller('homeCtrl', function ($scope, $window, quizModel,$firebaseObj
 	$scope.shareLinkPopup = true;
 	$scope.getCreateNew = function () {
 		$scope.createNewPopup = false;
-		console.log("create new");
 	}
 
 	$scope.closePopups = function (size) {
@@ -20,7 +19,6 @@ quizApp.controller('homeCtrl', function ($scope, $window, quizModel,$firebaseObj
 	$scope.getShareLink = function (quizId) {
 		$scope.shareLinkPopup = false;
 		$scope.shareLink = "http://localhost:8000/#/quiz/"+quizId;
-		console.log($scope.shareLink);
 	}
 
 	$scope.createQuiz = function(title, creator){
