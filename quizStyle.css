@@ -384,8 +384,13 @@ h1, h2, h3 {
   border: none;
 }
 
+.score-points > h3{
+  color:white;
+}
+
 .score-praise > h1{
-	margin-top:150px
+	margin-top:150px;
+  color: white;
 }
 
 .score-table >tbody>tr>td{
