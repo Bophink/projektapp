@@ -2,6 +2,7 @@
 <ng-include src="'partials/carousel.html'" ng-controller="CarouselCtrl"></ng-include>
 <div ng-class="{Cprogress: waitingForInput}" class="dodgeCarousel">
 
+	<!-- Contains the search box -->
 	<div class="row search-searchDiv">
 		<form id="search" ng-class="{'search-animateSlideUp':firstSearch}">
 		  	<div>
@@ -27,6 +28,7 @@
 				</tr>
 			</thead>
 			<tbody>
+				<!-- Loops through every track in result and builds a row for each. -->
 				<tr ng-repeat="track in results" ng-click="" id="{{track.id}}">
 					<td class="col-lg-2">
 						<div ng-style="{'background-image':'url(' + track.album.images[2].url + ')', 'height':'64px', 'width':'64px', 'margin':'auto','background-size':'64px 64px','background-repeat':'no-repeat'}" ng-mouseover="playIt(track.preview_url,track.id)" ng-mouseout="stopIt()">

@@ -1,6 +1,7 @@
 <div ng-hide="shareLinkPopup" class="popup-outer" ng-click="closePopups()">
+	<!-- Contains all the layout for the share quiz pop-up. event.stopPropagation() hinders the div to close when the div is clicked. -->
 	<div class="popup-inner col-xs-11 col-sm-10 col-md-8" onclick="event.stopPropagation()">
 		<h2> Copy this link to your clipboard and share!</h2>
-		<input class="form-control" type="text" ng-value="shareLink" style=" text-align:center;">
+		<input class="form-control" type="text" ng-value="shareLink" style="text-align:center;">
 	</div>
 </div>

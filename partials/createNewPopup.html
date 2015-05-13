@@ -1,4 +1,5 @@
 <div ng-hide="createNewPopup" class="popup-outer" ng-click="closePopups()">
+	<!-- Contains all the layout for the create new quiz pop-up. event.stopPropagation() hinders the div to close when the div is clicked. -->
 	<div class="row col-xs-11 col-sm-10 col-md-8 popup-inner" onclick="event.stopPropagation()">
 		<h2> Create a new Quiz</h2>
 		<form class="form-inline">
@@ -9,5 +10,5 @@
 			</div>
 		</form>
 		<h2 ng-show="checkInput" style="color:red">Please fill in both fields!</h2>
-		</div>
+	</div>
 </div>

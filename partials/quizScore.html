@@ -1,12 +1,14 @@
 <div id="quizScore">
 	<ng-include src="'partials/header.html'" ></ng-include>
 
+	<!-- Contains the score feedback for the user -->
 	<div class="row score-praise">
 		<h1 class="text-center">{{praise}}</h1> <!-- Användarnamn -->
 	</div>
 
 	<div class="row text-center score-points"><h3>You got {{getPoints()}} points!</h3></div>
 
+	<!-- Contains the Share Quiz and the Create New Quiz buttons -->
 	<div class="row score-buttonDiv">
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 			<button class="score-btn btn btn-primary col-lg-3 col-md-4 col-sm-5 col-xs-10 pull-right" ng-click="getShareLink()">Share this quiz</button>
@@ -16,6 +18,7 @@
 		</div>
 	</div>
 
+	<!-- Contains the questions in the quiz and their track information, the user answers and the correct answers for each question. -->
 	<div>
 		<table class="table score-table">
 			<thead>
@@ -28,6 +31,7 @@
 				</tr>
 			</thead>
 			<tbody>
+				<!-- Loops through all the questions in the quiz. -->
 				<tr ng-repeat="q in questions track by q.position">
 					<td class="col-lg-1 col-md-1 text-center"><h3>{{q.position}}.</h3></td>
 					<td class="col-lg-4 col-md-4">{{q.question}}</td>

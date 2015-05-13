@@ -1,17 +1,18 @@
 quizApp.controller('searchCtrl', function ($scope, $window, $document, $sce, quizModel) {
 
-	$scope.waitingForInput = false;
+	$scope.waitingForInput = false; // bolean for cursor animation
 	$scope.status = "";
-	var win = angular.element($window);
+	var win = angular.element($window); // selects the window object.
 
-	if ( quizModel.searchResults != null){
+	if (quizModel.searchResults != null){ // if there are saved search results
 		$scope.results = quizModel.searchResults.results;
 		$scope.query = quizModel.searchResults.query;
 		$scope.type = quizModel.searchResults.type;
-		$scope.firstSearch = true;
+		$scope.firstSearch = true; // activates search animation
 	}
 
 	$scope.sort = function(attr){
+		// sorting function for the search results.
 		if ($scope.sorted == attr[0]){
 			var order = -1;
 			$scope.sorted = attr[0] + "R";
@@ -40,26 +41,26 @@ quizApp.controller('searchCtrl', function ($scope, $window, $document, $sce, qui
 	win.scroll(function() {
 	   	if((win.scrollTop() + win.height() - $document.height() > -50) && $scope.nextParams != null) {
 	       $scope.songs($scope.nextParams);
-	   }
+	   	}
 	},null);
 
 	$scope.newSearch = function(query,type){
+		// Uses the users search input and calls a function to make API call from Spotify.
 		$scope.type = type;
 		$scope.query = query;
-		if (query == ""){
-			//felhantering
+		if (query == ""){ // error handling
 			console.log("empty search string")
 			return
 		}
-		//this is fine...
-		$scope.firstSearch = true;
-		//document.getElementById("search").className = "search-animateSlideUp";
-		$scope.results = [];
-		var searchParams = {"query":query,"type":"track","limit":50}
+
+		$scope.firstSearch = true; // activates search animation
+		$scope.results = []; // array to save the results from the API-call
+		var searchParams = {"query":query,"type":"track","limit":50} // prepare the API call.
 		$scope.songs(searchParams,type,query);
 	}
 
-	$scope.songs = function(searchParams) {
+	$scope.songs = function(searchParams){
+		// Calls the API through the model. Pushes all the track results into an array and handles duplicates. 
 		$scope.waitingForInput = true;
 		$scope.status = "Loading ..."
 		quizModel.songSearch.get(searchParams, function(data){
@@ -76,11 +77,11 @@ quizApp.controller('searchCtrl', function ($scope, $window, $document, $sce, qui
 						$scope.results.push(data.tracks.items[track]);
 					}
 				}
-			quizModel.searchResults = {'results':$scope.results,'query':$scope.query,'type':$scope.type};
+			quizModel.searchResults = {'results':$scope.results,'query':$scope.query,'type':$scope.type}; // saves the search if user shifts window.
 			}
-
 			$scope.waitingForInput = false;
 
+			// Error handling if there are no results, no more results or an unknown error is sent from the API.
 			if ($scope.results.length == 0){
 				$scope.status = "No results found, try again."
 				return
@@ -99,5 +100,3 @@ quizApp.controller('searchCtrl', function ($scope, $window, $document, $sce, qui
 	  	);
 	}
 });
-
-
