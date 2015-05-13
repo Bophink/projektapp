@@ -12,8 +12,8 @@ this.searchResults = null;
 var userAnswers = this.userAnswers = [];
 //var currentQuizObj = ""; // the Quiz the user is currently creating/modifying.
 
+//resources and keys
 var echonestApiKey = "6WKAD9UOX8AQCCF9O";
-
 this.songSearch = $resource('https://api.spotify.com/v1/search');
 this.song = $resource('https://api.spotify.com/v1/tracks/:id');
 this.biography = $resource('http://developer.echonest.com/api/v4/artist/biographies',{"api_key":echonestApiKey,"license":'cc-by-sa'});
