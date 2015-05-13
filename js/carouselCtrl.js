@@ -1,7 +1,7 @@
 quizApp.controller('CarouselCtrl', function($scope,quizModel) {
 
   $scope.initialize = function(){
-    $scope.C2 = quizModel.Quiz.questions;  
+    $scope.questions = quizModel.Quiz.questions;  
   }
 
   $scope.selectTrack = function(pos){
@@ -10,9 +10,9 @@ quizApp.controller('CarouselCtrl', function($scope,quizModel) {
 
   $scope.removeTrack = function(pos){
     // skickar in frågan som ska tas bort samt en funktion som fungerar som callback-funktion i modellen
-    quizModel.removeQuestion($scope.C2[pos-1], function(){
+    quizModel.removeQuestion($scope.questions[pos-1], function(){
       $scope.initialize; 
-      quizModel.shiftPosition($scope.C2, $scope.initialize);
+      quizModel.shiftPosition($scope.questions, $scope.initialize);
     });
   }
 
@@ -33,7 +33,7 @@ quizApp.controller('CarouselCtrl', function($scope,quizModel) {
     //restrict move across columns. move only within column.
     orderChanged: function(obj){
       // skickar in karusellobjektet med frågor, samt intialize() som callback-funktion
-      quizModel.shiftPosition($scope.C2,$scope.initialize);
+      quizModel.shiftPosition($scope.questions,$scope.initialize);
     },
     accept: function (sourceItemHandleScope, destSortableScope) {
       return sourceItemHandleScope.itemScope.sortableScope.$id === destSortableScope.$id;
