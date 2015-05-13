@@ -71,8 +71,9 @@ this.getQuiz = function(quizId, callback){
 		Quiz.quizId = quiz.quizId;
 
 		console.log('Creator: ' + quiz.creator);
-
-		callback();
+		if(callback){
+			callback();
+		}
 
 	});
 
