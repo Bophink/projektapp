@@ -87,7 +87,6 @@ this.createQuestion = function(question,a,b,c,d,songId, albumImgUrl, fbId){
 
 this.setQuestion = function(questionObj,index,callback){
 	//creates or updates a question (both in model and firebase)
-	//Firebase referens till questions i det specifika quizet.
 	var questionsRef = new Firebase("https://radiant-inferno-6844.firebaseio.com/quizzes/"+this.Quiz.quizId+"/questions/");
 	
 	if(typeof index !== "undefined"){//if the question should be modified
