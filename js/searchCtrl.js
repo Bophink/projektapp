@@ -39,6 +39,7 @@ quizApp.controller('searchCtrl', function ($scope, $window, $document, $sce, qui
 	}
 
 	win.scroll(function() {
+		// Listens to the scroll event on page and checks if user is close to the bottom. If so, presents the next page from the API call.
 	   	if((win.scrollTop() + win.height() - $document.height() > -50) && $scope.nextParams != null) {
 	       $scope.songs($scope.nextParams);
 	   	}
@@ -56,7 +57,7 @@ quizApp.controller('searchCtrl', function ($scope, $window, $document, $sce, qui
 		$scope.firstSearch = true; // activates search animation
 		$scope.results = []; // array to save the results from the API-call
 		var searchParams = {"query":query,"type":"track","limit":50} // prepare the API call.
-		$scope.songs(searchParams,type,query);
+		$scope.songs(searchParams);
 	}
 
 	$scope.songs = function(searchParams){
