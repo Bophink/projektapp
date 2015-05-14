@@ -7,6 +7,7 @@ quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$firebase
 	$scope.answers = [];
 	$scope.points = 10;
 
+	//gets answers for each question
 	$scope.getNewAnswers = function() {
 		$scope.answers = [];
 		console.log($scope.questions[$scope.currentQPos]);
@@ -19,13 +20,13 @@ quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$firebase
 		});
 	}
 
+	//a general algortihm used for sorting items in an array in a random order
+	//used to sort our questions so that we get a random order of the answers
 	$scope.shuffle = function(array) {
 	 	var m = array.length, t, i;
 		  while (m) {
-
-		    // Pick a remaining element…
+		    // Pick a remaining element
 		    i = Math.floor(Math.random() * m--);
-
 		    // And swap it with the current element.
 		    t = array[m];
 		    array[m] = array[i];
@@ -34,6 +35,7 @@ quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$firebase
 	  return array;
 	}
 
+	//Checks if answer is right and adds points if it is. Saves what user answered for results
 	$scope.checkAnswer = function(answer) {
 		if ($scope.qAnswered != true){
 			if (answer === $scope.questions[$scope.currentQPos].answers['a']){
@@ -52,31 +54,31 @@ quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$firebase
 	$scope.moveOn = function() {
 		$scope.correctAnswer = null;
 		$scope.falseAnswers = null;
-
-		console.log("Move on!")
+		//If the user did not answer in time, we push no answer.
 		if (quizModel.userAnswers[$scope.currentQPos] === undefined) {
 			quizModel.userAnswers.push("no answer");
 		}
+		//If there still are questions in the quiz, get new answers and randomize them
+		//Else go to quizScore (results page).
 		if (($scope.questions[$scope.currentQPos + 1]) != undefined) {
 			$scope.currentQPos += 1;
 			$scope.qAnswered = false;
 			$scope.getNewAnswers();
 			$scope.shuffledArray = $scope.shuffle($scope.answers);
-
-			// $scope.song.animate({volume: 1},500, function(){
-			// 	$scope.song[0].play();	
-			// });
 		}
 		else {
 			window.location = ('#/quizScore');
 		}
 	}
-
+	//Gets points from quizModel from the quiz
 	$scope.getPoints = function(){
 		return quizModel.getQuizResult();
 	}
 
-	if($routeParams['quizId']){//Läs in quiz från Firebase
+
+	//Checks route parameters to decide if the quiz is played locally through model or through database
+	//Runs the quiz from database
+	if($routeParams['quizId']){
 		console.log('läs från firebase!')
 		quizModel.getQuiz($routeParams['quizId']);
 		$scope.loading=true;
@@ -92,17 +94,13 @@ quizApp.controller('quizCtrl', function ($scope,quizModel,$routeParams,$firebase
 			$scope.Quiz = quizModel.Quiz;
 		   	
 		}); 	
-
-	}else{//ingen routeParam
-	//Inläsning feån modellen
+    //Runs quiz from model
+	}else{
 		console.log("läs från modellen")
 		$scope.Quiz = quizModel.Quiz;
-		//console.log($scope.Quiz);
 		$scope.questions = quizModel.Quiz.questions;
-		//console.log($scope.questions);
 		$scope.getNewAnswers();
 		$scope.shuffledArray = $scope.shuffle($scope.answers);
-		//quizModel.Quiz = $scope.Quiz; 	
 	}	
 });
 

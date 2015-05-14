@@ -1,5 +1,6 @@
 <div ng-controller="headerCtrl"></div>
 <div id="header">
+	<!-- Bootstrap navbar class-->
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -17,6 +18,7 @@
 				    <li ng-class="{'active': view == '#/search'}"><a href="#/search/" ng-show="view != '#/start'">Search</a></li>
 				    <li ng-class="{'active': view == '#/quiz'}"><a href="#/quiz" ng-show="view != '#/start' && questions() > 0">Preview</a></li>
 			  	</ul>
+			  	<!-- Section of code we might implement in the future concerning user accounts-->
 			  	<!-- <ul class="nav navbar-nav navbar-right">
 			        <li><a href="#signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
 			        <li><a href="#login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
